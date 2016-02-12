@@ -26,7 +26,8 @@ public class FloatParamList : AParamList {
 		((AiBlackboard)_serializedObject.targetObject).FloatParameters.Remove(list.serializedProperty.GetArrayElementAtIndex(list.index).stringValue);
 	}
 	
-	public override void Serialize() {
+	public override void ApplyModifications() {
+		_serializedObject.ApplyModifiedProperties();
 		((AiBlackboard)_serializedObject.targetObject).FloatParameters.OnBeforeSerialize();
 	}
 	#endregion

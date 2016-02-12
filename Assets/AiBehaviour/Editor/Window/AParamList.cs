@@ -20,8 +20,7 @@ public abstract class AParamList {
 	public void DrawParamList() {
 		_serializedObject.Update();
 		_list.DoLayoutList();
-		_serializedObject.ApplyModifiedProperties();
-		Serialize();
+		ApplyModifications();
 	}
 
 	protected void InitParamList(AiBlackboard blackboard) {
@@ -36,7 +35,7 @@ public abstract class AParamList {
 	
 	public void DrawHeader(Rect rect) {
 		var p = _serializedObject.FindProperty(_mainPropertyName);
-		if(GUI.Button(rect, p.displayName)) {
+		if(GUI.Button(rect, p.displayName, "LockedHeaderLabel")) {
 			_hidden = !_hidden;
 			if(_hidden) {
 				_elementHeight = _list.elementHeight;
@@ -62,5 +61,5 @@ public abstract class AParamList {
 
 	public abstract void Remove(ReorderableList list);
 
-	public abstract void Serialize();
+	public abstract void ApplyModifications();
 }
