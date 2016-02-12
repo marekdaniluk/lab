@@ -15,16 +15,27 @@ MonoBehaviour:
     _keys:
     - test
     - Int Parameter
-    _values: 0000000000000000
+    - Int Parameter 0
+    - Int Parameter 1
+    - Int Parameter 2
+    - Int Parameter 3
+    _values: 000000000000000000000000000000000000000000000000
   _floatParameters:
-    _keys: []
-    _values: []
+    _keys:
+    - Float Parameter
+    _values:
+    - 0
   _boolParameters:
-    _keys: []
-    _values: 
+    _keys:
+    - Bool Parameter
+    _values: 00
   _stringParameters:
-    _keys: []
-    _values: []
+    _keys:
+    - String Parameter 0
+    - String Parameter
+    _values:
+    - test
+    - test
   _trees:
   - _root: {fileID: 0}
   - _root: {fileID: 0}

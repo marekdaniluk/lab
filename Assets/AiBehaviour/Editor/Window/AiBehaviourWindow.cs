@@ -14,8 +14,10 @@ public class AiBehaviourWindow : EditorWindow {
     private float _currentViewWidth;
     private Rect _cursorChangeRect;
     private GUIContent _statusBarContent;
-    private ReorderableList _list;
-    private SerializedObject _serializedObject;
+	private IntParamList _intParamList;
+	private FloatParamList _floatParamList;
+	private BoolParamList _boolParamList;
+	private StringParamList _stringParamList;
 
     [MenuItem("Window/AiBehaviour")]
     public static void ShowEditor() {
@@ -34,7 +36,22 @@ public class AiBehaviourWindow : EditorWindow {
         ResizeSplitPanel();
         DrawStatusBar();
         _scrollPosition = GUILayout.BeginScrollView(_scrollPosition, GUILayout.Width(_currentViewWidth), GUILayout.Height(position.height));
-        DrawParameterList();
+		if(_intParamList != null) {
+			_intParamList.DrawParamList();
+		}
+		if(_floatParamList != null) {
+			_floatParamList.DrawParamList();
+		}
+		if(_boolParamList != null) {
+			_boolParamList.DrawParamList();
+		}
+		if(_stringParamList != null) {
+			_stringParamList.DrawParamList();
+		}
+		EditorGUILayout.Space();
+		EditorGUILayout.Space();
+		EditorGUILayout.Space();
+		EditorGUILayout.Space();
         GUILayout.EndScrollView();
         GUI.BeginGroup(new Rect(_currentViewWidth, EditorStyles.toolbar.fixedHeight, position.width - _currentViewWidth, position.height), string.Empty, "AnimationCurveEditorBackground");
         EditorUtils.DrawGrid(position);
@@ -65,14 +82,6 @@ public class AiBehaviourWindow : EditorWindow {
         GUILayout.EndHorizontal();
     }
 
-    private void DrawParameterList() {
-        if(_serializedObject != null) {
-            _serializedObject.Update();
-            _list.DoLayoutList();
-            _serializedObject.ApplyModifiedProperties();
-        }
-    }
-
     private void ResizeSplitPanel() {
         EditorGUIUtility.AddCursorRect(_cursorChangeRect, MouseCursor.ResizeHorizontal);
         if (Event.current.type == EventType.mouseDown && _cursorChangeRect.Contains(Event.current.mousePosition)) {
@@ -94,42 +103,29 @@ public class AiBehaviourWindow : EditorWindow {
 
     private void OnSelectionChange() {
         if (Selection.activeObject == null) {
-            return;
-        }
-        if (Selection.activeObject is GameObject) {
+			_selected = null;
+			_intParamList = null;
+			_floatParamList = null;
+			_boolParamList = null;
+			_stringParamList = null;
+        } else if (Selection.activeObject is GameObject) {
             var go = (GameObject)Selection.activeObject;
             if (go.GetComponent<AiController>() != null && go.GetComponent<AiController>().Blackboard != null && go.GetComponent<AiController>().Blackboard != _selected) {
                 _selected = go.GetComponent<AiController>().Blackboard;
-                _currentTree = 0;
-                Repaint();
-            }
+				_currentTree = 0;
+				_intParamList = new IntParamList(_selected);
+				_floatParamList = new FloatParamList(_selected);
+				_boolParamList = new BoolParamList(_selected);
+				_stringParamList = new StringParamList(_selected);
+			}
         } else if (Selection.activeObject is AiBlackboard && (AiBlackboard)Selection.activeObject != _selected) {
             _selected = (AiBlackboard)Selection.activeObject;
-            _currentTree = 0;
-            Repaint();
-        }
-        if (_selected != null) {
-            _serializedObject = new SerializedObject(_selected);
-            var p = _serializedObject.FindProperty("_intParameters");
-            _list = new ReorderableList(_serializedObject, p.FindPropertyRelative("_keys"), true, true, true, true);
-            _list.drawHeaderCallback += rect => GUI.Label(rect, p.displayName);
-            _list.onAddCallback += reorderableList => {
-                string key = "Int Parameter";
-                string k = key;
-                int i = 0;
-                while (_selected.IntParameters.ContainsKey(k)) {
-                    k = key + " " + (i++).ToString();
-                }
-                _selected.IntParameters[k] = 0;
-            };
-            _list.onRemoveCallback += reorderableList => {
-                _selected.IntParameters.Remove(_list.serializedProperty.GetArrayElementAtIndex(_list.index).stringValue);
-            };
-            _list.drawElementCallback += (rect, index, active, focused) =>
-            {
-                EditorGUI.PropertyField(new Rect(rect.x, rect.y, rect.width - 35, rect.height), p.FindPropertyRelative("_keys").GetArrayElementAtIndex(index), GUIContent.none);
-                EditorGUI.PropertyField(new Rect(rect.x + rect.width - 35, rect.y, 35, rect.height), p.FindPropertyRelative("_values").GetArrayElementAtIndex(index), GUIContent.none);
-            };
-        }
+			_currentTree = 0;
+			_intParamList = new IntParamList(_selected);
+			_floatParamList = new FloatParamList(_selected);
+			_boolParamList = new BoolParamList(_selected);
+			_stringParamList = new StringParamList(_selected);
+		}
+		Repaint();
     }
 }
