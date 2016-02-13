@@ -30,7 +30,7 @@ public class AiBlackboardEditor : Editor {
 
     private static void CreateAiBlackboard() {
         string path = EditorUtility.SaveFilePanel("Create New AiBlackboard", "Assets/", "AiBlackboard.asset", "asset");
-        if(string.IsNullOrEmpty(path)) {
+        if (string.IsNullOrEmpty(path)) {
             return;
         }
         path = FileUtil.GetProjectRelativePath(path);

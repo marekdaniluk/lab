@@ -9,7 +9,7 @@ public class IntParameterNodeEditor : Editor {
 
     public override void OnInspectorGUI() {
         var parameter = (IntParameterNode)target;
-        if(parameter.Blackboard.IntParameters.Count == 0) {
+        if (parameter.Blackboard.IntParameters.Count == 0) {
             EditorGUILayout.HelpBox(string.Format("Blackboard \"{0}\" has no Int parameters. Add at least one Int parameter.", parameter.Blackboard.name), MessageType.Info);
             return;
         }
