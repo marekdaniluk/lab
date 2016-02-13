@@ -53,11 +53,7 @@ public class AiBehaviourWindow : EditorWindow {
         }
     }
 
-    private void OnFocus() {
-        OnSelectionChange();
-    }
-
-    private void OnSelectionChange() {
+    private void OnInspectorUpdate() {
         var go = Selection.activeObject as GameObject;
         if (go != null && go.GetComponent<AiController>() != null && go.GetComponent<AiController>().Blackboard != null) {
             if (go.GetComponent<AiController>().Blackboard != _selected) {
