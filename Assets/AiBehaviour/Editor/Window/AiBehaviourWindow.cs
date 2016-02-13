@@ -102,30 +102,32 @@ public class AiBehaviourWindow : EditorWindow {
     }
 
     private void OnSelectionChange() {
-        if (Selection.activeObject == null) {
-			_selected = null;
-			_intParamList = null;
-			_floatParamList = null;
-			_boolParamList = null;
-			_stringParamList = null;
-        } else if (Selection.activeObject is GameObject) {
-            var go = (GameObject)Selection.activeObject;
-            if (go.GetComponent<AiController>() != null && go.GetComponent<AiController>().Blackboard != null && go.GetComponent<AiController>().Blackboard != _selected) {
+        var go = Selection.activeObject as GameObject;
+        if (go != null && go.GetComponent<AiController>() != null && go.GetComponent<AiController>().Blackboard != null) {
+            if (go.GetComponent<AiController>().Blackboard != _selected) {
                 _selected = go.GetComponent<AiController>().Blackboard;
 				_currentTree = 0;
 				_intParamList = new IntParamList(_selected);
 				_floatParamList = new FloatParamList(_selected);
 				_boolParamList = new BoolParamList(_selected);
 				_stringParamList = new StringParamList(_selected);
-			}
-        } else if (Selection.activeObject is AiBlackboard && (AiBlackboard)Selection.activeObject != _selected) {
-            _selected = (AiBlackboard)Selection.activeObject;
-			_currentTree = 0;
-			_intParamList = new IntParamList(_selected);
-			_floatParamList = new FloatParamList(_selected);
-			_boolParamList = new BoolParamList(_selected);
-			_stringParamList = new StringParamList(_selected);
-		}
-		Repaint();
+            }
+        } else if (Selection.activeObject is AiBlackboard) {
+            if ((AiBlackboard)Selection.activeObject != _selected) {
+                _selected = (AiBlackboard)Selection.activeObject;
+                _currentTree = 0;
+                _intParamList = new IntParamList(_selected);
+                _floatParamList = new FloatParamList(_selected);
+                _boolParamList = new BoolParamList(_selected);
+                _stringParamList = new StringParamList(_selected);
+            }
+		} else {
+            _selected = null;
+            _intParamList = null;
+            _floatParamList = null;
+            _boolParamList = null;
+            _stringParamList = null;
+        }
+        Repaint();
     }
 }
