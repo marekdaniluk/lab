@@ -18,16 +18,14 @@ namespace AiBehaviour {
         private StringParameter _stringParameters;
 
         [SerializeField]
-        private List<AiTree> _trees;
+        private List<AiTree> _trees = new List<AiTree>();
 
         public IList<AiTree> Trees {
-            get { return _trees == null ? null : _trees.AsReadOnly(); }
+            get { return _trees.AsReadOnly(); }
         }
 
         public bool AddTree(AiTree tree) {
-            if (_trees == null) {
-                _trees = new List<AiTree>();
-            } else if (_trees.Contains(tree)) {
+            if (_trees.Contains(tree)) {
                 return false;
             }
             _trees.Add(tree);

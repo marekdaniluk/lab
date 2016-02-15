@@ -25,9 +25,6 @@ public class NodeDrawer {
     }
 
     public void SetOffset(Vector2 offset) {
-        if(_node == null) {
-            return;
-        }
         _node.Position += offset;
     }
 
@@ -39,9 +36,6 @@ public class NodeDrawer {
     }
 
     public void DrawNode() {
-        if(_node == null) {
-            return;
-        }
         _rect.x = _node.Position.x;
         _rect.y = _node.Position.y;
         _rect = GUI.Window(_id, _rect, new GUI.WindowFunction(DrawNodeWindow), _node.GetType().Name, (gCurrentFocus != _id) ? (_isRoot ? _rootStyle : _defaultStyle) : (_isRoot ? _rootStyleOn : _defaultStyleOn));

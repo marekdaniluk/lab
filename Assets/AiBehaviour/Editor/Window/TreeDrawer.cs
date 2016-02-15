@@ -13,21 +13,13 @@ public class TreeDrawer {
     }
 
     public void DrawTree() {
-        if (_tree == null) {
-            return;
-        }
-        if (_tree.Root != null) {
-            DrawTransition(_tree.Root);
-        }
+        DrawTransition(_tree.Root);
         for (int i = 0; i < _nodeDrawers.Count; ++i) {
             _nodeDrawers[i].DrawNode();
         }
     }
 
     public void OffsetNodes(Vector2 offset) {
-        if (_tree == null) {
-            return;
-        }
         for (int i = 0; i < _nodeDrawers.Count; ++i) {
             _nodeDrawers[i].SetOffset(offset);
         }
@@ -35,9 +27,6 @@ public class TreeDrawer {
 
     public void RebuildTreeView(AiTree tree) {
         _tree = tree;
-        if(_tree == null) {
-            return;
-        }
         _nodeDrawers = new List<NodeDrawer>();
         for (int i = 0; i < _tree.Nodes.Count; ++i) {
             _nodeDrawers.Add(new NodeDrawer(_tree.Nodes[i], _tree.Root == _tree.Nodes[i]));

@@ -20,13 +20,13 @@ namespace AiBehaviour {
         public override bool Run() {
             switch (_condition) {
                 case StringCondition.Equal: {
-                    if (Blackboard.StringParameters[Key].Equals(Value)) {
+                    if (Blackboard.StringParameters[Key].Equals((DynamicValue ? Blackboard.StringParameters[Key] : Value))) {
                         return true;
                     }
                     break;
                 }
                 case StringCondition.NotEqual: {
-                    if (!Blackboard.StringParameters[Key].Equals(Value)) {
+                    if (!Blackboard.StringParameters[Key].Equals((DynamicValue ? Blackboard.StringParameters[Key] : Value))) {
                         return true;
                     }
                     break;
@@ -36,7 +36,7 @@ namespace AiBehaviour {
         }
 
         public override string ToString() {
-            return string.Format("Is {0} {1} from {2}?", Blackboard.StringParameters[Key], Condition.ToString(), Value);
+            return string.Format("Is {0} {1} from {2}?", Blackboard.StringParameters[Key], Condition.ToString(), (DynamicValue ? Blackboard.StringParameters[Key] : Value));
         }
     }
 }

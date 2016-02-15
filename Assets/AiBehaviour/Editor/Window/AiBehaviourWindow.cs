@@ -76,9 +76,11 @@ public class AiBehaviourWindow : EditorWindow {
     private void InputHandler() {
         int controlID = GUIUtility.GetControlID(new GUIContent("grid view"), FocusType.Passive);
         Event current = Event.current;
-        if(current.button == 1 && controlID == GUIUtility.hotControl) {
-            Debug.Log(controlID + " " + GUIUtility.hotControl);
-            GUI.FocusControl("");
+        if(current.button == 1 && current.type == EventType.MouseDown && _target != null) {
+            var node = NodeFactory.CreateNode(NodeFactory.Nodes.IntNode, _target);
+            node.Position = new Vector2(current.mousePosition.x - _currentViewWidth - NodeDrawer.gSize.x / 2, current.mousePosition.y - NodeDrawer.gSize.y);
+            _statusBar.CurrentTree.AddNode(node);
+            _treeDrawer = new TreeDrawer(_statusBar.CurrentTree);
             return;
         }
         if (current.button != 2 && (current.button != 0 || !current.alt)) {
@@ -123,17 +125,6 @@ public class AiBehaviourWindow : EditorWindow {
             _treeDrawer = new TreeDrawer(_statusBar.CurrentTree);
             _statusBar.OnSelectedAiTree += _treeDrawer.RebuildTreeView;
         }
-        //var asset = ScriptableObject.CreateInstance<IntParameterNode>();
-        //asset.Blackboard = _selected;
-        //AssetDatabase.AddObjectToAsset(asset, _selected);
-        //var asset1 = ScriptableObject.CreateInstance<SucceederNode>();
-        //asset1.AddNode(asset);
-        //AssetDatabase.AddObjectToAsset(asset1, _selected);
-        //EditorUtility.SetDirty(asset);
-        //EditorUtility.SetDirty(asset1);
-        //AssetDatabase.SaveAssets();
-        //_statusBar.CurrentTree.AddNode(asset1);
-        //_statusBar.CurrentTree.AddNode(asset);
         Repaint();
     }
 }
