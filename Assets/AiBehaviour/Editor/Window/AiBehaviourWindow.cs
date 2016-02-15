@@ -124,6 +124,11 @@ public class AiBehaviourWindow : EditorWindow {
             _paramPanel.Blackboard = _target;
             _treeDrawer = new TreeDrawer(_statusBar.CurrentTree);
             _statusBar.OnSelectedAiTree += _treeDrawer.RebuildTreeView;
+        } else if (Selection.activeObject == null && Selection.activeGameObject == null) {
+            _treeDrawer = null;
+            _target = null;
+            _statusBar.Blackboard = null;
+            _paramPanel.Blackboard = null;
         }
         Repaint();
     }

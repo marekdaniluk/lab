@@ -27,6 +27,9 @@ public class TreeDrawer {
 
     public void RebuildTreeView(AiTree tree) {
         _tree = tree;
+        if(_tree == null) {
+            return;
+        }
         _nodeDrawers = new List<NodeDrawer>();
         for (int i = 0; i < _tree.Nodes.Count; ++i) {
             _nodeDrawers.Add(new NodeDrawer(_tree.Nodes[i], _tree.Root == _tree.Nodes[i]));

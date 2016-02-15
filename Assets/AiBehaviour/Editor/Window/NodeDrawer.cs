@@ -44,6 +44,9 @@ public class NodeDrawer {
     }
 
     private void DrawNodeWindow(int id) {
+        if(_node == null) {
+            return;
+        }
         Event e = Event.current;
         if (e.type == EventType.MouseUp && e.button == 1) {
             //Object.DestroyImmediate(_node, true);
