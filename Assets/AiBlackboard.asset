@@ -12,30 +12,17 @@ MonoBehaviour:
   m_Name: AiBlackboard
   m_EditorClassIdentifier: 
   _intParameters:
-    _keys:
-    - test
-    - Int Parameter
-    - Int Parameter 0
-    - Int Parameter 1
-    - Int Parameter 2
-    - Int Parameter 3
-    _values: 000000000000000000000000000000000000000000000000
+    _keys: []
+    _values: 
   _floatParameters:
-    _keys:
-    - Float Parameter
-    _values:
-    - 0
+    _keys: []
+    _values: []
   _boolParameters:
-    _keys:
-    - Bool Parameter
-    _values: 00
+    _keys: []
+    _values: 
   _stringParameters:
-    _keys:
-    - String Parameter 0
-    - String Parameter
-    _values:
-    - test
-    - test
+    _keys: []
+    _values: []
   _trees:
   - _root: {fileID: 0}
-  - _root: {fileID: 0}
+    _nodes: []

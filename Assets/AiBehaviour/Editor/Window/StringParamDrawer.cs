@@ -1,5 +1,6 @@
 ﻿using UnityEditorInternal;
 using AiBehaviour;
+using UnityEditor;
 
 public class StringParamDrawer : AParamDrawer {
 
@@ -17,10 +18,12 @@ public class StringParamDrawer : AParamDrawer {
             k = _keyName + " " + (i++).ToString();
         }
         ((AiBlackboard)_serializedObject.targetObject).StringParameters[k] = "";
+        Selection.activeObject = _serializedObject.targetObject;
     }
 
     public override void Remove(ReorderableList list) {
         ((AiBlackboard)_serializedObject.targetObject).StringParameters.Remove(list.serializedProperty.GetArrayElementAtIndex(list.index).stringValue);
+        Selection.activeObject = _serializedObject.targetObject;
     }
 
     public override void ApplyModifications() {

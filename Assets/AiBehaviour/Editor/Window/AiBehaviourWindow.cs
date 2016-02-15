@@ -4,14 +4,17 @@ using AiBehaviour;
 
 public class AiBehaviourWindow : EditorWindow {
 
-    private AiBlackboard _selected;
+    [SerializeField]
+    private float _currentViewWidth = 200f;
     private Vector2 _scrollPosition = Vector2.zero;
     private bool _resize = false;
     private float _minimumViewWidth = 150f;
-    private float _currentViewWidth;
     private Rect _cursorChangeRect;
+
+    private AiBlackboard _target;
     private StatusBarDrawer _statusBar;
     private ParamPanelDrawer _paramPanel;
+    private TreeDrawer _treeDrawer;
 
     [MenuItem("Window/AiBehaviour")]
     public static void ShowEditor() {
@@ -23,7 +26,6 @@ public class AiBehaviourWindow : EditorWindow {
         titleContent.image = (Texture2D)EditorGUIUtility.Load("Assets/AiBehaviour/Icons/AiController.png");
         _statusBar = new StatusBarDrawer();
         _paramPanel = new ParamPanelDrawer();
-        _currentViewWidth = 200f;
         _cursorChangeRect = new Rect(_currentViewWidth, 0f, 5f, position.height);
     }
 
@@ -34,8 +36,14 @@ public class AiBehaviourWindow : EditorWindow {
         _paramPanel.DrawPanel();
         GUILayout.EndScrollView();
         GUI.BeginGroup(new Rect(_currentViewWidth, EditorStyles.toolbar.fixedHeight, position.width - _currentViewWidth, position.height), string.Empty, "AnimationCurveEditorBackground");
+        BeginWindows();
         EditorUtils.DrawGrid(position);
+        if (_treeDrawer != null) {
+            _treeDrawer.DrawTree();
+        }
+        EndWindows();
         GUI.EndGroup();
+        InputHandler();
     }
 
     private void ResizeSplitPanel() {
@@ -53,25 +61,79 @@ public class AiBehaviourWindow : EditorWindow {
         }
     }
 
-    private void OnInspectorUpdate() {
-        var go = Selection.activeObject as GameObject;
-        if (go != null && go.GetComponent<AiController>() != null && go.GetComponent<AiController>().Blackboard != null) {
-            if (go.GetComponent<AiController>().Blackboard != _selected) {
-                _selected = go.GetComponent<AiController>().Blackboard;
-                _statusBar.Blackboard = _selected;
-                _paramPanel.Blackboard = _selected;
-            }
-        } else if (Selection.activeObject is AiBlackboard) {
-            if ((AiBlackboard)Selection.activeObject != _selected) {
-                _selected = (AiBlackboard)Selection.activeObject;
-                _statusBar.Blackboard = _selected;
-                _paramPanel.Blackboard = _selected;
-            }
-        } else {
-            _selected = null;
-            _statusBar.Blackboard = null;
-            _paramPanel.Blackboard = null;
+    private void OnSelectionChange() {
+        Init();
+    }
+
+    private void OnFocus() {
+        Init();
+    }
+
+    private void OnProjectChange() {
+        Init();
+    }
+
+    private void InputHandler() {
+        int controlID = GUIUtility.GetControlID(new GUIContent("grid view"), FocusType.Passive);
+        Event current = Event.current;
+        if(current.button == 1 && controlID == GUIUtility.hotControl) {
+            Debug.Log(controlID + " " + GUIUtility.hotControl);
+            GUI.FocusControl("");
+            return;
         }
+        if (current.button != 2 && (current.button != 0 || !current.alt)) {
+            return;
+        }
+        switch (current.GetTypeForControl(controlID)) {
+            case EventType.MouseDown:
+                GUIUtility.hotControl = controlID;
+                current.Use();
+                EditorGUIUtility.SetWantsMouseJumping(1);
+                break;
+            case EventType.MouseUp:
+                if (GUIUtility.hotControl == controlID) {
+                    GUIUtility.hotControl = 0;
+                    current.Use();
+                    EditorGUIUtility.SetWantsMouseJumping(0);
+                }
+                break;
+            case EventType.MouseMove:
+            case EventType.MouseDrag:
+                if (GUIUtility.hotControl == controlID) {
+                    if(_treeDrawer != null) {
+                        _treeDrawer.OffsetNodes(current.delta);
+                    }
+                    current.Use();
+                }
+                break;
+        }
+    }
+
+    private void Init() {
+        if (_target != Selection.activeObject && Selection.activeObject is AiBlackboard && EditorUtility.IsPersistent(Selection.activeObject)) {
+            _target = (AiBlackboard)Selection.activeObject;
+            _statusBar.Blackboard = _target;
+            _paramPanel.Blackboard = _target;
+            _treeDrawer = new TreeDrawer(_statusBar.CurrentTree);
+            _statusBar.OnSelectedAiTree += _treeDrawer.RebuildTreeView;
+        } else if(Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<AiController>() != null && Selection.activeGameObject.GetComponent<AiController>().Blackboard != null && Selection.activeGameObject.GetComponent<AiController>().Blackboard != _target) {
+            _target = Selection.activeGameObject.GetComponent<AiController>().Blackboard;
+            _statusBar.Blackboard = _target;
+            _paramPanel.Blackboard = _target;
+            _treeDrawer = new TreeDrawer(_statusBar.CurrentTree);
+            _statusBar.OnSelectedAiTree += _treeDrawer.RebuildTreeView;
+        }
+        //var asset = ScriptableObject.CreateInstance<IntParameterNode>();
+        //asset.Blackboard = _selected;
+        //AssetDatabase.AddObjectToAsset(asset, _selected);
+        //var asset1 = ScriptableObject.CreateInstance<SucceederNode>();
+        //asset1.AddNode(asset);
+        //AssetDatabase.AddObjectToAsset(asset1, _selected);
+        //EditorUtility.SetDirty(asset);
+        //EditorUtility.SetDirty(asset1);
+        //AssetDatabase.SaveAssets();
+        //_statusBar.CurrentTree.AddNode(asset1);
+        //_statusBar.CurrentTree.AddNode(asset);
         Repaint();
     }
 }

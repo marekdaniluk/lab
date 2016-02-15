@@ -1,5 +1,6 @@
 ﻿using UnityEditorInternal;
 using AiBehaviour;
+using UnityEditor;
 
 public class FloatParamDrawer : AParamDrawer {
 
@@ -17,10 +18,12 @@ public class FloatParamDrawer : AParamDrawer {
             k = _keyName + " " + (i++).ToString();
         }
         ((AiBlackboard)_serializedObject.targetObject).FloatParameters[k] = 0f;
+        Selection.activeObject = _serializedObject.targetObject;
     }
 
     public override void Remove(ReorderableList list) {
         ((AiBlackboard)_serializedObject.targetObject).FloatParameters.Remove(list.serializedProperty.GetArrayElementAtIndex(list.index).stringValue);
+        Selection.activeObject = _serializedObject.targetObject;
     }
 
     public override void ApplyModifications() {

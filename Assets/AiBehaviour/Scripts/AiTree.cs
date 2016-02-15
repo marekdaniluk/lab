@@ -8,21 +8,23 @@ namespace AiBehaviour {
         [SerializeField]
         private ANode _root;
         [SerializeField]
-        private List<ANode> _nodes;
+        private List<ANode> _nodes = new List<ANode>();
 
         public ANode Root {
             get { return _root; }
             set {
-                if(_nodes != null && _nodes.Contains(value)) {
+                if (_nodes.Contains(value)) {
                     _root = value;
                 }
             }
         }
 
+        public List<ANode> Nodes {
+            get { return _nodes; }
+        }
+
         public bool AddNode(ANode node) {
-            if(_nodes == null) {
-                _nodes = new List<ANode>();
-            } else if (_nodes.Contains(node)) {
+            if (_nodes.Contains(node)) {
                 return false;
             }
             _nodes.Add(node);
@@ -33,7 +35,13 @@ namespace AiBehaviour {
         }
 
         public bool RemoveNode(ANode node) {
-            return _nodes.Remove(node);
+            if (_nodes.Remove(node)) {
+                if (Root == node && _nodes.Count > 0) {
+                    Root = _nodes[0];
+                }
+                return true;
+            }
+            return false;
         }
 
         public bool Run() {
