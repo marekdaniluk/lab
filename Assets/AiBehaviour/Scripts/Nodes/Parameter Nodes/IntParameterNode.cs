@@ -20,37 +20,33 @@ namespace AiBehaviour {
         }
 
         public override bool Run() {
-            switch(_condition) {
-                case IntCondition.Greater: {
-                    if (Blackboard.IntParameters[Key] > (DynamicValue ? Blackboard.IntParameters[Key] : Value)) {
+            switch (_condition) {
+                case IntCondition.Greater:
+                    if (Blackboard.IntParameters[Key] > (DynamicValue ? Blackboard.IntParameters[DynamicValueKey] : Value)) {
                         return true;
                     }
                     break;
-                }
-                case IntCondition.Less: {
-                    if (Blackboard.IntParameters[Key] < (DynamicValue ? Blackboard.IntParameters[Key] : Value)) {
+                case IntCondition.Less:
+                    if (Blackboard.IntParameters[Key] < (DynamicValue ? Blackboard.IntParameters[DynamicValueKey] : Value)) {
                         return true;
                     }
                     break;
-                }
-                case IntCondition.Equal: {
-                    if (Blackboard.IntParameters[Key] == (DynamicValue ? Blackboard.IntParameters[Key] : Value)) {
+                case IntCondition.Equal:
+                    if (Blackboard.IntParameters[Key] == (DynamicValue ? Blackboard.IntParameters[DynamicValueKey] : Value)) {
                         return true;
                     }
                     break;
-                }
-                case IntCondition.NotEqual: {
-                    if (Blackboard.IntParameters[Key] != (DynamicValue ? Blackboard.IntParameters[Key] : Value)) {
+                case IntCondition.NotEqual:
+                    if (Blackboard.IntParameters[Key] != (DynamicValue ? Blackboard.IntParameters[DynamicValueKey] : Value)) {
                         return true;
                     }
                     break;
-                }
             }
             return false;
         }
 
         public override string ToString() {
-            return string.Format("Is {0} {1} from {2}?", Blackboard.IntParameters[Key], Condition.ToString(), (DynamicValue ? Blackboard.IntParameters[Key] : Value));
+            return string.Format("Is {0} {1} from {2}?", Blackboard.IntParameters[Key], Condition.ToString(), (DynamicValue ? Blackboard.IntParameters[DynamicValueKey] : Value));
         }
     }
 }

@@ -33,6 +33,7 @@ public class BoolParameterNodeEditor : Editor {
         _index = EditorGUILayout.Popup(_index, keys);
         parameter.Key = keys[_index];
         if (parameter.DynamicValue) {
+            parameter.Condition = (BoolParameterNode.BoolCondition)EditorGUILayout.EnumPopup(parameter.Condition);
             _index1 = EditorGUILayout.Popup(_index1, keys);
             parameter.DynamicValueKey = keys[_index1];
         } else {

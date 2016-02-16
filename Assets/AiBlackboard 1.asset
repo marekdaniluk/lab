@@ -24,7 +24,8 @@ MonoBehaviour:
   _boolParameters:
     _keys:
     - Bool Parameter
-    _values: 00
+    - Bool Parameter 0
+    _values: 0000
   _stringParameters:
     _keys:
     - String Parameter
@@ -33,23 +34,6 @@ MonoBehaviour:
     - 
     - 
   _trees:
-  - _root: {fileID: 11488992}
-    _nodes:
-    - {fileID: 11488992}
-    - {fileID: 11454264}
-    - {fileID: 11489606}
-    - {fileID: 11411346}
-    - {fileID: 11404156}
-    - {fileID: 11449832}
-    - {fileID: 11448834}
-    - {fileID: 11439928}
-    - {fileID: 11411576}
-    - {fileID: 11440612}
-    - {fileID: 11416630}
-    - {fileID: 11490974}
-    - {fileID: 11408264}
-    - {fileID: 11446890}
-    - {fileID: 11431812}
   - _root: {fileID: 11479942}
     _nodes:
     - {fileID: 11479942}
@@ -71,7 +55,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77192985dbf2d4c4bbd32c7520893136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 228, y: 255}
+  Position: {x: 225, y: 246}
   _nodes: []
 --- !u!114 &11404156
 MonoBehaviour:
@@ -91,6 +75,24 @@ MonoBehaviour:
   _dynamicValueKey: 
   _value: 0
   _condition: 0
+--- !u!114 &11406682
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f575d0542cdd6c40b92c2dfffedfc1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Position: {x: 321, y: 187}
+  _dynamicValue: 0
+  _blackboard: {fileID: 11400000}
+  _key: Float Parameter
+  _dynamicValueKey: 
+  _value: 0
+  _condition: 0
 --- !u!114 &11407612
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -102,7 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c17c220617efa84c99e31f59f708f44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 298, y: 46}
+  Position: {x: 55, y: 246}
   _node: {fileID: 0}
 --- !u!114 &11408218
 MonoBehaviour:
@@ -187,7 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f575d0542cdd6c40b92c2dfffedfc1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 68, y: 57}
+  Position: {x: 388, y: 100}
   _dynamicValue: 0
   _blackboard: {fileID: 11400000}
   _key: Float Parameter
@@ -403,7 +405,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4049d6a73af16724ebf61d547555a4c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 455, y: 228}
+  Position: {x: 551, y: 245}
   _nodes: []
 --- !u!114 &11454264
 MonoBehaviour:
@@ -434,7 +436,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e1a115f1f106b24e813d1c75a6fb490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 78, y: 192}
+  Position: {x: 59, y: 103}
   _dynamicValue: 1
   _blackboard: {fileID: 11400000}
   _key: String Parameter
@@ -452,12 +454,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 184352b801f40a2458b3e1f8e0445aae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 454, y: 99}
-  _dynamicValue: 0
+  Position: {x: 549, y: 99}
+  _dynamicValue: 1
   _blackboard: {fileID: 11400000}
   _key: Bool Parameter
-  _dynamicValueKey: Bool Parameter
+  _dynamicValueKey: Bool Parameter 0
   _value: 0
+  _condition: 1
 --- !u!114 &11459642
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -487,7 +490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f636477ee2c6a54995f471850a62f10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 237, y: 116}
+  Position: {x: 227, y: 103}
   _dynamicValue: 0
   _blackboard: {fileID: 11400000}
   _key: Int Parameter
@@ -566,6 +569,24 @@ MonoBehaviour:
   _dynamicValueKey: 
   _value: 0
   _condition: 0
+--- !u!114 &11489752
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f636477ee2c6a54995f471850a62f10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Position: {x: 317, y: 54}
+  _dynamicValue: 0
+  _blackboard: {fileID: 11400000}
+  _key: Int Parameter
+  _dynamicValueKey: 
+  _value: 0
+  _condition: 0
 --- !u!114 &11490276
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -613,7 +634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb26d88320758874f9407e01c5948289, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 362, y: 176}
+  Position: {x: 390, y: 245}
   _repeat: 1
   _node: {fileID: 0}
 --- !u!114 &11499202
