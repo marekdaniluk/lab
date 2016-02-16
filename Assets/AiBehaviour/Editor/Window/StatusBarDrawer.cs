@@ -50,8 +50,8 @@ public class StatusBarDrawer {
             _blackboard.RemoveTree(_blackboard.Trees[_currentTree]);
             if (_currentTree == _blackboard.Trees.Count) {
                 _currentTree = _blackboard.Trees.Count - 1;
-                OnSelectedAiTree(CurrentTree);
             }
+            OnSelectedAiTree(CurrentTree);
             EditorUtility.SetDirty(_blackboard);
         }
         GUILayout.EndHorizontal();

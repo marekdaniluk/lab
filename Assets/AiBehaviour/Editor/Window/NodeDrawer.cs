@@ -4,6 +4,10 @@ using AiBehaviour;
 
 public class NodeDrawer {
 
+    public delegate void NodeDrawerHandler(ANode node);
+    public static NodeDrawerHandler OnRightClicked = delegate { };
+    public static NodeDrawerHandler OnLeftClicked = delegate { };
+
     public static readonly Vector2 gSize = new Vector2(144f, 32f);
 
     private static int gNodeDrawerIdIncremental = 0;
@@ -48,22 +52,13 @@ public class NodeDrawer {
             return;
         }
         if (e.type == EventType.MouseUp && e.button == 1) {
-            GenericMenu menu = new GenericMenu();
-            menu.AddItem(new GUIContent("Make Root"), false, Callback, "item 1");
-            menu.AddItem(new GUIContent("Connect"), false, Callback, "item 2");
-            menu.AddItem(new GUIContent("Delete"), false, Callback, "item 2");
-            menu.ShowAsContext();
+            OnRightClicked(_node);
             e.Use();
-            //Object.DestroyImmediate(_node, true);
         }
         if (e.type == EventType.MouseDown && e.button == 0) {
-            Selection.activeObject = _node;
+            OnLeftClicked(_node);
         }
         EditorUtility.SetDirty(_node);
         GUI.DragWindow();
-    }
-
-    void Callback(object obj) {
-        Debug.Log("Selected: " + obj);
     }
 }

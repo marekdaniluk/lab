@@ -49,13 +49,15 @@ namespace UnityEditor {
         public static void DrawNodeCurve(Rect start, Rect end) {
             Vector3 startPos = new Vector3(start.x + start.width / 2, start.y + start.height / 2, 0);
             Vector3 endPos = new Vector3(end.x + end.width / 2, end.y + end.height / 2, 0);
-            Vector3 startTan = startPos;
-            Vector3 endTan = endPos;
+            DrawLine(startPos, endPos);
+        }
+
+        public static void DrawLine(Vector3 start, Vector3 end) {
             Color shadowCol = new Color(1f, 1f, 1f, 0.35f);
             for (int i = 0; i < 3; ++i) {
-                Handles.DrawBezier(startPos, endPos, startTan, endTan, shadowCol, null, (i + 1) * 2);
+                Handles.DrawBezier(start, end, start, end, shadowCol, null, (i + 1) * 2);
             }
-            Handles.DrawBezier(startPos, endPos, startTan, endTan, Color.white, null, 1);
+            Handles.DrawBezier(start, end, start, end, Color.white, null, 1);
         }
     }
 }

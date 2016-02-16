@@ -46,6 +46,12 @@ public class AiBehaviourWindow : EditorWindow {
         InputHandler();
     }
 
+    private void Update() {
+        if (_treeDrawer != null && _treeDrawer.ForceRepaint()) {
+            Repaint();
+        }
+    }
+
     private void ResizeSplitPanel() {
         EditorGUIUtility.AddCursorRect(_cursorChangeRect, MouseCursor.ResizeHorizontal);
         if (Event.current.type == EventType.mouseDown && _cursorChangeRect.Contains(Event.current.mousePosition)) {
@@ -76,8 +82,12 @@ public class AiBehaviourWindow : EditorWindow {
     private void InputHandler() {
         int controlID = GUIUtility.GetControlID(new GUIContent("grid view"), FocusType.Passive);
         Event current = Event.current;
+        Rect r = new Rect(0f, 0f, _currentViewWidth, position.height);
         if ((current.type == EventType.MouseDown || current.type == EventType.MouseUp)) {
             Selection.activeObject = _target;
+            if (r.Contains(current.mousePosition)) {
+                return;
+            }
         }
         if (current.button == 1 && current.type == EventType.MouseDown && _target != null) {
             NodeFactory.CreateNodeMenu(current.mousePosition, MenuCallback);

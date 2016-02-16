@@ -6,12 +6,10 @@ namespace AiBehaviour {
     public class SelectorNode : AFlowNode {
 
         [SerializeField]
-        private List<ANode> _nodes;
+        private List<ANode> _nodes = new List<ANode>();
 
         public override bool AddNode(ANode node) {
-            if (_nodes == null) {
-                _nodes = new List<ANode>();
-            } else if (_nodes.Contains(node)) {
+            if (_nodes.Contains(node)) {
                 return false;
             }
             _nodes.Add(node);
@@ -27,7 +25,7 @@ namespace AiBehaviour {
         }
 
         public override int NodeCount {
-            get { return _nodes == null ? 0 : _nodes.Count; }
+            get { return _nodes.Count; }
         }
 
         public override bool Run() {

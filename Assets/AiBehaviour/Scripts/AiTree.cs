@@ -13,8 +13,17 @@ namespace AiBehaviour {
         public ANode Root {
             get { return _root; }
             set {
-                if (_nodes.Contains(value)) {
+                var node = value as AFlowNode;
+                if (_nodes.Contains(node) && node != null) {
+                    for (int i = 0; i < _nodes.Count; ++i) {
+                        var n = _nodes[i] as AFlowNode;
+                        if (n != null) {
+                            n.RemoveNode(value);
+                        }
+                    }
                     _root = value;
+                } else {
+                    _root = null;
                 }
             }
         }
@@ -39,7 +48,32 @@ namespace AiBehaviour {
                 if (Root == node && _nodes.Count > 0) {
                     Root = _nodes[0];
                 }
+                for (int i = 0; i < _nodes.Count; ++i) {
+                    var n = _nodes[i] as AFlowNode;
+                    if (n != null) {
+                        for (int j = 0; j < n.NodeCount; ++j) {
+                            if (n.GetNode(j) == n) {
+                                n.RemoveNode(n);
+                            }
+                        }
+                    }
+                }
                 return true;
+            }
+            return false;
+        }
+
+        public bool ConnectNodes(AFlowNode from, ANode to) {
+            if (_nodes.Contains(from) && _nodes.Contains(to) && to != Root) {
+                var n = to as AFlowNode;
+                if (n != null) {
+                    for (int i = 0; i < n.NodeCount; ++i) {
+                        if (from == n.GetNode(i)) {
+                            return false;
+                        }
+                    }
+                    return from.AddNode(to);
+                }
             }
             return false;
         }

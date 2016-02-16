@@ -22,7 +22,7 @@ public class NodeFactory {
         InverterNode,
         RepeaterNode,
         SelectorNode,
-        SequenceNode,
+        SequenceNode
     };
 
     public static ANode CreateNode(Nodes node, AiBlackboard blackboard) {
