@@ -7,7 +7,6 @@ public class NodeDrawer {
     public static readonly Vector2 gSize = new Vector2(144f, 32f);
 
     private static int gNodeDrawerIdIncremental = 0;
-    private static int gCurrentFocus = 0;
 
     private readonly string _rootStyle = "flow node 5";
     private readonly string _rootStyleOn = "flow node 5 on";
@@ -38,24 +37,33 @@ public class NodeDrawer {
     public void DrawNode() {
         _rect.x = _node.Position.x;
         _rect.y = _node.Position.y;
-        _rect = GUI.Window(_id, _rect, new GUI.WindowFunction(DrawNodeWindow), _node.GetType().Name, (gCurrentFocus != _id) ? (_isRoot ? _rootStyle : _defaultStyle) : (_isRoot ? _rootStyleOn : _defaultStyleOn));
+        _rect = GUI.Window(_id, _rect, new GUI.WindowFunction(DrawNodeWindow), _node.GetType().Name, (Selection.activeObject != _node) ? (_isRoot ? _rootStyle : _defaultStyle) : (_isRoot ? _rootStyleOn : _defaultStyleOn));
         _node.Position.x = _rect.x;
         _node.Position.y = _rect.y;
     }
 
     private void DrawNodeWindow(int id) {
-        if(_node == null) {
+        Event e = Event.current;
+        if (_node == null) {
             return;
         }
-        Event e = Event.current;
         if (e.type == EventType.MouseUp && e.button == 1) {
+            GenericMenu menu = new GenericMenu();
+            menu.AddItem(new GUIContent("Make Root"), false, Callback, "item 1");
+            menu.AddItem(new GUIContent("Connect"), false, Callback, "item 2");
+            menu.AddItem(new GUIContent("Delete"), false, Callback, "item 2");
+            menu.ShowAsContext();
+            e.Use();
             //Object.DestroyImmediate(_node, true);
         }
-        if (e.type == EventType.MouseDown) {
-            gCurrentFocus = id;
+        if (e.type == EventType.MouseDown && e.button == 0) {
             Selection.activeObject = _node;
         }
         EditorUtility.SetDirty(_node);
         GUI.DragWindow();
+    }
+
+    void Callback(object obj) {
+        Debug.Log("Selected: " + obj);
     }
 }

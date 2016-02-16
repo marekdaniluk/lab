@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Name: AiBlackboard
   m_EditorClassIdentifier: 
   _intParameters:
-    _keys: []
-    _values: 
+    _keys:
+    - town1_items_to_buy
+    - Int Parameter
+    _values: 0100000000000000
   _floatParameters:
     _keys: []
     _values: []
@@ -24,5 +26,404 @@ MonoBehaviour:
     _keys: []
     _values: []
   _trees:
-  - _root: {fileID: 0}
-    _nodes: []
+  - _root: {fileID: 11422922}
+    _nodes:
+    - {fileID: 11422922}
+    - {fileID: 11437658}
+    - {fileID: 11473754}
+    - {fileID: 11476250}
+    - {fileID: 11447602}
+    - {fileID: 11488134}
+    - {fileID: 11491770}
+    - {fileID: 11464516}
+    - {fileID: 11441136}
+    - {fileID: 11419208}
+    - {fileID: 11400126}
+    - {fileID: 11427696}
+    - {fileID: 11406876}
+  - _root: {fileID: 11473402}
+    _nodes:
+    - {fileID: 11473402}
+    - {fileID: 11445028}
+    - {fileID: 11494246}
+    - {fileID: 11414004}
+    - {fileID: 11426118}
+    - {fileID: 11426244}
+--- !u!114 &11400126
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f636477ee2c6a54995f471850a62f10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Position: {x: 364, y: 258}
+  _dynamicValue: 0
+  _blackboard: {fileID: 11400000}
+  _key: town1_items_to_buy
+  _dynamicValueKey: 
+  _value: 0
+  _condition: 0
+--- !u!114 &11406876
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f636477ee2c6a54995f471850a62f10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Position: {x: 352, y: 86}
+  _dynamicValue: 0
+  _blackboard: {fileID: 11400000}
+  _key: town1_items_to_buy
+  _dynamicValueKey: 
+  _value: 0
+  _condition: 0
+--- !u!114 &11414004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f636477ee2c6a54995f471850a62f10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Position: {x: 80, y: 70}
+  _dynamicValue: 0
+  _blackboard: {fileID: 11400000}
+  _key: 
+  _dynamicValueKey: 
+  _value: 0
+  _condition: 0
+--- !u!114 &11419208
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f636477ee2c6a54995f471850a62f10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Position: {x: 231, y: 210}
+  _dynamicValue: 0
+  _blackboard: {fileID: 11400000}
+  _key: town1_items_to_buy
+  _dynamicValueKey: 
+  _value: 0
+  _condition: 0
+--- !u!114 &11422922
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f636477ee2c6a54995f471850a62f10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Position: {x: 234, y: 41}
+  _dynamicValue: 1
+  _blackboard: {fileID: 11400000}
+  _key: town1_items_to_buy
+  _dynamicValueKey: Int Parameter
+  _value: 0
+  _condition: 1
+--- !u!114 &11424224
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f636477ee2c6a54995f471850a62f10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Position: {x: 423, y: 106}
+  _dynamicValue: 0
+  _blackboard: {fileID: 11400000}
+  _key: 
+  _dynamicValueKey: 
+  _value: 0
+  _condition: 0
+--- !u!114 &11426118
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f636477ee2c6a54995f471850a62f10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Position: {x: 479, y: 86}
+  _dynamicValue: 0
+  _blackboard: {fileID: 11400000}
+  _key: 
+  _dynamicValueKey: 
+  _value: 0
+  _condition: 0
+--- !u!114 &11426244
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f636477ee2c6a54995f471850a62f10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Position: {x: 500, y: 160}
+  _dynamicValue: 0
+  _blackboard: {fileID: 11400000}
+  _key: town1_items_to_buy
+  _dynamicValueKey: 
+  _value: 0
+  _condition: 0
+--- !u!114 &11427696
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f636477ee2c6a54995f471850a62f10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Position: {x: 207, y: 42}
+  _dynamicValue: 0
+  _blackboard: {fileID: 11400000}
+  _key: 
+  _dynamicValueKey: 
+  _value: 0
+  _condition: 0
+--- !u!114 &11437658
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f636477ee2c6a54995f471850a62f10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Position: {x: 43, y: 118}
+  _dynamicValue: 1
+  _blackboard: {fileID: 11400000}
+  _key: town1_items_to_buy
+  _dynamicValueKey: town1_items_to_buy
+  _value: 0
+  _condition: 0
+--- !u!114 &11441136
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f636477ee2c6a54995f471850a62f10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Position: {x: 524, y: 161}
+  _dynamicValue: 0
+  _blackboard: {fileID: 11400000}
+  _key: town1_items_to_buy
+  _dynamicValueKey: 
+  _value: 0
+  _condition: 0
+--- !u!114 &11445028
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f636477ee2c6a54995f471850a62f10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Position: {x: 152, y: 161}
+  _dynamicValue: 0
+  _blackboard: {fileID: 11400000}
+  _key: 
+  _dynamicValueKey: 
+  _value: 0
+  _condition: 0
+--- !u!114 &11447602
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f636477ee2c6a54995f471850a62f10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Position: {x: 43, y: 210}
+  _dynamicValue: 0
+  _blackboard: {fileID: 11400000}
+  _key: town1_items_to_buy
+  _dynamicValueKey: 
+  _value: 0
+  _condition: 0
+--- !u!114 &11457980
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f636477ee2c6a54995f471850a62f10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Position: {x: 423, y: 106}
+  _dynamicValue: 0
+  _blackboard: {fileID: 11400000}
+  _key: 
+  _dynamicValueKey: 
+  _value: 0
+  _condition: 0
+--- !u!114 &11464516
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f636477ee2c6a54995f471850a62f10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Position: {x: 233, y: 123}
+  _dynamicValue: 0
+  _blackboard: {fileID: 11400000}
+  _key: town1_items_to_buy
+  _dynamicValueKey: 
+  _value: 0
+  _condition: 0
+--- !u!114 &11473402
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f636477ee2c6a54995f471850a62f10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Position: {x: 289, y: 69}
+  _dynamicValue: 0
+  _blackboard: {fileID: 11400000}
+  _key: town1_items_to_buy
+  _dynamicValueKey: 
+  _value: 0
+  _condition: 0
+--- !u!114 &11473754
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f636477ee2c6a54995f471850a62f10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Position: {x: 513, y: 102}
+  _dynamicValue: 0
+  _blackboard: {fileID: 11400000}
+  _key: town1_items_to_buy
+  _dynamicValueKey: 
+  _value: 0
+  _condition: 0
+--- !u!114 &11476250
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f636477ee2c6a54995f471850a62f10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Position: {x: 525, y: 224}
+  _dynamicValue: 0
+  _blackboard: {fileID: 11400000}
+  _key: town1_items_to_buy
+  _dynamicValueKey: 
+  _value: 0
+  _condition: 0
+--- !u!114 &11488134
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f636477ee2c6a54995f471850a62f10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Position: {x: 41, y: 35}
+  _dynamicValue: 0
+  _blackboard: {fileID: 11400000}
+  _key: town1_items_to_buy
+  _dynamicValueKey: 
+  _value: 0
+  _condition: 0
+--- !u!114 &11491770
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f636477ee2c6a54995f471850a62f10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Position: {x: 487, y: 42}
+  _dynamicValue: 0
+  _blackboard: {fileID: 11400000}
+  _key: town1_items_to_buy
+  _dynamicValueKey: 
+  _value: 0
+  _condition: 0
+--- !u!114 &11494246
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f636477ee2c6a54995f471850a62f10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Position: {x: 326, y: 196}
+  _dynamicValue: 0
+  _blackboard: {fileID: 11400000}
+  _key: 
+  _dynamicValueKey: 
+  _value: 0
+  _condition: 0

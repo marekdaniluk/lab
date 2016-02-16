@@ -76,14 +76,15 @@ public class AiBehaviourWindow : EditorWindow {
     private void InputHandler() {
         int controlID = GUIUtility.GetControlID(new GUIContent("grid view"), FocusType.Passive);
         Event current = Event.current;
-        if(current.button == 1 && current.type == EventType.MouseDown && _target != null) {
-            var node = NodeFactory.CreateNode(NodeFactory.Nodes.IntNode, _target);
-            node.Position = new Vector2(current.mousePosition.x - _currentViewWidth - NodeDrawer.gSize.x / 2, current.mousePosition.y - NodeDrawer.gSize.y);
-            _statusBar.CurrentTree.AddNode(node);
-            _treeDrawer = new TreeDrawer(_statusBar.CurrentTree);
+        if ((current.type == EventType.MouseDown || current.type == EventType.MouseUp)) {
+            Selection.activeObject = _target;
+        }
+        if (current.button == 1 && current.type == EventType.MouseDown && _target != null) {
+            NodeFactory.CreateNodeMenu(current.mousePosition, MenuCallback);
+            current.Use();
             return;
         }
-        if (current.button != 2 && (current.button != 0 || !current.alt)) {
+        if (current.button != 0) {
             return;
         }
         switch (current.GetTypeForControl(controlID)) {
@@ -131,5 +132,15 @@ public class AiBehaviourWindow : EditorWindow {
             _paramPanel.Blackboard = null;
         }
         Repaint();
+    }
+
+    private void MenuCallback(object obj) {
+        var data = obj as NodeFactory.NodeCallbackData;
+        if(data != null) {
+            var node = NodeFactory.CreateNode(data.nodeType, _target);
+            node.Position = new Vector2(data.position.x - _currentViewWidth - NodeDrawer.gSize.x / 2, data.position.y - NodeDrawer.gSize.y);
+            _statusBar.CurrentTree.AddNode(node);
+            _treeDrawer.RebuildTreeView(_statusBar.CurrentTree);
+        }
     }
 }
