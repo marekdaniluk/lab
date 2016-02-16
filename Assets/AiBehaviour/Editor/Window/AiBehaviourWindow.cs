@@ -4,6 +4,8 @@ using AiBehaviour;
 
 public class AiBehaviourWindow : EditorWindow {
 
+    public static AiBehaviourWindow gWindow = null;
+
     [SerializeField]
     private float _currentViewWidth = 200f;
     private Vector2 _scrollPosition = Vector2.zero;
@@ -21,12 +23,17 @@ public class AiBehaviourWindow : EditorWindow {
         EditorWindow.GetWindow<AiBehaviourWindow>();
     }
 
-    public void OnEnable() {
+    private void OnEnable() {
+        gWindow = this;
         titleContent = new GUIContent("AiBehaviour");
         titleContent.image = (Texture2D)EditorGUIUtility.Load("Assets/AiBehaviour/Icons/AiController.png");
         _statusBar = new StatusBarDrawer();
         _paramPanel = new ParamPanelDrawer();
         _cursorChangeRect = new Rect(_currentViewWidth, 0f, 5f, position.height);
+    }
+
+    private void OnDisable() {
+        gWindow = null;
     }
 
     private void OnGUI() {

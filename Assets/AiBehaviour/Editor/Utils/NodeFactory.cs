@@ -59,6 +59,7 @@ public class NodeFactory {
             default:
                 return null;
         }
+        n.name = n.GetType().Name;
         n.hideFlags = HideFlags.HideInHierarchy;
         AssetDatabase.AddObjectToAsset(n, blackboard);
         EditorUtility.SetDirty(n);
