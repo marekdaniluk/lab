@@ -47,17 +47,26 @@ namespace UnityEditor {
         }
 
         public static void DrawNodeCurve(Rect start, Rect end) {
-            Vector3 startPos = new Vector3(start.x + start.width / 2, start.y + start.height / 2, 0);
-            Vector3 endPos = new Vector3(end.x + end.width / 2, end.y + end.height / 2, 0);
-            DrawLine(startPos, endPos);
+            Vector3 startPos = new Vector3(start.x + start.width / 2f, start.y + start.height / 2f, 0);
+            Vector3 endPos = new Vector3(end.x + end.width / 2f, end.y + end.height / 2f, 0);
+            Vector3 middlePos = (startPos + endPos) / 2f;
+            DrawLine(startPos, middlePos, Color.white);
+            DrawLine(middlePos, endPos, new Color(0.6f, 0.6f, 0.6f));
         }
 
-        public static void DrawLine(Vector3 start, Vector3 end) {
-            Color shadowCol = new Color(1f, 1f, 1f, 0.35f);
+        public static void DrawLine(Vector3 start, Vector3 end, Color color) {
+            Color shadowCol = color;
+            shadowCol.a = 0.35f;
             for (int i = 0; i < 3; ++i) {
                 Handles.DrawBezier(start, end, start, end, shadowCol, null, (i + 1) * 2);
             }
-            Handles.DrawBezier(start, end, start, end, Color.white, null, 1);
+            Handles.DrawBezier(start, end, start, end, color, null, 1);
+        }
+
+        public static void DrawLabel(Vector3 position, string text) {
+            GUIStyle style = new GUIStyle();
+            style.normal.textColor = Color.white;
+            Handles.Label(position, text, style);
         }
     }
 }

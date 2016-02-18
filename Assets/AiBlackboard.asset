@@ -15,14 +15,19 @@ MonoBehaviour:
     _keys: []
     _values: 
   _floatParameters:
-    _keys: []
-    _values: []
+    _keys:
+    - Float Parameter
+    _values:
+    - 0
   _boolParameters:
-    _keys: []
-    _values: 
+    _keys:
+    - Bool Parameter
+    _values: 00
   _stringParameters:
-    _keys: []
-    _values: []
+    _keys:
+    - String Parameter
+    _values:
+    - 
   _trees:
   - _root: {fileID: 11485358}
     _nodes:
@@ -33,6 +38,7 @@ MonoBehaviour:
     - {fileID: 11406704}
     - {fileID: 11468126}
     - {fileID: 11480866}
+    - {fileID: 11477026}
 --- !u!114 &11406704
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -44,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4049d6a73af16724ebf61d547555a4c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 387, y: 94}
+  Position: {x: 486, y: 111}
   _nodes:
   - {fileID: 11468126}
 --- !u!114 &11431000
@@ -58,10 +64,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 184352b801f40a2458b3e1f8e0445aae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 99, y: 124}
+  Position: {x: 159, y: 137}
   _dynamicValue: 0
   _blackboard: {fileID: 11400000}
-  _key: 
+  _key: Bool Parameter
   _dynamicValueKey: 
   _value: 0
   _condition: 0
@@ -76,10 +82,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f575d0542cdd6c40b92c2dfffedfc1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 450, y: 208}
+  Position: {x: 462, y: 270}
   _dynamicValue: 0
   _blackboard: {fileID: 11400000}
-  _key: 
+  _key: Float Parameter
   _dynamicValueKey: 
   _value: 0
   _condition: 0
@@ -94,9 +100,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77192985dbf2d4c4bbd32c7520893136, type: 3}
   m_Name: SelectorNode
   m_EditorClassIdentifier: 
-  Position: {x: 224, y: 176}
+  Position: {x: 305, y: 192}
   _nodes:
   - {fileID: 11443924}
+--- !u!114 &11477026
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e1a115f1f106b24e813d1c75a6fb490, type: 3}
+  m_Name: StringParameterNode
+  m_EditorClassIdentifier: 
+  Position: {x: 43, y: 189}
+  _dynamicValue: 0
+  _blackboard: {fileID: 11400000}
+  _key: String Parameter
+  _dynamicValueKey: 
+  _value: 
+  _condition: 0
 --- !u!114 &11480866
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -108,8 +132,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77192985dbf2d4c4bbd32c7520893136, type: 3}
   m_Name: SelectorNode
   m_EditorClassIdentifier: 
-  Position: {x: 72, y: 240}
-  _nodes: []
+  Position: {x: 142, y: 280}
+  _nodes:
+  - {fileID: 11477026}
 --- !u!114 &11482390
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -121,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c17c220617efa84c99e31f59f708f44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 482, y: 11}
+  Position: {x: 82, y: 60}
   _node: {fileID: 0}
 --- !u!114 &11485358
 MonoBehaviour:
@@ -134,7 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77192985dbf2d4c4bbd32c7520893136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 246, y: 8}
+  Position: {x: 275, y: 32}
   _nodes:
   - {fileID: 11431000}
   - {fileID: 11406704}

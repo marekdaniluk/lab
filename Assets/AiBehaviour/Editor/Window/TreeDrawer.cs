@@ -19,9 +19,9 @@ public class TreeDrawer {
     }
 
     public void DrawTree() {
-        DrawTransition(_tree.Root);
+        DrawTransition();
         if(_startConnection != null) {
-            EditorUtils.DrawLine(new Vector3(_startConnection.Position.x + NodeDrawer.gSize.x / 2, _startConnection.Position.y + NodeDrawer.gSize.y / 2, 0), Event.current.mousePosition);
+            EditorUtils.DrawLine(new Vector3(_startConnection.Position.x + NodeDrawer.gSize.x / 2, _startConnection.Position.y + NodeDrawer.gSize.y / 2, 0), Event.current.mousePosition, Color.grey);
         }
         for (int i = 0; i < _nodeDrawers.Count; ++i) {
             _nodeDrawers[i].DrawNode();
@@ -45,12 +45,17 @@ public class TreeDrawer {
         }
     }
 
-    private void DrawTransition(ANode node) {
-        var n = node as AFlowNode;
-        if (n != null) {
-            for (int i = 0; i < n.NodeCount; ++i) {
-                EditorUtils.DrawNodeCurve(new Rect(n.Position.x, n.Position.y, NodeDrawer.gSize.x, NodeDrawer.gSize.y), new Rect(n.GetNode(i).Position.x, n.GetNode(i).Position.y, NodeDrawer.gSize.x, NodeDrawer.gSize.y));
-                DrawTransition(n.GetNode(i));
+    private void DrawTransition() {
+        var nodes = _tree.Nodes;
+        for (int i = 0; i < nodes.Count; ++i) {
+            var n = nodes[i] as AFlowNode;
+            if (n != null) {
+                for (int k = 0; k < n.NodeCount; ++k) {
+                    Vector2 start = n.Position;
+                    Vector2 end = n.GetNode(k).Position;
+                    EditorUtils.DrawLabel(n.Position + new Vector2(NodeDrawer.gSize.x / 2, 0f) + (end - start).normalized * Vector2.Distance(start, end) / 2f, k.ToString());
+                    EditorUtils.DrawNodeCurve(new Rect(n.Position.x, n.Position.y, NodeDrawer.gSize.x, NodeDrawer.gSize.y), new Rect(n.GetNode(k).Position.x, n.GetNode(k).Position.y, NodeDrawer.gSize.x, NodeDrawer.gSize.y));
+                }
             }
         }
     }

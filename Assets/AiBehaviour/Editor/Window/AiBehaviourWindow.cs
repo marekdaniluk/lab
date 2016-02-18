@@ -27,9 +27,7 @@ public class AiBehaviourWindow : EditorWindow {
         gWindow = this;
         titleContent = new GUIContent("AiBehaviour");
         titleContent.image = (Texture2D)EditorGUIUtility.Load("Assets/AiBehaviour/Icons/AiController.png");
-        _statusBar = new StatusBarDrawer();
-        _paramPanel = new ParamPanelDrawer();
-        _cursorChangeRect = new Rect(_currentViewWidth, 0f, 5f, position.height);
+        Init();
     }
 
     private void OnDisable() {
@@ -66,7 +64,7 @@ public class AiBehaviourWindow : EditorWindow {
         }
         if (_resize) {
             _currentViewWidth = Mathf.Clamp(Event.current.mousePosition.x, _minimumViewWidth, position.width - _minimumViewWidth);
-            _cursorChangeRect.Set(_currentViewWidth, 0f, 5f, position.height);
+            _cursorChangeRect.Set(_currentViewWidth - 5f, 0f, 5f, position.height);
             Repaint();
         }
         if (Event.current.type == EventType.MouseUp) {
@@ -89,7 +87,7 @@ public class AiBehaviourWindow : EditorWindow {
     private void InputHandler() {
         int controlID = GUIUtility.GetControlID(new GUIContent("grid view"), FocusType.Passive);
         Event current = Event.current;
-        Rect r = new Rect(0f, 0f, _currentViewWidth, position.height);
+        Rect r = new Rect(0f, 0f, _currentViewWidth + 1f, position.height);
         if ((current.type == EventType.MouseDown || current.type == EventType.MouseUp)) {
             Selection.activeObject = _target;
             if (r.Contains(current.mousePosition)) {
@@ -120,7 +118,7 @@ public class AiBehaviourWindow : EditorWindow {
             case EventType.MouseMove:
             case EventType.MouseDrag:
                 if (GUIUtility.hotControl == controlID) {
-                    if(_treeDrawer != null) {
+                    if (_treeDrawer != null) {
                         _treeDrawer.OffsetNodes(current.delta);
                     }
                     current.Use();
@@ -130,13 +128,20 @@ public class AiBehaviourWindow : EditorWindow {
     }
 
     private void Init() {
+        if (_statusBar == null) {
+            _statusBar = new StatusBarDrawer();
+        }
+        if (_paramPanel == null) {
+            _paramPanel = new ParamPanelDrawer();
+        }
+        _cursorChangeRect = new Rect(_currentViewWidth, 0f, 5f, position.height);
         if (_target != Selection.activeObject && Selection.activeObject is AiBlackboard && EditorUtility.IsPersistent(Selection.activeObject)) {
             _target = (AiBlackboard)Selection.activeObject;
             _statusBar.Blackboard = _target;
             _paramPanel.Blackboard = _target;
             _treeDrawer = new TreeDrawer(_statusBar.CurrentTree);
             _statusBar.OnSelectedAiTree += _treeDrawer.RebuildTreeView;
-        } else if(Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<AiController>() != null && Selection.activeGameObject.GetComponent<AiController>().Blackboard != null && Selection.activeGameObject.GetComponent<AiController>().Blackboard != _target) {
+        } else if (Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<AiController>() != null && Selection.activeGameObject.GetComponent<AiController>().Blackboard != null && Selection.activeGameObject.GetComponent<AiController>().Blackboard != _target) {
             _target = Selection.activeGameObject.GetComponent<AiController>().Blackboard;
             _statusBar.Blackboard = _target;
             _paramPanel.Blackboard = _target;
@@ -153,7 +158,7 @@ public class AiBehaviourWindow : EditorWindow {
 
     private void MenuCallback(object obj) {
         var data = obj as NodeFactory.NodeCallbackData;
-        if(data != null) {
+        if (data != null) {
             var node = NodeFactory.CreateNode(data.nodeType, _target);
             node.Position = new Vector2(data.position.x - _currentViewWidth - NodeDrawer.gSize.x / 2, data.position.y - NodeDrawer.gSize.y);
             _statusBar.CurrentTree.AddNode(node);
