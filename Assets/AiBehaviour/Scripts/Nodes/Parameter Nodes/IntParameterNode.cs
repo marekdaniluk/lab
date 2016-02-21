@@ -44,9 +44,5 @@ namespace AiBehaviour {
             }
             return false;
         }
-
-        public override string ToString() {
-            return string.Format("Is {0} {1} from {2}?", Blackboard.IntParameters[Key], Condition.ToString(), (DynamicValue ? Blackboard.IntParameters[DynamicValueKey] : Value));
-        }
     }
 }

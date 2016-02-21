@@ -34,9 +34,5 @@ namespace AiBehaviour {
         public override bool Run() {
             return !_node.Run();
         }
-
-        public override string ToString() {
-            return string.Format("Inverter\n{0}?", _node.ToString());
-        }
     }
 }

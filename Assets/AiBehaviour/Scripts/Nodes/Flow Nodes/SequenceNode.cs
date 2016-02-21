@@ -36,13 +36,5 @@ namespace AiBehaviour {
             }
             return true;
         }
-
-        public override string ToString() {
-            System.Text.StringBuilder builder = new System.Text.StringBuilder("Sequence\n");
-            foreach (ANode node in _nodes) {
-                builder.Append(string.Format("\t{0}\n", node.ToString()));
-            }
-            return builder.ToString();
-        }
     }
 }

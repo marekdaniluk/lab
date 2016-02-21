@@ -34,9 +34,5 @@ namespace AiBehaviour {
             }
             return Blackboard.BoolParameters[Key] == Value;
         }
-
-        public override string ToString() {
-            return string.Format("Is {0} {1}?", Blackboard.BoolParameters[Key], (DynamicValue ? Blackboard.BoolParameters[DynamicValueKey] : Value));
-        }
     }
 }

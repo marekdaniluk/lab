@@ -44,9 +44,5 @@ namespace AiBehaviour {
             }
             return true;
         }
-
-        public override string ToString() {
-            return string.Format("Repeater\n{0}?", _node.ToString());
-        }
     }
 }
