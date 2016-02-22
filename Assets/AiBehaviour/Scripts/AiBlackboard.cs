@@ -52,8 +52,8 @@ namespace AiBehaviour {
             get { return _stringParameters; }
         }
 
-        public bool Run(int i = 0) {
-            return _trees[i].Run();
+        public bool Run(List<ATaskScript> tasks, int i = 0) {
+            return _trees[i].Run(tasks);
         }
     }
 }

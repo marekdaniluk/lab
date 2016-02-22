@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 namespace AiBehaviour {
     [System.Serializable]
@@ -17,7 +18,7 @@ namespace AiBehaviour {
             set { _condition = value; }
         }
 
-        public override bool Run() {
+        public override bool Run(List<ATaskScript> tasks) {
             if (DynamicValue) {
                 switch (_condition) {
                     case BoolCondition.Equal:

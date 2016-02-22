@@ -28,9 +28,9 @@ namespace AiBehaviour {
             get { return _nodes.Count; }
         }
 
-        public override bool Run() {
+        public override bool Run(List<ATaskScript> tasks) {
             for (int i = 0; i < _nodes.Count; ++i) {
-                if (_nodes[i].Run()) {
+                if (_nodes[i].Run(tasks)) {
                     return true;
                 }
             }

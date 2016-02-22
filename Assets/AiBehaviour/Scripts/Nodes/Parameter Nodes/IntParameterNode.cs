@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 namespace AiBehaviour {
     [System.Serializable]
@@ -19,7 +20,7 @@ namespace AiBehaviour {
             set { _condition = value; }
         }
 
-        public override bool Run() {
+        public override bool Run(List<ATaskScript> tasks) {
             switch (_condition) {
                 case IntCondition.Greater:
                     if (Blackboard.IntParameters[Key] > (DynamicValue ? Blackboard.IntParameters[DynamicValueKey] : Value)) {

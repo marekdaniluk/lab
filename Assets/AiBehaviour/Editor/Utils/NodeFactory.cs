@@ -22,7 +22,8 @@ public class NodeFactory {
         InverterNode,
         RepeaterNode,
         SelectorNode,
-        SequenceNode
+        SequenceNode,
+        TaskNode
     };
 
     public static ANode CreateNode(Nodes node, AiBlackboard blackboard) {
@@ -55,6 +56,9 @@ public class NodeFactory {
                 break;
             case Nodes.SequenceNode:
                 n = ScriptableObject.CreateInstance<SequenceNode>();
+                break;
+            case Nodes.TaskNode:
+                n = ScriptableObject.CreateInstance<TaskNode>();
                 break;
             default:
                 return null;

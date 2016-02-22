@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 namespace AiBehaviour {
     [System.Serializable]
@@ -19,7 +20,7 @@ namespace AiBehaviour {
             set { _condition = value; }
         }
 
-        public override bool Run() {
+        public override bool Run(List<ATaskScript> tasks) {
             switch (_condition) {
                 case FloatCondition.Greater:
                     if (Blackboard.FloatParameters[Key] > (DynamicValue ? Blackboard.FloatParameters[DynamicValueKey] : Value)) {

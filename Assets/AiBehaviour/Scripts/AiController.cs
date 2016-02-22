@@ -7,10 +7,17 @@ namespace AiBehaviour {
 
         [SerializeField]
         private AiBlackboard _blackboard;
+        [SerializeField]
+        private List<ATaskScript> _tasks;
 
         public AiBlackboard Blackboard {
             get { return _blackboard; }
             set { _blackboard = value; }
+        }
+
+        public List<ATaskScript> Tasks {
+            get { return _tasks; }
+            set { _tasks = value; }
         }
 
         public void SetInt(string key, int val) {
@@ -62,7 +69,7 @@ namespace AiBehaviour {
         }
 
         public bool Run(int i = 0) {
-            return Blackboard.Run(i);
+            return Blackboard.Run(Tasks, i);
         }
 
         public IList<AiTree> Trees {

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 namespace AiBehaviour {
     [System.Serializable]
@@ -9,6 +10,6 @@ namespace AiBehaviour {
         public Vector2 Position;
 #endif
 
-        public abstract bool Run();
+        public abstract bool Run(List<ATaskScript> tasks);
     }
 }

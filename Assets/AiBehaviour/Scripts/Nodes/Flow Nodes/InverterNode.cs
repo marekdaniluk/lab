@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 namespace AiBehaviour {
     [System.Serializable]
@@ -31,8 +32,8 @@ namespace AiBehaviour {
             get { return (_node == null) ? 0 : 1; }
         }
 
-        public override bool Run() {
-            return !_node.Run();
+        public override bool Run(List<ATaskScript> tasks) {
+            return !_node.Run(tasks);
         }
     }
 }

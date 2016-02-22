@@ -79,8 +79,8 @@ namespace AiBehaviour {
             return false;
         }
 
-        public bool Run() {
-            return Root.Run();
+        public bool Run(List<ATaskScript> tasks) {
+            return Root.Run(tasks);
         }
 
         private bool IsConnected(AFlowNode from, AFlowNode to) {

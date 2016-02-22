@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 namespace AiBehaviour {
     [System.Serializable]
@@ -38,9 +39,9 @@ namespace AiBehaviour {
             set { _repeat = value; }
         }
 
-        public override bool Run() {
+        public override bool Run(List<ATaskScript> tasks) {
             for (int i = 0; i < Repeat; ++i) {
-                _node.Run();
+                _node.Run(tasks);
             }
             return true;
         }
