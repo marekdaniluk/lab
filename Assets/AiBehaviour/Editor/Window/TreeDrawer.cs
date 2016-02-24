@@ -79,7 +79,11 @@ public class TreeDrawer {
         }
         GenericMenu menu = new GenericMenu();
         if(node is AFlowNode) {
-            menu.AddItem(new GUIContent("Make Root"), false, RootCallback, node);
+			if(node != _tree.Root) {
+				menu.AddItem(new GUIContent("Make Root"), false, RootCallback, node);
+			} else {
+				menu.AddDisabledItem(new GUIContent("Make Root"));
+			}
             menu.AddItem(new GUIContent("Connect"), false, ConnectCallback, node);
         } else {
             menu.AddDisabledItem(new GUIContent("Make Root"));

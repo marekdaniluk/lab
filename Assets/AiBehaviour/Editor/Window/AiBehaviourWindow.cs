@@ -99,7 +99,7 @@ public class AiBehaviourWindow : EditorWindow {
             current.Use();
             return;
         }
-        if (current.button != 0) {
+        if (current.button != 2) {
             return;
         }
         switch (current.GetTypeForControl(controlID)) {
