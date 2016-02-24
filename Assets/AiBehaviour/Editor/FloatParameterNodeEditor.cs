@@ -9,7 +9,7 @@ public class FloatParameterNodeEditor : Editor {
     private int _index1 = 0;
 
     public override void OnInspectorGUI() {
-        var parameter = (FloatParameterNode)target;
+		var parameter = (FloatParameterNode)target;
         if (parameter.Blackboard.FloatParameters.Count == 0) {
             EditorGUILayout.HelpBox(string.Format("Blackboard \"{0}\" has no Float parameters. Add at least one Float parameter.", parameter.Blackboard.name), MessageType.Info);
             return;
@@ -21,7 +21,7 @@ public class FloatParameterNodeEditor : Editor {
         parameter.DynamicValue = boolIndex == 1 ? true : false;
         EditorGUILayout.LabelField("Condition:");
         EditorGUILayout.BeginHorizontal();
-        string[] keys = parameter.Blackboard.FloatParameters.Keys.ToArray();
+        string[] keys = parameter.Blackboard.FloatParameters.Keys.ToArray<float>();
         for (int i = 0; i < keys.Length; ++i) {
             if (keys[i].Equals(parameter.Key)) {
                 _index = i;

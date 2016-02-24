@@ -9,7 +9,7 @@ public class BoolParameterNodeEditor : Editor {
     private int _index1 = 0;
 
     public override void OnInspectorGUI() {
-        var parameter = (BoolParameterNode)target;
+		var parameter = (BoolParameterNode)target;
         if (parameter.Blackboard.BoolParameters.Count == 0) {
             EditorGUILayout.HelpBox(string.Format("Blackboard \"{0}\" has no Bool parameters. Add at least one Bool parameter.", parameter.Blackboard.name), MessageType.Info);
             return;
@@ -21,7 +21,7 @@ public class BoolParameterNodeEditor : Editor {
         parameter.DynamicValue = boolIndex == 1 ? true : false;
         EditorGUILayout.LabelField("Condition:");
         EditorGUILayout.BeginHorizontal();
-        string[] keys = parameter.Blackboard.BoolParameters.Keys.ToArray();
+        string[] keys = parameter.Blackboard.BoolParameters.Keys.ToArray<bool>();
         for (int i = 0; i < keys.Length; ++i) {
             if (keys[i].Equals(parameter.Key)) {
                 _index = i;

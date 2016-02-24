@@ -1,9 +1,21 @@
 ﻿using UnityEngine;
 using AiBehaviour;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace UnityEditor {
     public static class EditorUtils {
+
+		public static bool IsSubclassOfRawGeneric(this System.Type toCheck, System.Type baseType) {
+			while (toCheck != typeof(object)) {
+				System.Type cur = toCheck.IsGenericType ? toCheck.GetGenericTypeDefinition() : toCheck;
+				if (baseType == cur) {
+					return true;
+				}
+				toCheck = toCheck.BaseType;
+			}
+			return false;
+		}
 
         public static string[] ToArray<T>(this Dictionary<string, T>.KeyCollection collection) {
             string[] keys = new string[collection.Count];

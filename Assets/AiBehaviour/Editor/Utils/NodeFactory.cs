@@ -1,68 +1,27 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using AiBehaviour;
+using System;
+using System.Linq;
+using System.Reflection;
 
 public class NodeFactory {
 
     public class NodeCallbackData {
         public Vector2 position;
-        public Nodes nodeType;
+        public Type nodeType;
 
-        public NodeCallbackData(Vector2 p, Nodes n) {
+		public NodeCallbackData(Vector2 p, Type n) {
             position = p;
             nodeType = n;
         }
     };
 
-    public enum Nodes {
-        IntNode,
-        FloatNode,
-        BoolNode,
-        StringNode,
-        InverterNode,
-        RepeaterNode,
-        SelectorNode,
-        SequenceNode,
-        TaskNode
-    };
-
-    public static ANode CreateNode(Nodes node, AiBlackboard blackboard) {
-        ANode n = null;
-        switch (node) {
-            case Nodes.IntNode:
-                n = ScriptableObject.CreateInstance<IntParameterNode>();
-                ((IntParameterNode)n).Blackboard = blackboard;
-                break;
-            case Nodes.FloatNode:
-                n = ScriptableObject.CreateInstance<FloatParameterNode>();
-                ((FloatParameterNode)n).Blackboard = blackboard;
-                break;
-            case Nodes.BoolNode:
-                n = ScriptableObject.CreateInstance<BoolParameterNode>();
-                ((BoolParameterNode)n).Blackboard = blackboard;
-                break;
-            case Nodes.StringNode:
-                n = ScriptableObject.CreateInstance<StringParameterNode>();
-                ((StringParameterNode)n).Blackboard = blackboard;
-                break;
-            case Nodes.InverterNode:
-                n = ScriptableObject.CreateInstance<InverterNode>();
-                break;
-            case Nodes.RepeaterNode:
-                n = ScriptableObject.CreateInstance<RepeaterNode>();
-                break;
-            case Nodes.SelectorNode:
-                n = ScriptableObject.CreateInstance<SelectorNode>();
-                break;
-            case Nodes.SequenceNode:
-                n = ScriptableObject.CreateInstance<SequenceNode>();
-                break;
-            case Nodes.TaskNode:
-                n = ScriptableObject.CreateInstance<TaskNode>();
-                break;
-            default:
-                return null;
-        }
+	public static ANode CreateNode(Type nodeType, AiBlackboard blackboard) {
+		ANode n = ScriptableObject.CreateInstance(nodeType) as ANode;
+		if(n.GetType().IsSubclassOfRawGeneric(typeof(AParameterNode<>))) {
+			n.GetType().GetProperty("Blackboard").SetValue(n, blackboard, null);
+		}
         n.name = n.GetType().Name;
         n.hideFlags = HideFlags.HideInHierarchy;
         AssetDatabase.AddObjectToAsset(n, blackboard);
@@ -73,9 +32,17 @@ public class NodeFactory {
 
     public static void CreateNodeMenu(Vector2 position, GenericMenu.MenuFunction2 MenuCallback) {
         GenericMenu menu = new GenericMenu();
-        foreach (Nodes node in System.Enum.GetValues(typeof(Nodes))) {
-            menu.AddItem(new GUIContent(node.ToString()), false, MenuCallback, new NodeCallbackData(position, node));
-        }
+		
+		var assembly = Assembly.Load(new AssemblyName("Assembly-CSharp"));
+		var paramTypes = (from t in assembly.GetTypes() where t.IsSubclassOfRawGeneric(typeof(AParameterNode<>)) && !t.IsAbstract select t).ToArray();
+		var flowTypes = (from t in assembly.GetTypes() where t.IsSubclassOfRawGeneric(typeof(AFlowNode)) && !t.IsAbstract select t).ToArray();
+		foreach(System.Type t in paramTypes) {
+			menu.AddItem(new GUIContent(string.Format("Parameter Nodes/{0}", t.Name)), false, MenuCallback, new NodeCallbackData(position, t));
+		}
+		foreach(System.Type t in flowTypes) {
+			menu.AddItem(new GUIContent(string.Format("Flow Nodes/{0}", t.Name)), false, MenuCallback, new NodeCallbackData(position, t));
+		}
+		menu.AddItem(new GUIContent("TaskNode"), false, MenuCallback, new NodeCallbackData(position, typeof(TaskNode)));
         menu.ShowAsContext();
     }
 }
