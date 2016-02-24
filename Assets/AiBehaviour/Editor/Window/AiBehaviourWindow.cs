@@ -48,7 +48,7 @@ public class AiBehaviourWindow : EditorWindow {
         }
         EndWindows();
 		if(GUI.Button(new Rect(position.width - _currentViewWidth - 55f, position.height - EditorStyles.toolbar.fixedHeight - 55f, 50f, 50f), "C")) {
-			_treeDrawer.OffsetNodes(-_statusBar.CurrentTree.Root.Position);
+			_treeDrawer.OffsetNodes(-_statusBar.CurrentTree.Root.Position + (new Vector2(position.width - _currentViewWidth,  position.height - EditorStyles.toolbar.fixedHeight) - NodeDrawer.gSize) * 0.5f);
 		}
         GUI.EndGroup();
         InputHandler();
