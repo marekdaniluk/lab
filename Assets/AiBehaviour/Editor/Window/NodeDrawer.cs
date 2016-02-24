@@ -41,7 +41,7 @@ public class NodeDrawer {
     public void DrawNode() {
         _rect.x = _node.Position.x;
         _rect.y = _node.Position.y;
-        _rect = GUI.Window(_id, _rect, new GUI.WindowFunction(DrawNodeWindow), _node.GetType().Name, (Selection.activeObject != _node) ? (_isRoot ? _rootStyle : _defaultStyle) : (_isRoot ? _rootStyleOn : _defaultStyleOn));
+        _rect = GUI.Window(_id, _rect, new GUI.WindowFunction(DrawNodeWindow), "", (Selection.activeObject != _node) ? (_isRoot ? _rootStyle : _defaultStyle) : (_isRoot ? _rootStyleOn : _defaultStyleOn));
         _node.Position.x = _rect.x;
         _node.Position.y = _rect.y;
     }
@@ -51,6 +51,7 @@ public class NodeDrawer {
         if (_node == null) {
             return;
         }
+        GUI.Label(new Rect(0, gSize.y / 2f - 8, _rect.width, 16), new GUIContent(_node.GetType().Name, EditorGUIUtility.ObjectContent(_node, _node.GetType()).image));
         if (e.type == EventType.MouseUp && e.button == 1) {
             OnRightClicked(_node);
             e.Use();
