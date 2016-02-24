@@ -47,6 +47,9 @@ public class AiBehaviourWindow : EditorWindow {
             _treeDrawer.DrawTree();
         }
         EndWindows();
+		if(GUI.Button(new Rect(position.width - _currentViewWidth - 55f, position.height - EditorStyles.toolbar.fixedHeight - 55f, 50f, 50f), "C")) {
+			_treeDrawer.OffsetNodes(-_statusBar.CurrentTree.Root.Position);
+		}
         GUI.EndGroup();
         InputHandler();
     }
@@ -85,6 +88,9 @@ public class AiBehaviourWindow : EditorWindow {
     }
 
     private void InputHandler() {
+		if(_target == null) {
+			return;
+		}
         int controlID = GUIUtility.GetControlID(new GUIContent("grid view"), FocusType.Passive);
         Event current = Event.current;
         Rect r = new Rect(0f, 0f, _currentViewWidth + 1f, position.height);
