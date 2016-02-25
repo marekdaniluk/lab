@@ -8,7 +8,7 @@ public class NodeDrawer {
     public static NodeDrawerHandler OnRightClicked = delegate { };
     public static NodeDrawerHandler OnLeftClicked = delegate { };
 
-    public static readonly Vector2 gSize = new Vector2(156f, 34f);
+    public static readonly Vector2 gSize = new Vector2(144f, 32f);
 
     private static int gNodeDrawerIdIncremental = 0;
 
@@ -51,7 +51,7 @@ public class NodeDrawer {
         if (_node == null) {
             return;
         }
-        GUI.Label(new Rect(0, gSize.y / 2f - 16, _rect.width, 32), new GUIContent(_node.GetType().Name, EditorGUIUtility.ObjectContent(_node, _node.GetType()).image));
+        GUI.Label(new Rect(0, gSize.y / 2f - 12, _rect.width, 24), new GUIContent(_node.GetType().Name, EditorGUIUtility.ObjectContent(_node, _node.GetType()).image));
         if (e.type == EventType.MouseUp && e.button == 1) {
             OnRightClicked(_node);
             e.Use();

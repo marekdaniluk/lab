@@ -77,7 +77,7 @@ namespace UnityEditor {
 		public static void DrawArrow(Vector3 start, Vector3 end, Color color) {
 			var arrowHead = new Vector3[3];
 			var h = 10f;
-			var w = h / 4f * 3f;
+			var w = h / 2f;
 			var forward = (end - start).normalized;
 			var right = Vector3.Cross(Vector3.forward, forward).normalized;
 
