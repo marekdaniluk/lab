@@ -4,7 +4,7 @@ using System.Collections;
 public class TestScript : MonoBehaviour {
 
     [SerializeField]
-    private AiBehaviour.AiController _controller;
+    private lab.AiController _controller;
 
 	void Start () {
         StartCoroutine(CheckCoroutine());
