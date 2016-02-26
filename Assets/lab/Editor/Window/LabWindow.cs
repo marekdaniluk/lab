@@ -48,7 +48,10 @@ public class LabWindow : EditorWindow {
         }
         EndWindows();
 		if(_target != null && GUI.Button(new Rect(position.width - _currentViewWidth - 55f, position.height - EditorStyles.toolbar.fixedHeight - 55f, 50f, 50f), "C")) {
-			_treeDrawer.OffsetNodes(-_statusBar.CurrentTree.Root.Position + (new Vector2(position.width - _currentViewWidth,  position.height - EditorStyles.toolbar.fixedHeight) - NodeDrawer.gSize) * 0.5f);
+            var pos = -_statusBar.CurrentTree.Root.Position + (new Vector2(position.width - _currentViewWidth, position.height - EditorStyles.toolbar.fixedHeight) - NodeDrawer.gSize) / 2;
+            pos.x = Mathf.Floor(pos.x);
+            pos.y = Mathf.Floor(pos.y);
+			_treeDrawer.OffsetNodes(pos);
 		}
         GUI.EndGroup();
         InputHandler();

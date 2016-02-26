@@ -21,7 +21,7 @@ namespace lab {
 		}
 
         public override bool Run(List<ATaskScript> tasks) {
-            return tasks[_taskIndex];
+            return tasks[_taskIndex].Execute();
         }
     }
 }
