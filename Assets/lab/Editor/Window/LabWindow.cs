@@ -20,14 +20,13 @@ public class LabWindow : EditorWindow {
 
 	[MenuItem("Window/Lab Window")]
     public static void ShowEditor() {
-        EditorWindow.GetWindow<LabWindow>();
+        gWindow = EditorWindow.GetWindow<LabWindow>();
+        gWindow.Init();
     }
 
     private void OnEnable() {
-        gWindow = this;
 		titleContent = new GUIContent("lab");
 		titleContent.image = (Texture2D)EditorGUIUtility.Load("Assets/lab/Icons/icon_lab1.png");
-        Init();
     }
 
     private void OnDisable() {
@@ -82,12 +81,16 @@ public class LabWindow : EditorWindow {
         Init();
     }
 
-    private void OnFocus() {
-        Init();
-    }
-
     private void OnProjectChange() {
-        Init();
+        if (Selection.activeObject == null && Selection.activeGameObject == null) {
+            _treeDrawer = null;
+            _target = null;
+            _statusBar.Blackboard = null;
+            _paramPanel.Blackboard = null;
+        }
+        if (_target == null) {
+            Init();
+        }
     }
 
     private void InputHandler() {
@@ -156,11 +159,6 @@ public class LabWindow : EditorWindow {
             _paramPanel.Blackboard = _target;
             _treeDrawer = new TreeDrawer(_statusBar.CurrentTree);
             _statusBar.OnSelectedAiTree += _treeDrawer.RebuildTreeView;
-        } else if (Selection.activeObject == null && Selection.activeGameObject == null) {
-            _treeDrawer = null;
-            _target = null;
-            _statusBar.Blackboard = null;
-            _paramPanel.Blackboard = null;
         }
         Repaint();
     }
