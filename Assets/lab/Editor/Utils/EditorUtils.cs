@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using lab;
 using System.Collections.Generic;
-using System.Reflection;
 
 namespace UnityEditor {
     public static class EditorUtils {
@@ -15,11 +14,19 @@ namespace UnityEditor {
 				toCheck = toCheck.BaseType;
 			}
 			return false;
-		}
+        }
 
         public static string[] ToArray<T>(this Dictionary<string, T>.KeyCollection collection) {
             string[] keys = new string[collection.Count];
             collection.CopyTo(keys, 0);
+            return keys;
+        }
+
+        public static string[] ToArray(this IList<AiTree> collection) {
+            string[] keys = new string[collection.Count];
+            for(int i = 0; i < collection.Count; ++i) {
+                keys[i] = string.Format("Tree {0}", i);
+            }
             return keys;
         }
 

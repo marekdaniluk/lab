@@ -19,7 +19,7 @@ public class NodeFactory {
 
 	public static ANode CreateNode(Type nodeType, AiBlackboard blackboard) {
 		ANode n = ScriptableObject.CreateInstance(nodeType) as ANode;
-		if(n.GetType().IsSubclassOfRawGeneric(typeof(AParameterNode<>))) {
+		if(n.GetType().IsSubclassOfRawGeneric(typeof(ABlackboardNode))) {
 			n.GetType().GetProperty("Blackboard").SetValue(n, blackboard, null);
 		}
         n.name = n.GetType().Name;
@@ -41,8 +41,9 @@ public class NodeFactory {
 		}
 		foreach(System.Type t in flowTypes) {
 			menu.AddItem(new GUIContent(string.Format("Flow Nodes/{0}", t.Name)), false, MenuCallback, new NodeCallbackData(position, t));
-		}
-		menu.AddItem(new GUIContent("TaskNode"), false, MenuCallback, new NodeCallbackData(position, typeof(TaskNode)));
+        }
+        menu.AddItem(new GUIContent("TreeNode"), false, MenuCallback, new NodeCallbackData(position, typeof(TreeNode)));
+        menu.AddItem(new GUIContent("TaskNode"), false, MenuCallback, new NodeCallbackData(position, typeof(TaskNode)));
         menu.ShowAsContext();
     }
 }

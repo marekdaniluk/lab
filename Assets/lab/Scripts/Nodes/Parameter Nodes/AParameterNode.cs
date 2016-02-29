@@ -2,23 +2,16 @@
 
 namespace lab {
     [System.Serializable]
-    public abstract class AParameterNode<T> : ANode {
+    public abstract class AParameterNode<T> : ABlackboardNode {
 
         [SerializeField]
         private bool _dynamicValue;
-        [SerializeField]
-        private AiBlackboard _blackboard;
         [SerializeField]
         private string _key;
         [SerializeField]
         private string _dynamicValueKey;
         [SerializeField]
         private T _value;
-
-        public AiBlackboard Blackboard {
-            get { return _blackboard; }
-            set { _blackboard = value; }
-        }
 
         public string Key {
             get { return _key; }
