@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace lab {
@@ -17,5 +16,11 @@ namespace lab {
         public override bool Run(List<ATaskScript> tasks) {
             return Blackboard.Trees[TreeIndex].Run(tasks);
         }
+#if UNITY_EDITOR
+        public override bool DebugRun(int level, int nodeIndex) {
+            Debug.Log(string.Format("{0}{1}. Tree Node. <b><color=orange>true</color></b>", new string('\t', level), nodeIndex));
+            return true;
+        }
+#endif
     }
 }

@@ -36,5 +36,17 @@ namespace lab {
             }
             return false;
         }
+#if UNITY_EDITOR
+        public override bool DebugRun(int level, int nodeIndex) {
+            for (int i = 0; i < _nodes.Count; ++i) {
+                if (_nodes[i].DebugRun((level + 1), i)) {
+                    Debug.Log(string.Format("{0}{1}. Selector Node. Result: <b><color=green>true</color></b>", new string('\t', level), nodeIndex));
+                    return true;
+                }
+            }
+            Debug.Log(string.Format("{0}{1}. Selector Node. Result: <b><color=red>false</color></b>", new string('\t', level), nodeIndex));
+            return false;
+        }
+#endif
     }
 }

@@ -51,7 +51,10 @@ public class LabWindow : EditorWindow {
             pos.x = Mathf.Floor(pos.x);
             pos.y = Mathf.Floor(pos.y);
 			_treeDrawer.OffsetNodes(pos);
-		}
+        }
+        if (_target != null && GUI.Button(new Rect(position.width - _currentViewWidth - 110f, position.height - EditorStyles.toolbar.fixedHeight - 55f, 50f, 50f), "D")) {
+            _statusBar.CurrentTree.DebugRun(-1);
+        }
         GUI.EndGroup();
         InputHandler();
     }

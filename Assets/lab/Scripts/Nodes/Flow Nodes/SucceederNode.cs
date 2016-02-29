@@ -35,6 +35,13 @@ namespace lab {
 		public override bool Run(List<ATaskScript> tasks) {
 			_node.Run(tasks);
 			return true;
-		}
-	}
+        }
+#if UNITY_EDITOR
+        public override bool DebugRun(int level, int nodeIndex) {
+            _node.DebugRun((level + 1), 0);
+            Debug.Log(string.Format("{0}{1}. Succeeder Node. Result: <b><color=green>true</color></b>", new string('\t', level), nodeIndex));
+            return true;
+        }
+#endif
+    }
 }

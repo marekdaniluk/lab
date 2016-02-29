@@ -82,6 +82,14 @@ namespace lab {
         public bool Run(List<ATaskScript> tasks) {
             return Root.Run(tasks);
         }
+#if UNITY_EDITOR
+        public bool DebugRun(int level) {
+            var result = Root.DebugRun((level + 1), 0);
+            level = Mathf.Clamp(level, 0, level);
+            Debug.Log(string.Format("{0}<b>Tree debug run. Result: <color={1}>{2}</color></b>", new string('\t', level), result ? "green" : "red", result));
+            return result;
+        }
+#endif
 
         private bool IsConnected(AFlowNode from, AFlowNode to) {
             for (int i = 0; i < to.NodeCount; ++i) {
