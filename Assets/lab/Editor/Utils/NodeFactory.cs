@@ -42,8 +42,8 @@ public class NodeFactory {
 		foreach(System.Type t in flowTypes) {
 			menu.AddItem(new GUIContent(string.Format("Flow Nodes/{0}", t.Name)), false, MenuCallback, new NodeCallbackData(position, t));
         }
-        menu.AddItem(new GUIContent("TreeNode"), false, MenuCallback, new NodeCallbackData(position, typeof(TreeNode)));
         menu.AddItem(new GUIContent("TaskNode"), false, MenuCallback, new NodeCallbackData(position, typeof(TaskNode)));
+        menu.AddItem(new GUIContent("TreeNode"), false, MenuCallback, new NodeCallbackData(position, typeof(TreeNode)));
         menu.ShowAsContext();
     }
 }

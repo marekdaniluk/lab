@@ -21,12 +21,12 @@ public class LabWindow : EditorWindow {
 	[MenuItem("Window/Lab Window")]
     public static void ShowEditor() {
         gWindow = EditorWindow.GetWindow<LabWindow>();
-        gWindow.Init();
     }
 
     private void OnEnable() {
-		titleContent = new GUIContent("lab");
+        titleContent = new GUIContent("lab");
 		titleContent.image = (Texture2D)EditorGUIUtility.Load("Assets/lab/Icons/icon_lab1.png");
+        Init();
     }
 
     private void OnDisable() {
