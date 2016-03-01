@@ -26,14 +26,14 @@ public class LabWindow : EditorWindow {
     private void OnEnable() {
         titleContent = new GUIContent("lab");
 		titleContent.image = (Texture2D)EditorGUIUtility.Load("Assets/lab/Icons/icon_lab1.png");
-        Init();
+		Init();
+		gWindow = this;
     }
 
-    private void OnDisable() {
-        gWindow = null;
-    }
-
-    private void OnGUI() {
+	private void OnGUI() {
+		if(_statusBar == null) {
+			return;
+		}
         _statusBar.DrawStatusBar();
         ResizeSplitPanel();
         _scrollPosition = GUILayout.BeginScrollView(_scrollPosition, GUILayout.Width(_currentViewWidth), GUILayout.Height(position.height));
@@ -145,7 +145,7 @@ public class LabWindow : EditorWindow {
         }
     }
 
-    private void Init() {
+	private void Init() {
         if (_statusBar == null) {
             _statusBar = new StatusBarDrawer();
         }
@@ -153,13 +153,13 @@ public class LabWindow : EditorWindow {
             _paramPanel = new ParamPanelDrawer();
         }
         _cursorChangeRect = new Rect(_currentViewWidth, 0f, 5f, position.height);
-        if (_target != Selection.activeObject && Selection.activeObject is AiBlackboard && EditorUtility.IsPersistent(Selection.activeObject)) {
+        if (Selection.activeObject is AiBlackboard && EditorUtility.IsPersistent(Selection.activeObject)) {
             _target = (AiBlackboard)Selection.activeObject;
             _statusBar.Blackboard = _target;
             _paramPanel.Blackboard = _target;
             _treeDrawer = new TreeDrawer(_statusBar.CurrentTree);
             _statusBar.OnSelectedAiTree += _treeDrawer.RebuildTreeView;
-        } else if (Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<AiController>() != null && Selection.activeGameObject.GetComponent<AiController>().Blackboard != null && Selection.activeGameObject.GetComponent<AiController>().Blackboard != _target) {
+        } else if (Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<AiController>() != null && Selection.activeGameObject.GetComponent<AiController>().Blackboard != null) {
             _target = Selection.activeGameObject.GetComponent<AiController>().Blackboard;
             _statusBar.Blackboard = _target;
             _paramPanel.Blackboard = _target;
