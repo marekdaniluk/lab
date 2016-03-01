@@ -17,8 +17,10 @@ namespace lab {
             return Blackboard.Trees[TreeIndex].Run(tasks);
         }
 #if UNITY_EDITOR
-        public override bool DebugRun(int level, int nodeIndex) {
-            Debug.Log(string.Format("{0}{1}. Tree Node. <b><color=orange>true</color></b>", new string('\t', level), nodeIndex));
+		public override bool DebugRun(int level, int nodeIndex) {
+			var result = Blackboard.Trees[TreeIndex].DebugRun((level + 1));
+			Debug.Log(string.Format("{0}{1}. Tree Node. Result: <b><color={2}>{3}</color></b>", new string('\t', level), nodeIndex, result ? "green" : "red", result));
+			OnDebugResult(this, result);
             return true;
         }
 #endif

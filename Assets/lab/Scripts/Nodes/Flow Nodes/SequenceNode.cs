@@ -40,11 +40,13 @@ namespace lab {
         public override bool DebugRun(int level, int nodeIndex) {
             for (int i = 0; i < _nodes.Count; ++i) {
                 if (!_nodes[i].DebugRun((level + 1), i)) {
-                    Debug.Log(string.Format("{0}{1}. Sequence Node. Result: <b><color=red>false</color></b>", new string('\t', level), nodeIndex));
+					Debug.Log(string.Format("{0}{1}. Sequence Node. Result: <b><color=red>false</color></b>", new string('\t', level), nodeIndex));
+					OnDebugResult(this, false);
                     return false;
                 }
             }
-            Debug.Log(string.Format("{0}{1}. Sequence Node. Result: <b><color=green>true</color></b>", new string('\t', level), nodeIndex));
+			Debug.Log(string.Format("{0}{1}. Sequence Node. Result: <b><color=green>true</color></b>", new string('\t', level), nodeIndex));
+			OnDebugResult(this, true);
             return true;
         }
 #endif

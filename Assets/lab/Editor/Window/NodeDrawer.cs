@@ -21,6 +21,11 @@ public class NodeDrawer {
     private int _id;
     private Rect _rect;
     private bool _isRoot = false;
+	private GUIStyle _labelStyle;
+
+	public ANode Node {
+		get { return _node; }
+	}
 
     public bool IsRoot {
         get { return _isRoot; }
@@ -36,7 +41,17 @@ public class NodeDrawer {
         _node = node;
         _isRoot = isRoot;
         _rect = new Rect(0f, 0f, gSize.x, gSize.y);
+		_labelStyle = new GUIStyle();
+		_labelStyle.normal.textColor = Color.black;
     }
+
+	public void ResetDebugInfo() {
+		_labelStyle.normal.textColor = Color.black;
+	}
+
+	public void SetDebugInfo(bool result) {
+		_labelStyle.normal.textColor = result ? new Color(0f, 0.5f, 0f) : Color.red;
+	}
 
     public void DrawNode() {
         _rect.x = _node.Position.x;
@@ -51,7 +66,7 @@ public class NodeDrawer {
         if (_node == null) {
             return;
         }
-        GUI.Label(new Rect(0, gSize.y / 2f - 12, _rect.width, 24), new GUIContent(_node.GetType().Name, EditorGUIUtility.ObjectContent(_node, _node.GetType()).image));
+		GUI.Label(new Rect(0, gSize.y / 2f - 12, _rect.width, 24), new GUIContent(_node.GetType().Name, EditorGUIUtility.ObjectContent(_node, _node.GetType()).image), _labelStyle);
         if (e.type == EventType.MouseUp && e.button == 1) {
             OnRightClicked(_node);
             e.Use();

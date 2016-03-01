@@ -50,7 +50,8 @@ namespace lab {
             for (int i = 0; i < Repeat; ++i) {
                 _node.DebugRun((level + 1), 0);
             }
-            Debug.Log(string.Format("{0}{1}. Repeater Node. Result: <b><color=green>true</color></b>", new string('\t', level), nodeIndex));
+			Debug.Log(string.Format("{0}{1}. Repeater Node. Result: <b><color=green>true</color></b>", new string('\t', level), nodeIndex));
+			OnDebugResult(this, true);
             return true;
         }
 #endif

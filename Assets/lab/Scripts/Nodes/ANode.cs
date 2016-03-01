@@ -6,6 +6,9 @@ namespace lab {
     public abstract class ANode : ScriptableObject {
 
 #if UNITY_EDITOR
+		public delegate void DebugNodeHandler(ANode node, bool result);
+		public DebugNodeHandler OnDebugResult = delegate { };
+
         [SerializeField, HideInInspector]
         public Vector2 Position;
 

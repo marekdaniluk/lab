@@ -32,12 +32,26 @@ namespace lab {
                     break;
             }
             return false;
-        }
-#if UNITY_EDITOR
-        public override bool DebugRun(int level, int nodeIndex) {
-            Debug.Log(string.Format("{0}{1}. Succeeder Node. Result: <b><color=green>true</color></b>", new string('\t', level), nodeIndex));
-            return true;
-        }
-#endif
+		}
+		#if UNITY_EDITOR
+		public override bool DebugRun(int level, int nodeIndex) {
+			var result = false;
+			switch (_condition) {
+				case StringCondition.Equal:
+					if (Blackboard.StringParameters[Key] == (DynamicValue ? Blackboard.StringParameters[DynamicValueKey] : Value)) {
+						result = true;
+					}
+					break;
+				case StringCondition.NotEqual:
+					if (Blackboard.StringParameters[Key] != (DynamicValue ? Blackboard.StringParameters[DynamicValueKey] : Value)) {
+						result = true;
+					}
+					break;
+			}
+			Debug.Log(string.Format("{0}{1}. String Parameter Node. Result: <b><color={2}>{3}</color></b>", new string('\t', level), nodeIndex, result ? "green" : "red", result));
+			OnDebugResult(this, result);
+			return result;
+		}
+		#endif
     }
 }

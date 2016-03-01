@@ -39,7 +39,8 @@ namespace lab {
 #if UNITY_EDITOR
         public override bool DebugRun(int level, int nodeIndex) {
             _node.DebugRun((level + 1), 0);
-            Debug.Log(string.Format("{0}{1}. Succeeder Node. Result: <b><color=green>true</color></b>", new string('\t', level), nodeIndex));
+			Debug.Log(string.Format("{0}{1}. Succeeder Node. Result: <b><color=green>true</color></b>", new string('\t', level), nodeIndex));
+			OnDebugResult(this, true);
             return true;
         }
 #endif

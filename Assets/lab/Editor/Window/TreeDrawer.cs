@@ -6,7 +6,8 @@ using System.Collections.Generic;
 public class TreeDrawer {
 
     private AiTree _tree;
-    private List<NodeDrawer> _nodeDrawers;
+	private List<NodeDrawer> _nodeDrawers;
+	private AFlowNode _startConnection = null;
 
     public TreeDrawer(AiTree tree) {
         NodeDrawer.OnLeftClicked += NodeLeftClicked;
@@ -17,6 +18,23 @@ public class TreeDrawer {
     public bool ForceRepaint() {
         return _startConnection != null;
     }
+
+	public void ResetDebug() {
+		EditorUtils.ClearConsole();
+		if(_nodeDrawers == null) {
+			return;
+		}
+		foreach(NodeDrawer drawer in _nodeDrawers) {
+			drawer.ResetDebugInfo();
+		}
+	}
+
+	public void RunDebug() {
+		ResetDebug();
+		if(_tree != null && _tree.Root != null) {
+			_tree.DebugRun(-1);
+		}
+	}
 
     public void DrawTree() {
         DrawTransition();
@@ -39,8 +57,14 @@ public class TreeDrawer {
         if (_tree == null) {
             return;
         }
-        _nodeDrawers = new List<NodeDrawer>();
-        for (int i = 0; i < _tree.Nodes.Count; ++i) {
+		if(_nodeDrawers != null) {
+			foreach(NodeDrawer drawer in _nodeDrawers) {
+				drawer.Node.OnDebugResult -= DebugResult;
+			}
+		}
+		_nodeDrawers = new List<NodeDrawer>();
+		for (int i = 0; i < _tree.Nodes.Count; ++i) {
+			_tree.Nodes[i].OnDebugResult += DebugResult;
             _nodeDrawers.Add(new NodeDrawer(_tree.Nodes[i], _tree.Root == _tree.Nodes[i]));
         }
     }
@@ -103,8 +127,6 @@ public class TreeDrawer {
         }
     }
 
-    private AFlowNode _startConnection = null;
-
     private void ConnectCallback(object obj) {
         var n = obj as AFlowNode;
         if (n != null) {
@@ -115,10 +137,20 @@ public class TreeDrawer {
     private void DeleteCallback(object obj) {
         var n = obj as ANode;
         if (n != null && _tree.RemoveNode(n)) {
+			n.OnDebugResult -= DebugResult;
             Selection.activeObject = _tree.Root;
             Object.DestroyImmediate(n, true);
             AssetDatabase.SaveAssets();
             RebuildTreeView(_tree);
         }
     }
+
+	private void DebugResult(ANode node, bool result) {
+		foreach(NodeDrawer drawer in _nodeDrawers) {
+			if(drawer.Node == node) {
+				drawer.SetDebugInfo(result);
+				return;
+			}
+		}
+	}
 }

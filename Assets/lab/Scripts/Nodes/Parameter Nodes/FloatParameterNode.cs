@@ -44,12 +44,36 @@ namespace lab {
                     break;
             }
             return false;
-        }
-#if UNITY_EDITOR
-        public override bool DebugRun(int level, int nodeIndex) {
-            Debug.Log(string.Format("{0}{1}. Succeeder Node. Result: <b><color=green>true</color></b>", new string('\t', level), nodeIndex));
-            return true;
-        }
-#endif
+		}
+		#if UNITY_EDITOR
+		public override bool DebugRun(int level, int nodeIndex) {
+			var result = false;
+			switch (_condition) {
+			case FloatCondition.Greater:
+				if (Blackboard.FloatParameters[Key] > (DynamicValue ? Blackboard.FloatParameters[DynamicValueKey] : Value)) {
+					result = true;
+				}
+				break;
+			case FloatCondition.Less:
+				if (Blackboard.FloatParameters[Key] < (DynamicValue ? Blackboard.FloatParameters[DynamicValueKey] : Value)) {
+					result = true;
+				}
+				break;
+			case FloatCondition.Equal:
+				if (Blackboard.FloatParameters[Key] == (DynamicValue ? Blackboard.FloatParameters[DynamicValueKey] : Value)) {
+					result = true;
+				}
+				break;
+			case FloatCondition.NotEqual:
+				if (Blackboard.FloatParameters[Key] != (DynamicValue ? Blackboard.FloatParameters[DynamicValueKey] : Value)) {
+					result = true;
+				}
+				break;
+			}
+			Debug.Log(string.Format("{0}{1}. Float Parameter Node. Result: <b><color={2}>{3}</color></b>", new string('\t', level), nodeIndex, result ? "green" : "red", result));
+			OnDebugResult(this, result);
+			return result;
+		}
+		#endif
     }
 }

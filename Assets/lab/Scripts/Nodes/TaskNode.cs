@@ -25,7 +25,8 @@ namespace lab {
         }
 #if UNITY_EDITOR
         public override bool DebugRun(int level, int nodeIndex) {
-            Debug.Log(string.Format("{0}{1}. Task Node. Result in debug mode for tasks is always <b><color=orange>true</color></b>", new string('\t', level), nodeIndex));
+			Debug.Log(string.Format("{0}{1}. Task Node. Result in debug mode for tasks is always <b><color=orange>true</color></b>", new string('\t', level), nodeIndex));
+			OnDebugResult(this, true);
             return true;
         }
 #endif
