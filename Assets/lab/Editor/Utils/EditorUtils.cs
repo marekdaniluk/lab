@@ -88,9 +88,9 @@ namespace UnityEditor {
 			var forward = (end - start).normalized;
 			var right = Vector3.Cross(Vector3.forward, forward).normalized;
 
-			arrowHead[0] = (start + end) / 2f + forward * h / 3f * 2f;
-			arrowHead[1] = (start + end) / 2f - forward * h / 3f + right * w;
-			arrowHead[2] = (start + end) / 2f - forward * h / 3f - right * w;
+			arrowHead[0] = start + forward * Vector3.Distance(start, end) / 2f + forward * h / 3f * 2f;
+			arrowHead[1] = start + forward * Vector3.Distance(start, end) / 2f - forward * h / 3f + right * w;
+			arrowHead[2] = start + forward * Vector3.Distance(start, end) / 2f - forward * h / 3f - right * w;
 
 			Handles.color = color;
 			Handles.DrawAAConvexPolygon(arrowHead);

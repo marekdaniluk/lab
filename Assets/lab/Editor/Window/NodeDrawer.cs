@@ -67,6 +67,7 @@ public class NodeDrawer {
             return;
         }
 		GUI.Label(new Rect(0, gSize.y / 2f - 12, _rect.width, 24), new GUIContent(_node.GetType().Name, EditorGUIUtility.ObjectContent(_node, _node.GetType()).image), _labelStyle);
+        GUI.Label(new Rect(gSize.x - 14f, -1f, 16f, 16f), new GUIContent((Texture2D)EditorGUIUtility.Load("Assets/cicik.png")));
         if (e.type == EventType.MouseUp && e.button == 1) {
             OnRightClicked(_node);
             e.Use();
