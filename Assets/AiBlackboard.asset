@@ -22,7 +22,7 @@ MonoBehaviour:
   _boolParameters:
     _keys:
     - Bool Parameter
-    _values: 00
+    _values: 01
   _stringParameters:
     _keys:
     - String Parameter
@@ -34,11 +34,7 @@ MonoBehaviour:
     - {fileID: 11431000}
     - {fileID: 11485358}
     - {fileID: 11443924}
-    - {fileID: 11482390}
     - {fileID: 11406704}
-    - {fileID: 11468126}
-    - {fileID: 11480866}
-    - {fileID: 11477026}
     - {fileID: 11445428}
 --- !u!114 &11406704
 MonoBehaviour:
@@ -51,10 +47,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4049d6a73af16724ebf61d547555a4c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 602, y: 113}
+  Position: {x: 456, y: 293}
   _nodes:
-  - {fileID: 11468126}
   - {fileID: 11445428}
+  - {fileID: 11443924}
 --- !u!114 &11431000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -66,12 +62,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 184352b801f40a2458b3e1f8e0445aae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 275, y: 147}
-  _dynamicValue: 0
+  Position: {x: 164, y: 290}
   _blackboard: {fileID: 11400000}
+  _dynamicValue: 0
   _key: Bool Parameter
   _dynamicValueKey: 
-  _value: 0
+  _value: 1
   _condition: 0
 --- !u!114 &11443924
 MonoBehaviour:
@@ -84,9 +80,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f575d0542cdd6c40b92c2dfffedfc1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 576, y: 280}
-  _dynamicValue: 0
+  Position: {x: 308, y: 410}
   _blackboard: {fileID: 11400000}
+  _dynamicValue: 0
   _key: Float Parameter
   _dynamicValueKey: 
   _value: 0
@@ -102,67 +98,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f57c244dd3480924a888b3b03b101418, type: 3}
   m_Name: TaskNode
   m_EditorClassIdentifier: 
-  Position: {x: 666, y: 204}
+  Position: {x: 599, y: 416}
   _taskIndex: 0
---- !u!114 &11468126
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77192985dbf2d4c4bbd32c7520893136, type: 3}
-  m_Name: SelectorNode
-  m_EditorClassIdentifier: 
-  Position: {x: 420, y: 202}
-  _nodes:
-  - {fileID: 11443924}
---- !u!114 &11477026
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e1a115f1f106b24e813d1c75a6fb490, type: 3}
-  m_Name: StringParameterNode
-  m_EditorClassIdentifier: 
-  Position: {x: 171, y: 204}
-  _dynamicValue: 0
-  _blackboard: {fileID: 11400000}
-  _key: String Parameter
-  _dynamicValueKey: 
-  _value: 
-  _condition: 0
---- !u!114 &11480866
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77192985dbf2d4c4bbd32c7520893136, type: 3}
-  m_Name: SelectorNode
-  m_EditorClassIdentifier: 
-  Position: {x: 172, y: 102}
-  _nodes:
-  - {fileID: 11477026}
---- !u!114 &11482390
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c17c220617efa84c99e31f59f708f44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Position: {x: 172, y: 53}
-  _node: {fileID: 0}
+  _description: 
 --- !u!114 &11485358
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -174,8 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77192985dbf2d4c4bbd32c7520893136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Position: {x: 425, y: 40}
+  Position: {x: 310, y: 176}
   _nodes:
-  - {fileID: 11431000}
   - {fileID: 11406704}
-  - {fileID: 11468126}
+  - {fileID: 11431000}

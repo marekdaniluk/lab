@@ -33,7 +33,7 @@ namespace UnityEditor {
         public static GUIContent[] TreesToNames(IList<AiTree> trees) {
             List<GUIContent> names = new List<GUIContent>();
             for (int i = 0; i < trees.Count; ++i) {
-                names.Add(new GUIContent(string.Format("Tree {0}", i), (Texture2D)EditorGUIUtility.Load("Assets/lab/Icons/icon_treenode.png")));
+                names.Add(new GUIContent(string.Format("Tree {0}", i), (Texture2D)EditorGUIUtility.Load("Assets/lab/Icons/32x32/treenode.png")));
             }
             return names.ToArray();
         }

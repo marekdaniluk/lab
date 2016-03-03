@@ -16,9 +16,9 @@ public class NodeDrawer {
     private readonly string _rootStyleOn = "flow node 5 on";
     private readonly string _defaultStyle = "flow node 0";
 	private readonly string _defaultStyleOn = "flow node 0 on";
-	private readonly string _defaultIconPath = "Assets/lab/Icons/triangle_black.png";
-	private readonly string _passIconPath = "Assets/lab/Icons/triangle_green.png";
-	private readonly string _failIconPath = "Assets/lab/Icons/triangle_red.png";
+	private readonly string _defaultIconPath = "Assets/lab/Icons/16x16/triangle_black.png";
+	private readonly string _passIconPath = "Assets/lab/Icons/16x16/triangle_green.png";
+	private readonly string _failIconPath = "Assets/lab/Icons/16x16/triangle_red.png";
 
     private ANode _node;
     private int _id;

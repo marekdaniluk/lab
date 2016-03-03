@@ -25,7 +25,7 @@ public class LabWindow : EditorWindow {
 
     private void OnEnable() {
         titleContent = new GUIContent("lab");
-		titleContent.image = (Texture2D)EditorGUIUtility.Load("Assets/lab/Icons/icon_lab1.png");
+		titleContent.image = (Texture2D)EditorGUIUtility.Load("Assets/lab/Icons/32x32/lab.png");
 		Init();
 		gWindow = this;
     }
