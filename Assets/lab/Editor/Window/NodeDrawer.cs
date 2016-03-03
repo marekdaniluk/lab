@@ -15,13 +15,16 @@ public class NodeDrawer {
     private readonly string _rootStyle = "flow node 5";
     private readonly string _rootStyleOn = "flow node 5 on";
     private readonly string _defaultStyle = "flow node 0";
-    private readonly string _defaultStyleOn = "flow node 0 on";
+	private readonly string _defaultStyleOn = "flow node 0 on";
+	private readonly string _defaultIconPath = "Assets/lab/Icons/triangle_black.png";
+	private readonly string _passIconPath = "Assets/lab/Icons/triangle_green.png";
+	private readonly string _failIconPath = "Assets/lab/Icons/triangle_red.png";
 
     private ANode _node;
     private int _id;
     private Rect _rect;
     private bool _isRoot = false;
-	private GUIStyle _labelStyle;
+	private string _currentIcon;
 
 	public ANode Node {
 		get { return _node; }
@@ -41,16 +44,15 @@ public class NodeDrawer {
         _node = node;
         _isRoot = isRoot;
         _rect = new Rect(0f, 0f, gSize.x, gSize.y);
-		_labelStyle = new GUIStyle();
-		_labelStyle.normal.textColor = Color.black;
+		_currentIcon = _defaultIconPath;
     }
 
 	public void ResetDebugInfo() {
-		_labelStyle.normal.textColor = Color.black;
+		_currentIcon = _defaultIconPath;
 	}
 
 	public void SetDebugInfo(bool result) {
-		_labelStyle.normal.textColor = result ? new Color(0f, 0.5f, 0f) : Color.red;
+		_currentIcon = result ? _passIconPath : _failIconPath;
 	}
 
     public void DrawNode() {
@@ -66,8 +68,8 @@ public class NodeDrawer {
         if (_node == null) {
             return;
         }
-		GUI.Label(new Rect(0, gSize.y / 2f - 12, _rect.width, 24), new GUIContent(_node.GetType().Name, EditorGUIUtility.ObjectContent(_node, _node.GetType()).image), _labelStyle);
-        GUI.Label(new Rect(gSize.x - 14f, -1f, 16f, 16f), new GUIContent((Texture2D)EditorGUIUtility.Load("Assets/cicik.png")));
+		GUI.Label(new Rect(0, gSize.y / 2f - 12, _rect.width, 24), new GUIContent(_node.GetType().Name, EditorGUIUtility.ObjectContent(_node, _node.GetType()).image));
+		GUI.Label(new Rect(gSize.x - 14f, -1f, 16f, 16f), new GUIContent((Texture2D)EditorGUIUtility.Load(_currentIcon)));
         if (e.type == EventType.MouseUp && e.button == 1) {
             OnRightClicked(_node);
             e.Use();
