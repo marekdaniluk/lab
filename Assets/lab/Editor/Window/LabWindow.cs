@@ -35,6 +35,21 @@ public class LabWindow : EditorWindow {
 			return;
 		}
         _statusBar.DrawStatusBar();
+        //a bit dirty hack of drawing buttons in param panel without making dependencies. Well, editor gui...
+        EditorGUILayout.BeginHorizontal();
+        if (_target != null && GUILayout.Button(new GUIContent((Texture2D)EditorGUIUtility.Load("Assets/lab/Icons/32x32/debug.png"), "run debug info"), "CommandLeft")) {
+            _treeDrawer.RunDebug();
+        }
+        if (_target != null && GUILayout.Button(new GUIContent((Texture2D)EditorGUIUtility.Load("Assets/lab/Icons/32x32/reset.png"), "reset debug info"), "CommandMid")) {
+            _treeDrawer.ResetDebug();
+        }
+        if (_target != null && GUILayout.Button(new GUIContent((Texture2D)EditorGUIUtility.Load("Assets/lab/Icons/32x32/center.png"), "center view on root"), "CommandRight")) {
+            var pos = -_statusBar.CurrentTree.Root.Position + (new Vector2(position.width - _currentViewWidth, position.height - EditorStyles.toolbar.fixedHeight) - NodeDrawer.gSize) / 2;
+            pos.x = Mathf.Floor(pos.x);
+            pos.y = Mathf.Floor(pos.y);
+            _treeDrawer.OffsetNodes(pos);
+        }
+        EditorGUILayout.EndHorizontal();
         ResizeSplitPanel();
         _scrollPosition = GUILayout.BeginScrollView(_scrollPosition, GUILayout.Width(_currentViewWidth), GUILayout.Height(position.height));
         _paramPanel.DrawPanel();
@@ -46,18 +61,6 @@ public class LabWindow : EditorWindow {
             _treeDrawer.DrawTree();
         }
         EndWindows();
-		if(_target != null && GUI.Button(new Rect(position.width - _currentViewWidth - 55f, position.height - EditorStyles.toolbar.fixedHeight - 55f, 50f, 50f), "C")) {
-            var pos = -_statusBar.CurrentTree.Root.Position + (new Vector2(position.width - _currentViewWidth, position.height - EditorStyles.toolbar.fixedHeight) - NodeDrawer.gSize) / 2;
-            pos.x = Mathf.Floor(pos.x);
-            pos.y = Mathf.Floor(pos.y);
-			_treeDrawer.OffsetNodes(pos);
-		}
-		if (_target != null && GUI.Button(new Rect(position.width - _currentViewWidth - 110f, position.height - EditorStyles.toolbar.fixedHeight - 55f, 50f, 50f), "R")) {
-			_treeDrawer.ResetDebug();
-		}
-		if (_target != null && GUI.Button(new Rect(position.width - _currentViewWidth - 165f, position.height - EditorStyles.toolbar.fixedHeight - 55f, 50f, 50f), "D")) {
-			_treeDrawer.RunDebug();
-		}
         GUI.EndGroup();
         InputHandler();
     }
