@@ -32,7 +32,7 @@ public class LabWindow : EditorWindow {
 
 	private void OnGUI() {
 		if(_statusBar == null) {
-			return;
+            return;
 		}
         _statusBar.DrawStatusBar();
         //a bit dirty hack of drawing buttons in param panel without making dependencies. Well, editor gui...
@@ -87,6 +87,9 @@ public class LabWindow : EditorWindow {
     }
 
     private void OnSelectionChange() {
+        if (Selection.activeObject == _target) {
+            return;
+        }
         Init();
     }
 
@@ -104,8 +107,8 @@ public class LabWindow : EditorWindow {
 
     private void InputHandler() {
 		if(_target == null) {
-			return;
-		}
+            return;
+        }
         int controlID = GUIUtility.GetControlID(new GUIContent("grid view"), FocusType.Passive);
         Event current = Event.current;
         Rect r = new Rect(0f, 0f, _currentViewWidth + 1f, position.height);
