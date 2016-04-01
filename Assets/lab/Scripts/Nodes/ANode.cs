@@ -15,6 +15,6 @@ namespace lab {
         public abstract bool DebugRun(int level, int nodeIndex);
 #endif
 
-        public abstract bool Run(List<ATaskScript> tasks);
+        public abstract bool Run(ParameterContainer parameters, List<ATaskScript> tasks);
     }
 }

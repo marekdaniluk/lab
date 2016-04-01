@@ -18,15 +18,15 @@ namespace lab {
             set { _condition = value; }
         }
 
-		public override bool Run(List<ATaskScript> tasks) {
+		public override bool Run(ParameterContainer parameters, List<ATaskScript> tasks) {
 			switch (_condition) {
 				case BoolCondition.Equal:
-					if (Blackboard.BoolParameters[Key] == (DynamicValue ? Blackboard.BoolParameters[DynamicValueKey] : Value)) {
+					if (parameters.BoolParameters[Key] == (DynamicValue ? parameters.BoolParameters[DynamicValueKey] : Value)) {
 						return true;
 					}
 					break;
 				case BoolCondition.NotEqual:
-					if (Blackboard.BoolParameters[Key] != (DynamicValue ? Blackboard.BoolParameters[DynamicValueKey] : Value)) {
+					if (parameters.BoolParameters[Key] != (DynamicValue ? parameters.BoolParameters[DynamicValueKey] : Value)) {
 						return true;
 					}
 					break;

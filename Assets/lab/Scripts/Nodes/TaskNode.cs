@@ -20,7 +20,7 @@ namespace lab {
 			set { _description = value; }
 		}
 
-        public override bool Run(List<ATaskScript> tasks) {
+        public override bool Run(ParameterContainer parameters, List<ATaskScript> tasks) {
             return tasks[_taskIndex].Execute();
         }
 #if UNITY_EDITOR

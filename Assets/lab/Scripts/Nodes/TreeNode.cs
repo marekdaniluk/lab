@@ -13,8 +13,8 @@ namespace lab {
             set { _treeIndex = value; }
         }
 
-        public override bool Run(List<ATaskScript> tasks) {
-            return Blackboard.Trees[TreeIndex].Run(tasks);
+        public override bool Run(ParameterContainer parameters, List<ATaskScript> tasks) {
+            return Blackboard.Trees[TreeIndex].Run(parameters, tasks);
         }
 #if UNITY_EDITOR
 		public override bool DebugRun(int level, int nodeIndex) {

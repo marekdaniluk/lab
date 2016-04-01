@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 
 namespace lab {
+    /// <summary>
+    /// 
+    /// <para></para>
+    /// </summary>
     [System.Serializable]
     public class AiTree {
 
@@ -10,6 +14,9 @@ namespace lab {
         [SerializeField]
         private List<ANode> _nodes = new List<ANode>();
 
+        /// <summary>
+        /// 
+        /// </summary>
         public ANode Root {
             get { return _root; }
             set {
@@ -29,25 +36,38 @@ namespace lab {
             }
         }
 
-        public List<ANode> Nodes {
-            get { return _nodes; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public IList<ANode> Nodes {
+            get { return _nodes.AsReadOnly(); }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="node"></param>
+        /// <returns></returns>
         public bool AddNode(ANode node) {
             if (_nodes.Contains(node)) {
                 return false;
             }
             _nodes.Add(node);
-            if (_nodes.Count == 1) {
+            if (Root == null) {
                 Root = node;
             }
             return true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="node"></param>
+        /// <returns></returns>
         public bool RemoveNode(ANode node) {
             if (_nodes.Remove(node)) {
-                if (Root == node && _nodes.Count > 0) {
-                    Root = _nodes[0];
+                if (Root == node) {
+                    Root = null;
                 }
                 //remove connections to removed node
                 for (int i = 0; i < _nodes.Count; ++i) {
@@ -65,6 +85,12 @@ namespace lab {
             return false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <returns></returns>
         public bool ConnectNodes(AFlowNode from, ANode to) {
             if (_nodes.Contains(from) && _nodes.Contains(to) && to != Root) {
                 var n = to as AFlowNode;
@@ -79,8 +105,13 @@ namespace lab {
             return false;
         }
 
-        public bool Run(List<ATaskScript> tasks) {
-            return Root.Run(tasks);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tasks"></param>
+        /// <returns></returns>
+        public bool Run(ParameterContainer parameters, List<ATaskScript> tasks) {
+            return Root.Run(parameters, tasks);
         }
 #if UNITY_EDITOR
         public bool DebugRun(int level) {
@@ -90,7 +121,12 @@ namespace lab {
             return result;
         }
 #endif
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <returns></returns>
         private bool IsConnected(AFlowNode from, AFlowNode to) {
             for (int i = 0; i < to.NodeCount; ++i) {
                 var n = to.GetNode(i) as AFlowNode;

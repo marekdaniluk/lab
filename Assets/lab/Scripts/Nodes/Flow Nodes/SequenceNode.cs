@@ -28,9 +28,9 @@ namespace lab {
             get { return _nodes.Count; }
         }
 
-        public override bool Run(List<ATaskScript> tasks) {
+        public override bool Run(ParameterContainer parameters, List<ATaskScript> tasks) {
             for (int i = 0; i < _nodes.Count; ++i) {
-                if (!_nodes[i].Run(tasks)) {
+                if (!_nodes[i].Run(parameters, tasks)) {
                     return false;
                 }
             }

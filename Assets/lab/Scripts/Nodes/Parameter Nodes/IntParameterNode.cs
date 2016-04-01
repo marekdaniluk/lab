@@ -20,25 +20,25 @@ namespace lab {
             set { _condition = value; }
         }
 
-        public override bool Run(List<ATaskScript> tasks) {
+        public override bool Run(ParameterContainer parameters, List<ATaskScript> tasks) {
             switch (_condition) {
                 case IntCondition.Greater:
-                    if (Blackboard.IntParameters[Key] > (DynamicValue ? Blackboard.IntParameters[DynamicValueKey] : Value)) {
+                    if (parameters.IntParameters[Key] > (DynamicValue ? parameters.IntParameters[DynamicValueKey] : Value)) {
                         return true;
                     }
                     break;
                 case IntCondition.Less:
-                    if (Blackboard.IntParameters[Key] < (DynamicValue ? Blackboard.IntParameters[DynamicValueKey] : Value)) {
+                    if (parameters.IntParameters[Key] < (DynamicValue ? parameters.IntParameters[DynamicValueKey] : Value)) {
                         return true;
                     }
                     break;
                 case IntCondition.Equal:
-                    if (Blackboard.IntParameters[Key] == (DynamicValue ? Blackboard.IntParameters[DynamicValueKey] : Value)) {
+                    if (parameters.IntParameters[Key] == (DynamicValue ? parameters.IntParameters[DynamicValueKey] : Value)) {
                         return true;
                     }
                     break;
                 case IntCondition.NotEqual:
-                    if (Blackboard.IntParameters[Key] != (DynamicValue ? Blackboard.IntParameters[DynamicValueKey] : Value)) {
+                    if (parameters.IntParameters[Key] != (DynamicValue ? parameters.IntParameters[DynamicValueKey] : Value)) {
                         return true;
                     }
                     break;

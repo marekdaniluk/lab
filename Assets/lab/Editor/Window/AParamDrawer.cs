@@ -24,7 +24,7 @@ public abstract class AParamDrawer {
 
     protected void InitParamList(AiBlackboard blackboard) {
         _serializedObject = new SerializedObject(blackboard);
-        var p = _serializedObject.FindProperty(_mainPropertyName);
+        var p = _serializedObject.FindProperty("_parameters").FindPropertyRelative(_mainPropertyName);
         _list = new ReorderableList(_serializedObject, p.FindPropertyRelative(_keysPropertyName), true, true, true, true);
         _list.drawHeaderCallback += DrawHeader;
         _list.onAddCallback += Add;
@@ -33,7 +33,7 @@ public abstract class AParamDrawer {
     }
 
     public void DrawHeader(Rect rect) {
-        var p = _serializedObject.FindProperty(_mainPropertyName);
+        var p = _serializedObject.FindProperty("_parameters").FindPropertyRelative(_mainPropertyName);
         if (GUI.Button(rect, p.displayName, "LockedHeaderLabel")) {
             _hidden = !_hidden;
             if (_hidden) {
@@ -50,7 +50,7 @@ public abstract class AParamDrawer {
 
     public void DrawElement(Rect rect, int index, bool isActive, bool isFocused) {
         if (!_hidden) {
-            var p = _serializedObject.FindProperty(_mainPropertyName);
+            var p = _serializedObject.FindProperty("_parameters").FindPropertyRelative(_mainPropertyName);
             var l = p.FindPropertyRelative(_keysPropertyName);
             var k = l.GetArrayElementAtIndex(index);
             var c = GetPropertyValue(k);

@@ -39,9 +39,9 @@ namespace lab {
             set { _repeat = value; }
         }
 
-        public override bool Run(List<ATaskScript> tasks) {
+        public override bool Run(ParameterContainer parameters, List<ATaskScript> tasks) {
             for (int i = 0; i < Repeat; ++i) {
-                _node.Run(tasks);
+                _node.Run(parameters, tasks);
             }
             return true;
         }

@@ -32,8 +32,8 @@ namespace lab {
 			get { return (_node == null) ? 0 : 1; }
 		}
 		
-		public override bool Run(List<ATaskScript> tasks) {
-			_node.Run(tasks);
+		public override bool Run(ParameterContainer parameters, List<ATaskScript> tasks) {
+			_node.Run(parameters, tasks);
 			return true;
         }
 #if UNITY_EDITOR
