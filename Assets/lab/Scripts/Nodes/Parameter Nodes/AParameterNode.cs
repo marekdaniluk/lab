@@ -2,7 +2,7 @@
 
 namespace lab {
     [System.Serializable]
-    public abstract class AParameterNode<T> : ABlackboardNode {
+    public abstract class AParameterNode<T> : ANode {
 
         [SerializeField]
         private bool _dynamicValue;

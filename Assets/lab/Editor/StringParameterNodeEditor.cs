@@ -10,8 +10,8 @@ public class StringParameterNodeEditor : Editor {
 
     public override void OnInspectorGUI() {
 		var parameter = (StringParameterNode)target;
-        if (parameter.Blackboard.StringParameters.Count == 0) {
-            EditorGUILayout.HelpBox(string.Format("Blackboard \"{0}\" has no String parameters. Add at least one String parameter.", parameter.Blackboard.name), MessageType.Info);
+        if (LabWindow._target.StringParameters.Count == 0) {
+            EditorGUILayout.HelpBox(string.Format("Blackboard \"{0}\" has no String parameters. Add at least one String parameter.", LabWindow._target.name), MessageType.Info);
             return;
         }
         EditorGUILayout.BeginVertical();
@@ -21,7 +21,7 @@ public class StringParameterNodeEditor : Editor {
         parameter.DynamicValue = boolIndex == 1 ? true : false;
         EditorGUILayout.LabelField("Condition:");
         EditorGUILayout.BeginHorizontal();
-        string[] keys = parameter.Blackboard.StringParameters.Keys.ToArray<string>();
+        string[] keys = LabWindow._target.StringParameters.Keys.ToArray<string>();
         for (int i = 0; i < keys.Length; ++i) {
             if (keys[i].Equals(parameter.Key)) {
                 _index = i;

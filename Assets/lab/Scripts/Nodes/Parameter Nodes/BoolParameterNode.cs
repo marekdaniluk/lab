@@ -18,7 +18,7 @@ namespace lab {
             set { _condition = value; }
         }
 
-		public override bool Run(ParameterContainer parameters, List<ATaskScript> tasks) {
+		public override bool Run(ParameterContainer parameters, IList<AiTree> trees, List<ATaskScript> tasks) {
 			switch (_condition) {
 				case BoolCondition.Equal:
 					if (parameters.BoolParameters[Key] == (DynamicValue ? parameters.BoolParameters[DynamicValueKey] : Value)) {
@@ -34,16 +34,16 @@ namespace lab {
 			return false;
         }
 #if UNITY_EDITOR
-		public override bool DebugRun(int level, int nodeIndex) {
+		public override bool DebugRun(ParameterContainer parameters, IList<AiTree> trees, int level, int nodeIndex) {
 			var result = false;
 			switch (_condition) {
 			case BoolCondition.Equal:
-				if (Blackboard.BoolParameters[Key] == (DynamicValue ? Blackboard.BoolParameters[DynamicValueKey] : Value)) {
+				if (parameters.BoolParameters[Key] == (DynamicValue ? parameters.BoolParameters[DynamicValueKey] : Value)) {
 					result = true;
 				}
 				break;
 			case BoolCondition.NotEqual:
-				if (Blackboard.BoolParameters[Key] != (DynamicValue ? Blackboard.BoolParameters[DynamicValueKey] : Value)) {
+				if (parameters.BoolParameters[Key] != (DynamicValue ? parameters.BoolParameters[DynamicValueKey] : Value)) {
 					result = true;
 				}
 				break;

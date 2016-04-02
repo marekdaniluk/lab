@@ -13,7 +13,7 @@ public class LabWindow : EditorWindow {
     private float _minimumViewWidth = 150f;
     private Rect _cursorChangeRect;
 
-    private AiBlackboard _target;
+    public static AiBlackboard _target;
     private StatusBarDrawer _statusBar;
     private ParamPanelDrawer _paramPanel;
     private TreeDrawer _treeDrawer;

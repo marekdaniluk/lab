@@ -20,7 +20,7 @@ namespace lab {
             set { _condition = value; }
         }
 
-        public override bool Run(ParameterContainer parameters, List<ATaskScript> tasks) {
+        public override bool Run(ParameterContainer parameters, IList<AiTree> trees, List<ATaskScript> tasks) {
             switch (_condition) {
                 case FloatCondition.Greater:
                     if (parameters.FloatParameters[Key] > (DynamicValue ? parameters.FloatParameters[DynamicValueKey] : Value)) {
@@ -46,26 +46,26 @@ namespace lab {
             return false;
 		}
 		#if UNITY_EDITOR
-		public override bool DebugRun(int level, int nodeIndex) {
+		public override bool DebugRun(ParameterContainer parameters, IList<AiTree> trees, int level, int nodeIndex) {
 			var result = false;
 			switch (_condition) {
 			case FloatCondition.Greater:
-				if (Blackboard.FloatParameters[Key] > (DynamicValue ? Blackboard.FloatParameters[DynamicValueKey] : Value)) {
+				if (parameters.FloatParameters[Key] > (DynamicValue ? parameters.FloatParameters[DynamicValueKey] : Value)) {
 					result = true;
 				}
 				break;
 			case FloatCondition.Less:
-				if (Blackboard.FloatParameters[Key] < (DynamicValue ? Blackboard.FloatParameters[DynamicValueKey] : Value)) {
+				if (parameters.FloatParameters[Key] < (DynamicValue ? parameters.FloatParameters[DynamicValueKey] : Value)) {
 					result = true;
 				}
 				break;
 			case FloatCondition.Equal:
-				if (Blackboard.FloatParameters[Key] == (DynamicValue ? Blackboard.FloatParameters[DynamicValueKey] : Value)) {
+				if (parameters.FloatParameters[Key] == (DynamicValue ? parameters.FloatParameters[DynamicValueKey] : Value)) {
 					result = true;
 				}
 				break;
 			case FloatCondition.NotEqual:
-				if (Blackboard.FloatParameters[Key] != (DynamicValue ? Blackboard.FloatParameters[DynamicValueKey] : Value)) {
+				if (parameters.FloatParameters[Key] != (DynamicValue ? parameters.FloatParameters[DynamicValueKey] : Value)) {
 					result = true;
 				}
 				break;

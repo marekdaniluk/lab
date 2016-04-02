@@ -7,7 +7,7 @@ public class TreeNodeEditor : Editor {
 
     public override void OnInspectorGUI() {
         var parameter = (TreeNode)target;
-        string[] keys = parameter.Blackboard.Trees.ToArray();
+        string[] keys = LabWindow._target.Trees.ToArray();
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("Tree index:");
         parameter.TreeIndex = EditorGUILayout.Popup(parameter.TreeIndex, keys);

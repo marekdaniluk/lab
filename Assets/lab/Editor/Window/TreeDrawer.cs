@@ -32,7 +32,8 @@ public class TreeDrawer {
 	public void RunDebug() {
 		ResetDebug();
 		if(_tree != null && _tree.Root != null) {
-			_tree.DebugRun(-1);
+            //TODO: fix the null param
+			_tree.DebugRun(null, null, -1);
 		}
 	}
 

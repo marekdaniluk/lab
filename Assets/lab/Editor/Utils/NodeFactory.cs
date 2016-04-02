@@ -19,9 +19,6 @@ public class NodeFactory {
 
 	public static ANode CreateNode(Type nodeType, AiBlackboard blackboard) {
 		ANode n = ScriptableObject.CreateInstance(nodeType) as ANode;
-		if(n.GetType().IsSubclassOfRawGeneric(typeof(ABlackboardNode))) {
-			n.GetType().GetProperty("Blackboard").SetValue(n, blackboard, null);
-		}
         n.name = n.GetType().Name;
         n.hideFlags = HideFlags.HideInHierarchy;
         AssetDatabase.AddObjectToAsset(n, blackboard);

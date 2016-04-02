@@ -39,16 +39,16 @@ namespace lab {
             set { _repeat = value; }
         }
 
-        public override bool Run(ParameterContainer parameters, List<ATaskScript> tasks) {
+        public override bool Run(ParameterContainer parameters, IList<AiTree> trees, List<ATaskScript> tasks) {
             for (int i = 0; i < Repeat; ++i) {
-                _node.Run(parameters, tasks);
+                _node.Run(parameters, trees, tasks);
             }
             return true;
         }
 #if UNITY_EDITOR
-        public override bool DebugRun(int level, int nodeIndex) {
+        public override bool DebugRun(ParameterContainer parameters, IList<AiTree> trees, int level, int nodeIndex) {
             for (int i = 0; i < Repeat; ++i) {
-                _node.DebugRun((level + 1), 0);
+                _node.DebugRun(parameters, trees, (level + 1), 0);
             }
 			Debug.Log(string.Format("{0}{1}. Repeater Node. Result: <b><color=green>true</color></b>", new string('\t', level), nodeIndex));
 			OnDebugResult(this, true);

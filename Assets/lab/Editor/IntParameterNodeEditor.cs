@@ -10,8 +10,8 @@ public class IntParameterNodeEditor : Editor {
 
     public override void OnInspectorGUI() {
 		var parameter = (IntParameterNode)target;
-        if (parameter.Blackboard.IntParameters.Count == 0) {
-            EditorGUILayout.HelpBox(string.Format("Blackboard \"{0}\" has no Int parameters. Add at least one Int parameter.", parameter.Blackboard.name), MessageType.Info);
+        if (LabWindow._target.IntParameters.Count == 0) {
+            EditorGUILayout.HelpBox(string.Format("Blackboard \"{0}\" has no Int parameters. Add at least one Int parameter.", LabWindow._target.name), MessageType.Info);
             return;
         }
         EditorGUILayout.BeginVertical();
@@ -21,7 +21,7 @@ public class IntParameterNodeEditor : Editor {
         parameter.DynamicValue = boolIndex == 1 ? true : false;
         EditorGUILayout.LabelField("Condition:");
         EditorGUILayout.BeginHorizontal();
-        string[] keys = parameter.Blackboard.IntParameters.Keys.ToArray<int>();
+        string[] keys = LabWindow._target.IntParameters.Keys.ToArray<int>();
         for(int i = 0; i < keys.Length; ++i) {
             if(keys[i].Equals(parameter.Key)) {
                 _index = i;

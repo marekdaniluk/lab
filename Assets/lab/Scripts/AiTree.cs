@@ -110,12 +110,12 @@ namespace lab {
         /// </summary>
         /// <param name="tasks"></param>
         /// <returns></returns>
-        public bool Run(ParameterContainer parameters, List<ATaskScript> tasks) {
-            return Root.Run(parameters, tasks);
+        public bool Run(ParameterContainer parameters, IList<AiTree> trees, List<ATaskScript> tasks) {
+            return Root.Run(parameters, trees, tasks);
         }
 #if UNITY_EDITOR
-        public bool DebugRun(int level) {
-            var result = Root.DebugRun((level + 1), 0);
+        public bool DebugRun(ParameterContainer parameters, IList<AiTree> trees, int level) {
+            var result = Root.DebugRun(parameters, trees, (level + 1), 0);
             level = Mathf.Clamp(level, 0, level);
             Debug.Log(string.Format("{0}<b>Tree debug run. Result: <color={1}>{2}</color></b>", new string('\t', level), result ? "green" : "red", result));
             return result;

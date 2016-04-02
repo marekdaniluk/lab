@@ -51,7 +51,7 @@ namespace lab {
         }
 
         public bool Run(List<ATaskScript> tasks, int i = 0) {
-            return _trees[i].Run(_parameters, tasks);
+            return _trees[i].Run(_parameters, Trees, tasks);
         }
 
         /// <summary>
