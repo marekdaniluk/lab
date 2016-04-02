@@ -11,7 +11,7 @@ public class BoolParameterNodeEditor : Editor {
     public override void OnInspectorGUI() {
 		var parameter = (BoolParameterNode)target;
         if (LabWindow._target.BoolParameters.Count == 0) {
-            EditorGUILayout.HelpBox(string.Format("Blackboard \"{0}\" has no Bool parameters. Add at least one Bool parameter.", LabWindow._target.name), MessageType.Info);
+            EditorGUILayout.HelpBox(string.Format("Behaviour \"{0}\" has no Bool parameters. Add at least one Bool parameter.", LabWindow._target.name), MessageType.Info);
             return;
         }
         EditorGUILayout.BeginVertical();

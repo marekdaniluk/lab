@@ -17,7 +17,7 @@ public class NodeFactory {
         }
     };
 
-	public static ANode CreateNode(Type nodeType, AiBlackboard blackboard) {
+	public static ANode CreateNode(Type nodeType, AiBehaviour blackboard) {
 		ANode n = ScriptableObject.CreateInstance(nodeType) as ANode;
         n.name = n.GetType().Name;
         n.hideFlags = HideFlags.HideInHierarchy;

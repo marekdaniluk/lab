@@ -11,7 +11,7 @@ public class StringParameterNodeEditor : Editor {
     public override void OnInspectorGUI() {
 		var parameter = (StringParameterNode)target;
         if (LabWindow._target.StringParameters.Count == 0) {
-            EditorGUILayout.HelpBox(string.Format("Blackboard \"{0}\" has no String parameters. Add at least one String parameter.", LabWindow._target.name), MessageType.Info);
+            EditorGUILayout.HelpBox(string.Format("Behaviour \"{0}\" has no String parameters. Add at least one String parameter.", LabWindow._target.name), MessageType.Info);
             return;
         }
         EditorGUILayout.BeginVertical();

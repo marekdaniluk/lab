@@ -3,20 +3,20 @@ using System.Collections.Generic;
 
 namespace lab {
     /// <summary>
-    /// Data asset with parameters and behavour trees.
-    /// <para>AiBlackboard collects parameters in key-value manner. Typical blackboards are responsible only for that, but AiBlackboard is more similar to Unity's Animator. It handles not only parameters, but also bevahour trees.
-    /// Single AiBehaviour has own parameters and can have multiple trees. If many objects have reference to same AiBehaviour, that means they all can run and change AiBehaviour's state.</para>
+    /// Data asset with parameters and behaviour trees.
+    /// <para>AiBehaviour collects parameters in key-value manner. AiBehaviour is similar to Unity's Animator. It handles not only parameters, but also bevahiour trees.
+    /// Single AiBehaviour has a blackboard and can have multiple trees.</para>
     /// </summary>
     [System.Serializable]
-    public class AiBlackboard : ScriptableObject {
+    public class AiBehaviour : ScriptableObject {
 
         [SerializeField]
-        private ParameterContainer _parameters;
+        private Blackboard _parameters;
         [SerializeField]
         private List<AiTree> _trees = new List<AiTree>();
 
         /// <summary>
-        /// Gets a readonly list of all behaviour trees assigned to this AiBlackboard.
+        /// Gets a readonly list of all behaviour trees assigned to this AiBehaviour.
         /// </summary>
         public IList<AiTree> Trees {
             get { return _trees.AsReadOnly(); }
@@ -50,6 +50,12 @@ namespace lab {
             get { return _parameters.StringParameters; }
         }
 
+        /// <summary>
+        /// Run tree behaviour.
+        /// </summary>
+        /// <param name="tasks">List of tasks to bind with task nodes.</param>
+        /// <param name="i">Index of tree to run. Default value is 0.</param>
+        /// <returns>True if tree succeed. Otherwise false.</returns>
         public bool Run(List<ATaskScript> tasks, int i = 0) {
             return _trees[i].Run(_parameters, Trees, tasks);
         }

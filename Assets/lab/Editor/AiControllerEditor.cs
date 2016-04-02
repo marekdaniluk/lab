@@ -7,7 +7,7 @@ public class AiControllerEditor : Editor {
     public override void OnInspectorGUI() {
         DrawDefaultInspector();
         var aiController = (AiController)target;
-        if (aiController.Blackboard == null) {
+        if (aiController.Behaviour == null) {
             EditorGUILayout.HelpBox("Not initialized", MessageType.Info);
         }
     }

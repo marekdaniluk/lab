@@ -4,7 +4,7 @@ using UnityEditor;
 
 public class FloatParamDrawer : AParamDrawer {
 
-    public FloatParamDrawer(AiBlackboard blackboard) {
+    public FloatParamDrawer(AiBehaviour blackboard) {
         _mainPropertyName = "_floatParameters";
         _keyName = "Float Parameter";
         InitParamList(blackboard);
@@ -14,21 +14,21 @@ public class FloatParamDrawer : AParamDrawer {
     public override void Add(ReorderableList list) {
         string k = _keyName;
         int i = 0;
-        while (((AiBlackboard)_serializedObject.targetObject).FloatParameters.ContainsKey(k)) {
+        while (((AiBehaviour)_serializedObject.targetObject).FloatParameters.ContainsKey(k)) {
             k = _keyName + " " + (i++).ToString();
         }
-        ((AiBlackboard)_serializedObject.targetObject).FloatParameters[k] = 0f;
+        ((AiBehaviour)_serializedObject.targetObject).FloatParameters[k] = 0f;
         Selection.activeObject = _serializedObject.targetObject;
     }
 
     public override void Remove(ReorderableList list) {
-        ((AiBlackboard)_serializedObject.targetObject).FloatParameters.Remove(list.serializedProperty.GetArrayElementAtIndex(list.index).stringValue);
+        ((AiBehaviour)_serializedObject.targetObject).FloatParameters.Remove(list.serializedProperty.GetArrayElementAtIndex(list.index).stringValue);
         Selection.activeObject = _serializedObject.targetObject;
     }
 
     public override void ApplyModifications() {
         _serializedObject.ApplyModifiedProperties();
-        ((AiBlackboard)_serializedObject.targetObject).FloatParameters.OnBeforeSerialize();
+        ((AiBehaviour)_serializedObject.targetObject).FloatParameters.OnBeforeSerialize();
     }
     #endregion
 }

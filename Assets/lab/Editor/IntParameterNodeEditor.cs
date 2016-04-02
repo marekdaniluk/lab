@@ -11,7 +11,7 @@ public class IntParameterNodeEditor : Editor {
     public override void OnInspectorGUI() {
 		var parameter = (IntParameterNode)target;
         if (LabWindow._target.IntParameters.Count == 0) {
-            EditorGUILayout.HelpBox(string.Format("Blackboard \"{0}\" has no Int parameters. Add at least one Int parameter.", LabWindow._target.name), MessageType.Info);
+            EditorGUILayout.HelpBox(string.Format("Behaviour \"{0}\" has no Int parameters. Add at least one Int parameter.", LabWindow._target.name), MessageType.Info);
             return;
         }
         EditorGUILayout.BeginVertical();

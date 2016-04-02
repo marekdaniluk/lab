@@ -11,7 +11,7 @@ public class FloatParameterNodeEditor : Editor {
     public override void OnInspectorGUI() {
 		var parameter = (FloatParameterNode)target;
         if (LabWindow._target.FloatParameters.Count == 0) {
-            EditorGUILayout.HelpBox(string.Format("Blackboard \"{0}\" has no Float parameters. Add at least one Float parameter.", LabWindow._target.name), MessageType.Info);
+            EditorGUILayout.HelpBox(string.Format("Behaviour \"{0}\" has no Float parameters. Add at least one Float parameter.", LabWindow._target.name), MessageType.Info);
             return;
         }
         EditorGUILayout.BeginVertical();

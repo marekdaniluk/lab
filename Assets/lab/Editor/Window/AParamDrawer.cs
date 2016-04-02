@@ -22,7 +22,7 @@ public abstract class AParamDrawer {
         ApplyModifications();
     }
 
-    protected void InitParamList(AiBlackboard blackboard) {
+    protected void InitParamList(AiBehaviour blackboard) {
         _serializedObject = new SerializedObject(blackboard);
         var p = _serializedObject.FindProperty("_parameters").FindPropertyRelative(_mainPropertyName);
         _list = new ReorderableList(_serializedObject, p.FindPropertyRelative(_keysPropertyName), true, true, true, true);

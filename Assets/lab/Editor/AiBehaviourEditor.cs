@@ -13,12 +13,12 @@ internal class EndNameEdit : EndNameEditAction {
     #endregion
 }
 
-[CustomEditor(typeof(AiBlackboard))]
-public class AiBlackboardEditor : Editor {
+[CustomEditor(typeof(AiBehaviour))]
+public class AiBehaviourEditor : Editor {
 
-    [MenuItem("Assets/Create/AiBlackboard")]
-    private static void CreateAiBlackboardMenu() {
-        var asset = ScriptableObject.CreateInstance<AiBlackboard>();
+    [MenuItem("Assets/Create/AiBehaviour")]
+    private static void CreateAiBehaviourMenu() {
+        var asset = ScriptableObject.CreateInstance<AiBehaviour>();
         asset.AddTree(new AiTree());
         ProjectWindowUtil.StartNameEditingIfProjectWindowExists(
             asset.GetInstanceID(),
@@ -28,22 +28,22 @@ public class AiBlackboardEditor : Editor {
             null);
     }
 
-    private static void CreateAiBlackboard() {
-        string path = EditorUtility.SaveFilePanel("Create New AiBlackboard", "Assets/", "AiBlackboard.asset", "asset");
+    private static void CreateAiBehaviour() {
+        string path = EditorUtility.SaveFilePanel("Create New AiBehaviour", "Assets/", "AiBehaviour.asset", "asset");
         if (string.IsNullOrEmpty(path)) {
             return;
         }
         path = FileUtil.GetProjectRelativePath(path);
-        var asset = ScriptableObject.CreateInstance<AiBlackboard>();
+        var asset = ScriptableObject.CreateInstance<AiBehaviour>();
         asset.AddTree(new AiTree());
         AssetDatabase.CreateAsset(asset, path);
         AssetDatabase.SaveAssets();
     }
 
     public override void OnInspectorGUI() {
-        var blackboard = (AiBlackboard)target;
-        if (blackboard.Trees == null || blackboard.Trees.Count == 0) {
-            EditorGUILayout.HelpBox(string.Format("Blackboard \"{0}\" has no ai trees. Add at least one ai tree.", blackboard.name), MessageType.Info);
+        var behaviour = (AiBehaviour)target;
+        if (behaviour.Trees == null || behaviour.Trees.Count == 0) {
+            EditorGUILayout.HelpBox(string.Format("Behaviour \"{0}\" has no ai trees. Add at least one ai tree.", behaviour.name), MessageType.Info);
         }
     }
 }

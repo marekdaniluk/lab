@@ -1,9 +1,13 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 
 namespace lab {
+    /// <summary>
+    /// Blackboard with global information for current behaviour.
+    /// <para>Blackboard keeps global information values to help making decisions to bevahiour trees. Blackboard supports four types (int, float, bool and string) of parameters.
+    /// Values can be written or read to cache some more complicated calculation.</para>
+    /// </summary>
     [System.Serializable]
-    public class ParameterContainer {
+    public class Blackboard {
 
         [SerializeField]
         private IntParameter _intParameters;

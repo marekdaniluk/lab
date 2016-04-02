@@ -13,7 +13,7 @@ public class LabWindow : EditorWindow {
     private float _minimumViewWidth = 150f;
     private Rect _cursorChangeRect;
 
-    public static AiBlackboard _target;
+    public static AiBehaviour _target;
     private StatusBarDrawer _statusBar;
     private ParamPanelDrawer _paramPanel;
     private TreeDrawer _treeDrawer;
@@ -159,14 +159,14 @@ public class LabWindow : EditorWindow {
             _paramPanel = new ParamPanelDrawer();
         }
         _cursorChangeRect = new Rect(_currentViewWidth, 0f, 5f, position.height);
-        if (Selection.activeObject is AiBlackboard && EditorUtility.IsPersistent(Selection.activeObject)) {
-            _target = (AiBlackboard)Selection.activeObject;
+        if (Selection.activeObject is AiBehaviour && EditorUtility.IsPersistent(Selection.activeObject)) {
+            _target = (AiBehaviour)Selection.activeObject;
             _statusBar.Blackboard = _target;
             _paramPanel.Blackboard = _target;
             _treeDrawer = new TreeDrawer(_statusBar.CurrentTree);
             _statusBar.OnSelectedAiTree += _treeDrawer.RebuildTreeView;
-        } else if (Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<AiController>() != null && Selection.activeGameObject.GetComponent<AiController>().Blackboard != null) {
-            _target = Selection.activeGameObject.GetComponent<AiController>().Blackboard;
+        } else if (Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<AiController>() != null && Selection.activeGameObject.GetComponent<AiController>().Behaviour != null) {
+            _target = Selection.activeGameObject.GetComponent<AiController>().Behaviour;
             _statusBar.Blackboard = _target;
             _paramPanel.Blackboard = _target;
             _treeDrawer = new TreeDrawer(_statusBar.CurrentTree);

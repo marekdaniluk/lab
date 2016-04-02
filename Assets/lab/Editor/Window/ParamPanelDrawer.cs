@@ -3,13 +3,13 @@ using lab;
 
 public class ParamPanelDrawer {
 
-    private AiBlackboard _blackboard;
+    private AiBehaviour _blackboard;
     private IntParamDrawer _intParamList;
     private FloatParamDrawer _floatParamList;
     private BoolParamDrawer _boolParamList;
     private StringParamDrawer _stringParamList;
 
-    public AiBlackboard Blackboard {
+    public AiBehaviour Blackboard {
         set {
             _blackboard = value;
             if (_blackboard != null) {

@@ -12,8 +12,8 @@ namespace lab {
         [SerializeField, HideInInspector]
         public Vector2 Position;
 
-        public abstract bool DebugRun(ParameterContainer parameters, IList<AiTree> trees, int level, int nodeIndex);
+        public abstract bool DebugRun(Blackboard parameters, IList<AiTree> trees, int level, int nodeIndex);
 #endif
-        public abstract bool Run(ParameterContainer parameters, IList<AiTree> trees, List<ATaskScript> tasks);
+        public abstract bool Run(Blackboard parameters, IList<AiTree> trees, List<ATaskScript> tasks);
     }
 }

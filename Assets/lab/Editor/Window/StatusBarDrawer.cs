@@ -7,11 +7,11 @@ public class StatusBarDrawer {
     public delegate void StatusBarDrawerHandler(AiTree aiTree);
     public StatusBarDrawerHandler OnSelectedAiTree = delegate { };
 
-    private AiBlackboard _blackboard;
+    private AiBehaviour _blackboard;
     private GUIContent _statusBarContent;
     private int _currentTree;
 
-    public AiBlackboard Blackboard {
+    public AiBehaviour Blackboard {
         set {
             _blackboard = value;
             _currentTree = 0;

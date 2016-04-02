@@ -4,7 +4,7 @@ using UnityEditor;
 
 public class StringParamDrawer : AParamDrawer {
 
-    public StringParamDrawer(AiBlackboard blackboard) {
+    public StringParamDrawer(AiBehaviour blackboard) {
         _mainPropertyName = "_stringParameters";
         _keyName = "String Parameter";
         InitParamList(blackboard);
@@ -14,21 +14,21 @@ public class StringParamDrawer : AParamDrawer {
     public override void Add(ReorderableList list) {
         string k = _keyName;
         int i = 0;
-        while (((AiBlackboard)_serializedObject.targetObject).StringParameters.ContainsKey(k)) {
+        while (((AiBehaviour)_serializedObject.targetObject).StringParameters.ContainsKey(k)) {
             k = _keyName + " " + (i++).ToString();
         }
-        ((AiBlackboard)_serializedObject.targetObject).StringParameters[k] = "";
+        ((AiBehaviour)_serializedObject.targetObject).StringParameters[k] = "";
         Selection.activeObject = _serializedObject.targetObject;
     }
 
     public override void Remove(ReorderableList list) {
-        ((AiBlackboard)_serializedObject.targetObject).StringParameters.Remove(list.serializedProperty.GetArrayElementAtIndex(list.index).stringValue);
+        ((AiBehaviour)_serializedObject.targetObject).StringParameters.Remove(list.serializedProperty.GetArrayElementAtIndex(list.index).stringValue);
         Selection.activeObject = _serializedObject.targetObject;
     }
 
     public override void ApplyModifications() {
         _serializedObject.ApplyModifiedProperties();
-        ((AiBlackboard)_serializedObject.targetObject).StringParameters.OnBeforeSerialize();
+        ((AiBehaviour)_serializedObject.targetObject).StringParameters.OnBeforeSerialize();
     }
     #endregion
 }
