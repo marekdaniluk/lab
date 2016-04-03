@@ -20,7 +20,7 @@ namespace lab {
         private List<TValue> _values = new List<TValue>();
 
         /// <summary>
-        /// Implement this method to receive a callback before Unity serializes your object.
+        /// Method to receive a callback before Unity serializes your object.
         /// </summary>
         public void OnBeforeSerialize() {
             _keys.Clear();
@@ -32,7 +32,7 @@ namespace lab {
         }
 
         /// <summary>
-        /// Implement this method to receive a callback after Unity de-serializes your object.
+        /// Method to receive a callback after Unity de-serializes your object.
         /// </summary>
         public void OnAfterDeserialize() {
             this.Clear();
@@ -42,6 +42,17 @@ namespace lab {
             for (int i = 0; i < _keys.Count; i++) {
                 this.Add(_keys[i], _values[i]);
             }
+        }
+
+        /// <summary>
+        /// Creates a copy of this object.
+        /// </summary>
+        /// <returns>Deep copy of serialized parameter.</returns>
+        public ASerializableParameter<TKey, TValue> Clone() {
+            var asp = (ASerializableParameter<TKey, TValue>)MemberwiseClone();
+            asp._keys = new List<TKey>(_keys);
+            asp._values = new List<TValue>(_values);
+            return asp;
         }
     }
 }

@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 
 namespace lab {
+    /// <summary>
+    /// 
+    /// <para></para>
+    /// </summary>
     [System.Serializable]
     public abstract class ANode : ScriptableObject {
 
@@ -11,9 +15,25 @@ namespace lab {
 
         [SerializeField, HideInInspector]
         public Vector2 Position;
-
-        public abstract bool DebugRun(Blackboard parameters, IList<AiTree> trees, int level, int nodeIndex);
 #endif
-        public abstract bool Run(Blackboard parameters, IList<AiTree> trees, List<ATaskScript> tasks);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <param name="trees"></param>
+        /// <param name="level"></param>
+        /// <param name="nodeIndex"></param>
+        /// <returns></returns>
+        public abstract bool DebugRun(AiBlackboard parameters, IList<AiTree> trees, int level, int nodeIndex);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <param name="trees"></param>
+        /// <param name="tasks"></param>
+        /// <returns></returns>
+        public abstract bool Run(AiBlackboard parameters, IList<AiTree> trees, List<ATaskScript> tasks);
     }
 }

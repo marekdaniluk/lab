@@ -14,21 +14,21 @@ public class BoolParamDrawer : AParamDrawer {
     public override void Add(ReorderableList list) {
         string k = _keyName;
         int i = 0;
-        while (((AiBehaviour)_serializedObject.targetObject).BoolParameters.ContainsKey(k)) {
+        while (((AiBehaviour)_serializedObject.targetObject).Blackboard.BoolParameters.ContainsKey(k)) {
             k = _keyName + " " + (i++).ToString();
         }
-        ((AiBehaviour)_serializedObject.targetObject).BoolParameters[k] = false;
+        ((AiBehaviour)_serializedObject.targetObject).Blackboard.BoolParameters[k] = false;
         Selection.activeObject = _serializedObject.targetObject;
     }
 
     public override void Remove(ReorderableList list) {
-        ((AiBehaviour)_serializedObject.targetObject).BoolParameters.Remove(list.serializedProperty.GetArrayElementAtIndex(list.index).stringValue);
+        ((AiBehaviour)_serializedObject.targetObject).Blackboard.BoolParameters.Remove(list.serializedProperty.GetArrayElementAtIndex(list.index).stringValue);
         Selection.activeObject = _serializedObject.targetObject;
     }
 
     public override void ApplyModifications() {
         _serializedObject.ApplyModifiedProperties();
-        ((AiBehaviour)_serializedObject.targetObject).BoolParameters.OnBeforeSerialize();
+        ((AiBehaviour)_serializedObject.targetObject).Blackboard.BoolParameters.OnBeforeSerialize();
     }
     #endregion
 }

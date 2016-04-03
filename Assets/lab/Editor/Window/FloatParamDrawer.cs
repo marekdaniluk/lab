@@ -14,21 +14,21 @@ public class FloatParamDrawer : AParamDrawer {
     public override void Add(ReorderableList list) {
         string k = _keyName;
         int i = 0;
-        while (((AiBehaviour)_serializedObject.targetObject).FloatParameters.ContainsKey(k)) {
+        while (((AiBehaviour)_serializedObject.targetObject).Blackboard.FloatParameters.ContainsKey(k)) {
             k = _keyName + " " + (i++).ToString();
         }
-        ((AiBehaviour)_serializedObject.targetObject).FloatParameters[k] = 0f;
+        ((AiBehaviour)_serializedObject.targetObject).Blackboard.FloatParameters[k] = 0f;
         Selection.activeObject = _serializedObject.targetObject;
     }
 
     public override void Remove(ReorderableList list) {
-        ((AiBehaviour)_serializedObject.targetObject).FloatParameters.Remove(list.serializedProperty.GetArrayElementAtIndex(list.index).stringValue);
+        ((AiBehaviour)_serializedObject.targetObject).Blackboard.FloatParameters.Remove(list.serializedProperty.GetArrayElementAtIndex(list.index).stringValue);
         Selection.activeObject = _serializedObject.targetObject;
     }
 
     public override void ApplyModifications() {
         _serializedObject.ApplyModifiedProperties();
-        ((AiBehaviour)_serializedObject.targetObject).FloatParameters.OnBeforeSerialize();
+        ((AiBehaviour)_serializedObject.targetObject).Blackboard.FloatParameters.OnBeforeSerialize();
     }
     #endregion
 }

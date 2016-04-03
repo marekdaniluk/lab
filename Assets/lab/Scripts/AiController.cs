@@ -33,26 +33,42 @@ namespace lab {
         [SerializeField]
         private List<ATaskScript> _tasks;
 
-        private AiBehaviour _clonedBehaviour;
+        private AiBlackboard _blackboard;
+        private IList<AiTree> _trees;
 
-        /// <summary>
-        /// Getter for AiBehaviour asset.
-        /// </summary>
-        public AiBehaviour Behaviour {
+        private AiBlackboard Blackboard {
             get {
-                if (_behaviour == null) {
-                    return null;
+                if(_blackboard == null) {
+                    if (_behaviour == null) {
+                        return null;
+                    }
+                    _blackboard = _behaviour.Blackboard.Clone();
                 }
-                if (_clonedBehaviour == null) {
-                    _clonedBehaviour = (AiBehaviour)Instantiate(_behaviour);
-                    _clonedBehaviour.name = _behaviour.name;
+                return _blackboard;
+            }
+        }
+
+        private IList<AiTree> Trees {
+            get {
+                if(_trees == null) {
+                    if(_behaviour == null) {
+                        return null;
+                    }
+                    _trees = _behaviour.Trees;
                 }
-                return _clonedBehaviour;
+                return _trees;
             }
         }
 
         /// <summary>
-        /// Setter/Getter for task list.
+        /// Gets for Behaviour attached to current AiController.
+        /// </summary>
+        public AiBehaviour Behaviour {
+            get { return _behaviour; }
+        }
+
+        /// <summary>
+        /// Sets/Gets task list.
         /// </summary>
         public List<ATaskScript> Tasks {
             get { return _tasks; }
@@ -65,23 +81,23 @@ namespace lab {
         /// <param name="key">The name of the int parameters.</param>
         /// <param name="val">The new value for the int parameters.</param>
         public void SetInt(string key, int val) {
-            Behaviour.IntParameters[key] = val;
+            Blackboard.IntParameters[key] = val;
         }
 
         /// <summary>
-        /// Gets the int parameters for ai behaviour.
+        /// Gets int parameters for ai behaviour.
         /// </summary>
         /// <param name="key">The name of the int parameters.</param>
         /// <returns>The value for the int parameters.</returns>
         public int GetInt(string key) {
-            return Behaviour.IntParameters[key];
+            return Blackboard.IntParameters[key];
         }
 
         /// <summary>
-        /// Getter for all keys for int parameters.
+        /// Gets all int parameters keys.
         /// </summary>
         public IntParameter.KeyCollection IntKeys {
-            get { return Behaviour.IntParameters.Keys; }
+            get { return Blackboard.IntParameters.Keys; }
         }
 
         /// <summary>
@@ -90,23 +106,23 @@ namespace lab {
         /// <param name="key">The name of the float parameters.</param>
         /// <param name="val">The new value for the float parameters.</param>
         public void SetFloat(string key, float val) {
-            Behaviour.FloatParameters[key] = val;
+            Blackboard.FloatParameters[key] = val;
         }
 
         /// <summary>
-        /// Gets the float parameters for ai behaviour.
+        /// Gets float parameters for ai behaviour.
         /// </summary>
         /// <param name="key">The name of the float parameters.</param>
         /// <returns>The value for the float parameters.</returns>
         public float GetFloat(string key) {
-            return Behaviour.FloatParameters[key];
+            return Blackboard.FloatParameters[key];
         }
 
         /// <summary>
-        /// Getter for all keys for float parameters.
+        /// Gets all float parameters keys.
         /// </summary>
         public FloatParameter.KeyCollection FloatKeys {
-            get { return Behaviour.FloatParameters.Keys; }
+            get { return Blackboard.FloatParameters.Keys; }
         }
 
         /// <summary>
@@ -115,23 +131,23 @@ namespace lab {
         /// <param name="key">The name of the bool parameters.</param>
         /// <param name="val">The new value for the bool parameters.</param>
         public void SetBool(string key, bool val) {
-            Behaviour.BoolParameters[key] = val;
+            Blackboard.BoolParameters[key] = val;
         }
 
         /// <summary>
-        /// Gets the bool parameters for ai behaviour.
+        /// Gets bool parameters for ai behaviour.
         /// </summary>
         /// <param name="key">The name of the bool parameters.</param>
         /// <returns>The value for the bool parameters.</returns>
         public bool GetBool(string key) {
-            return Behaviour.BoolParameters[key];
+            return Blackboard.BoolParameters[key];
         }
 
         /// <summary>
-        /// Getter for all keys for bool parameters.
+        /// Gets all bool parameters keys.
         /// </summary>
         public BoolParameter.KeyCollection BoolKeys {
-            get { return Behaviour.BoolParameters.Keys; }
+            get { return Blackboard.BoolParameters.Keys; }
         }
 
         /// <summary>
@@ -140,39 +156,32 @@ namespace lab {
         /// <param name="key">The name of the string parameters.</param>
         /// <param name="val">The new value for the string parameters.</param>
         public void SetString(string key, string val) {
-            Behaviour.StringParameters[key] = val;
+            Blackboard.StringParameters[key] = val;
         }
 
         /// <summary>
-        /// Gets the string parameters for ai behaviour.
+        /// Gets string parameters for ai behaviour.
         /// </summary>
         /// <param name="key">The name of the string parameters.</param>
         /// <returns>The value for the string parameters.</returns>
         public string GetString(string key) {
-            return Behaviour.StringParameters[key];
+            return Blackboard.StringParameters[key];
         }
 
         /// <summary>
-        /// Getter for all keys for string parameters.
+        /// Gets all string parameters keys.
         /// </summary>
         public StringParameter.KeyCollection StringKyes {
-            get { return Behaviour.StringParameters.Keys; }
+            get { return Blackboard.StringParameters.Keys; }
         }
 
         /// <summary>
-        /// Run tree behaviour.
+        /// Runs tree behaviour.
         /// </summary>
         /// <param name="i">Index of tree to run. Default value is 0.</param>
         /// <returns>True if tree succeed. Otherwise false.</returns>
         public bool Run(int i = 0) {
-            return Behaviour.Run(Tasks, i);
-        }
-
-        /// <summary>
-        /// Getter for a list of behaviour trees.
-        /// </summary>
-        public IList<AiTree> Trees {
-            get { return Behaviour.Trees; }
+            return Trees[i].Run(Blackboard, Trees, Tasks);
         }
     }
 }

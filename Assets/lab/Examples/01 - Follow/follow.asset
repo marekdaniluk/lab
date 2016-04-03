@@ -8,9 +8,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 429ddd75cd4ce9a4ab0e779dde4d8752, type: 3}
   m_Name: follow
-  m_EditorClassIdentifier: Assembly-CSharp:lab:AiBehaviour
+  m_EditorClassIdentifier: 
   _parameters:
     _intParameters:
       _keys: []
@@ -27,14 +27,14 @@ MonoBehaviour:
       _keys: []
       _values: []
   _trees:
-  - _root: {fileID: 11456162}
+  - _root: {fileID: 11412766}
     _nodes:
-    - {fileID: 11492918}
-    - {fileID: 11418978}
-    - {fileID: 11418096}
-    - {fileID: 11460358}
-    - {fileID: 11456162}
---- !u!114 &11418096
+    - {fileID: 11412766}
+    - {fileID: 11461468}
+    - {fileID: 11448220}
+    - {fileID: 11440674}
+    - {fileID: 11411338}
+--- !u!114 &11411338
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -45,25 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f57c244dd3480924a888b3b03b101418, type: 3}
   m_Name: TaskNode
   m_EditorClassIdentifier: 
-  Position: {x: 424, y: 327}
-  _taskIndex: 0
+  Position: {x: 476, y: 180}
+  _taskIndex: 1
   _description: 
---- !u!114 &11418978
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4049d6a73af16724ebf61d547555a4c5, type: 3}
-  m_Name: SequenceNode
-  m_EditorClassIdentifier: 
-  Position: {x: 297, y: 205}
-  _nodes:
-  - {fileID: 11492918}
-  - {fileID: 11418096}
---- !u!114 &11456162
+--- !u!114 &11412766
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -74,11 +59,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77192985dbf2d4c4bbd32c7520893136, type: 3}
   m_Name: SelectorNode
   m_EditorClassIdentifier: 
-  Position: {x: 414, y: 83}
+  Position: {x: 375, y: 83}
   _nodes:
-  - {fileID: 11418978}
-  - {fileID: 11460358}
---- !u!114 &11460358
+  - {fileID: 11461468}
+  - {fileID: 11411338}
+--- !u!114 &11440674
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -89,10 +74,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f57c244dd3480924a888b3b03b101418, type: 3}
   m_Name: TaskNode
   m_EditorClassIdentifier: 
-  Position: {x: 533, y: 205}
-  _taskIndex: 1
+  Position: {x: 351, y: 276}
+  _taskIndex: 0
   _description: 
---- !u!114 &11492918
+--- !u!114 &11448220
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -103,9 +88,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f575d0542cdd6c40b92c2dfffedfc1d, type: 3}
   m_Name: FloatParameterNode
   m_EditorClassIdentifier: 
-  Position: {x: 176, y: 326}
+  Position: {x: 168, y: 279}
   _dynamicValue: 0
   _key: distance
   _dynamicValueKey: 
   _value: 10
   _condition: 1
+--- !u!114 &11461468
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4049d6a73af16724ebf61d547555a4c5, type: 3}
+  m_Name: SequenceNode
+  m_EditorClassIdentifier: 
+  Position: {x: 268, y: 177}
+  _nodes:
+  - {fileID: 11448220}
+  - {fileID: 11440674}

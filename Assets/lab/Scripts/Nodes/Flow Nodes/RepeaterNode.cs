@@ -39,14 +39,14 @@ namespace lab {
             set { _repeat = value; }
         }
 
-        public override bool Run(Blackboard parameters, IList<AiTree> trees, List<ATaskScript> tasks) {
+        public override bool Run(AiBlackboard parameters, IList<AiTree> trees, List<ATaskScript> tasks) {
             for (int i = 0; i < Repeat; ++i) {
                 _node.Run(parameters, trees, tasks);
             }
             return true;
         }
-#if UNITY_EDITOR
-        public override bool DebugRun(Blackboard parameters, IList<AiTree> trees, int level, int nodeIndex) {
+
+        public override bool DebugRun(AiBlackboard parameters, IList<AiTree> trees, int level, int nodeIndex) {
             for (int i = 0; i < Repeat; ++i) {
                 _node.DebugRun(parameters, trees, (level + 1), 0);
             }
@@ -54,6 +54,5 @@ namespace lab {
 			OnDebugResult(this, true);
             return true;
         }
-#endif
     }
 }

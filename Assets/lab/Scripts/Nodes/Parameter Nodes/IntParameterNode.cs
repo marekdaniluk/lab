@@ -20,7 +20,7 @@ namespace lab {
             set { _condition = value; }
         }
 
-        public override bool Run(Blackboard parameters, IList<AiTree> trees, List<ATaskScript> tasks) {
+        public override bool Run(AiBlackboard parameters, IList<AiTree> trees, List<ATaskScript> tasks) {
             switch (_condition) {
                 case IntCondition.Greater:
                     if (parameters.IntParameters[Key] > (DynamicValue ? parameters.IntParameters[DynamicValueKey] : Value)) {
@@ -45,8 +45,8 @@ namespace lab {
             }
             return false;
 		}
-		#if UNITY_EDITOR
-		public override bool DebugRun(Blackboard parameters, IList<AiTree> trees, int level, int nodeIndex) {
+
+		public override bool DebugRun(AiBlackboard parameters, IList<AiTree> trees, int level, int nodeIndex) {
 			var result = false;
 			switch (_condition) {
 			case IntCondition.Greater:
@@ -74,6 +74,5 @@ namespace lab {
 			OnDebugResult(this, result);
 			return result;
 		}
-		#endif
     }
 }

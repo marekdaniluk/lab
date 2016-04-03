@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace lab {
     /// <summary>
-    /// 
+    /// Behaviour tree with ai logic.
     /// <para></para>
     /// </summary>
     [System.Serializable]
@@ -21,15 +21,15 @@ namespace lab {
             get { return _root; }
             set {
                 var node = value as AFlowNode;
-                if (_nodes.Contains(node) && node != null) {
+                if (node != null && _nodes.Contains(node)) {
                     //fix connections between new root node and other nodes
                     for (int i = 0; i < _nodes.Count; ++i) {
                         var n = _nodes[i] as AFlowNode;
                         if (n != null) {
-                            n.RemoveNode(value);
+                            n.RemoveNode(node);
                         }
                     }
-                    _root = value;
+                    _root = node;
                 } else {
                     _root = null;
                 }
@@ -105,22 +105,39 @@ namespace lab {
             return false;
         }
 
+        ///// <summary>
+        ///// Run tree behaviour.
+        ///// </summary>
+        ///// <param name="tasks">List of tasks to bind with task nodes.</param>
+        ///// <param name="i">Index of tree to run. Default value is 0.</param>
+        ///// <returns>True if tree succeed. Otherwise false.</returns>
+        //public bool Run(List<ATaskScript> tasks, int i = 0) {
+        //    return _trees[i].Run(_parameters, Trees, tasks);
+        //}
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="tasks"></param>
         /// <returns></returns>
-        public bool Run(Blackboard parameters, IList<AiTree> trees, List<ATaskScript> tasks) {
+        public bool Run(AiBlackboard parameters, IList<AiTree> trees, List<ATaskScript> tasks) {
             return Root.Run(parameters, trees, tasks);
         }
-#if UNITY_EDITOR
-        public bool DebugRun(Blackboard parameters, IList<AiTree> trees, int level) {
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <param name="trees"></param>
+        /// <param name="level"></param>
+        /// <returns></returns>
+        public bool DebugRun(AiBlackboard parameters, IList<AiTree> trees, int level) {
             var result = Root.DebugRun(parameters, trees, (level + 1), 0);
             level = Mathf.Clamp(level, 0, level);
             Debug.Log(string.Format("{0}<b>Tree debug run. Result: <color={1}>{2}</color></b>", new string('\t', level), result ? "green" : "red", result));
             return result;
         }
-#endif
+
         /// <summary>
         /// 
         /// </summary>

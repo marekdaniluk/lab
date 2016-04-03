@@ -1,4 +1,6 @@
-﻿namespace lab {
+﻿using System;
+
+namespace lab {
     /// <summary>
     /// Serializable bool parameter. This weird solution of inheriting from generic class is to avoid boiler code.
     /// </summary>

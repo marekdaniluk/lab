@@ -10,7 +10,7 @@ public class BoolParameterNodeEditor : Editor {
 
     public override void OnInspectorGUI() {
 		var parameter = (BoolParameterNode)target;
-        if (LabWindow._target.BoolParameters.Count == 0) {
+        if (LabWindow._target.Blackboard.BoolParameters.Count == 0) {
             EditorGUILayout.HelpBox(string.Format("Behaviour \"{0}\" has no Bool parameters. Add at least one Bool parameter.", LabWindow._target.name), MessageType.Info);
             return;
         }
@@ -21,7 +21,7 @@ public class BoolParameterNodeEditor : Editor {
         parameter.DynamicValue = boolIndex == 1 ? true : false;
         EditorGUILayout.LabelField("Condition:");
         EditorGUILayout.BeginHorizontal();
-        string[] keys = LabWindow._target.BoolParameters.Keys.ToArray<bool>();
+        string[] keys = LabWindow._target.Blackboard.BoolParameters.Keys.ToArray<bool>();
         for (int i = 0; i < keys.Length; ++i) {
             if (keys[i].Equals(parameter.Key)) {
                 _index = i;

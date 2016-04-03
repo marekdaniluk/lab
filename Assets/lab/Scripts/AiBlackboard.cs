@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
+using System;
 
 namespace lab {
     /// <summary>
-    /// Blackboard with global information for current behaviour.
-    /// <para>Blackboard keeps global information values to help making decisions to bevahiour trees. Blackboard supports four types (int, float, bool and string) of parameters.
+    /// AiBlackboard with global information for current behaviour.
+    /// <para>AiBlackboard keeps global information values to help making decisions to bevahiour trees. AiBlackboard supports four types (int, float, bool and string) of parameters.
     /// Values can be written or read to cache some more complicated calculation.</para>
     /// </summary>
     [System.Serializable]
-    public class Blackboard {
+    public class AiBlackboard {
 
         [SerializeField]
         private IntParameter _intParameters;
@@ -19,31 +20,44 @@ namespace lab {
         private StringParameter _stringParameters;
 
         /// <summary>
-        /// Getter for int parameters.
+        /// Gets int parameters.
         /// </summary>
         public IntParameter IntParameters {
             get { return _intParameters; }
         }
 
         /// <summary>
-        /// Getter for float parameters.
+        /// Gets float parameters.
         /// </summary>
         public FloatParameter FloatParameters {
             get { return _floatParameters; }
         }
 
         /// <summary>
-        /// Getter for bool parameters.
+        /// Gets bool parameters.
         /// </summary>
         public BoolParameter BoolParameters {
             get { return _boolParameters; }
         }
 
         /// <summary>
-        /// Getter for string parameters.
+        /// Gets string parameters.
         /// </summary>
         public StringParameter StringParameters {
             get { return _stringParameters; }
+        }
+
+        /// <summary>
+        /// Creates a copy of this object.
+        /// </summary>
+        /// <returns>Deep copy of AiBlackboard.</returns>
+        public AiBlackboard Clone() {
+            var aib = new AiBlackboard();
+            aib._intParameters = (IntParameter)_intParameters.Clone();
+            aib._floatParameters = (FloatParameter)_floatParameters.Clone();
+            aib._boolParameters = (BoolParameter)_boolParameters.Clone();
+            aib._stringParameters = (StringParameter)_stringParameters.Clone();
+            return aib;
         }
     }
 }
