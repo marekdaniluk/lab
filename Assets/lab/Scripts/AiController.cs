@@ -38,10 +38,10 @@ namespace lab {
 
         private AiBlackboard Blackboard {
             get {
-                if(_blackboard == null) {
-                    if (_behaviour == null) {
-                        return null;
-                    }
+                if (_behaviour == null) {
+                    return null;
+                }
+                if (_blackboard == null) {
                     _blackboard = _behaviour.Blackboard.Clone();
                 }
                 return _blackboard;
@@ -61,10 +61,11 @@ namespace lab {
         }
 
         /// <summary>
-        /// Gets for Behaviour attached to current AiController.
+        /// Gets/Sets Behaviour for current AiController.
         /// </summary>
         public AiBehaviour Behaviour {
             get { return _behaviour; }
+            set { _behaviour = value; _blackboard = null; }
         }
 
         /// <summary>

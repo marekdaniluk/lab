@@ -131,7 +131,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follow: {fileID: 632617602}
-  maxDistance: 5
 --- !u!114 &169794168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -427,7 +426,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follow: {fileID: 632617602}
-  maxDistance: 5
 --- !u!114 &1498359382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -623,7 +621,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follow: {fileID: 632617602}
-  maxDistance: 5
 --- !u!114 &1888547475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -758,7 +755,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follow: {fileID: 632617602}
-  maxDistance: 5
 --- !u!114 &1925467305
 MonoBehaviour:
   m_ObjectHideFlags: 0

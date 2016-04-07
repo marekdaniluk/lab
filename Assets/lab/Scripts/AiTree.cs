@@ -105,16 +105,6 @@ namespace lab {
             return false;
         }
 
-        ///// <summary>
-        ///// Run tree behaviour.
-        ///// </summary>
-        ///// <param name="tasks">List of tasks to bind with task nodes.</param>
-        ///// <param name="i">Index of tree to run. Default value is 0.</param>
-        ///// <returns>True if tree succeed. Otherwise false.</returns>
-        //public bool Run(List<ATaskScript> tasks, int i = 0) {
-        //    return _trees[i].Run(_parameters, Trees, tasks);
-        //}
-
         /// <summary>
         /// 
         /// </summary>
@@ -138,20 +128,11 @@ namespace lab {
             return result;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="from"></param>
-        /// <param name="to"></param>
-        /// <returns></returns>
         private bool IsConnected(AFlowNode from, AFlowNode to) {
             for (int i = 0; i < to.NodeCount; ++i) {
                 var n = to.GetNode(i) as AFlowNode;
                 if (n != null) {
-                    if (from == n) {
-                        return true;
-                    }
-                    if (IsConnected(from, n)) {
+                    if (from == n || IsConnected(from, n)) {
                         return true;
                     }
                 }

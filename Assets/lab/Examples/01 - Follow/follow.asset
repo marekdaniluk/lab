@@ -19,7 +19,7 @@ MonoBehaviour:
       _keys:
       - distance
       _values:
-      - 0
+      - 30.443607
     _boolParameters:
       _keys: []
       _values: 
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f57c244dd3480924a888b3b03b101418, type: 3}
   m_Name: TaskNode
   m_EditorClassIdentifier: 
-  Position: {x: 476, y: 180}
+  Position: {x: 497, y: 175}
   _taskIndex: 1
   _description: 
 --- !u!114 &11412766
