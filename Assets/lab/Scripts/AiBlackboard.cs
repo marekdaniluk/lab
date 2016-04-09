@@ -53,10 +53,10 @@ namespace lab {
         /// <returns>Deep copy of AiBlackboard.</returns>
         public AiBlackboard Clone() {
             var aib = new AiBlackboard();
-            aib._intParameters = (IntParameter)_intParameters.Clone();
-            aib._floatParameters = (FloatParameter)_floatParameters.Clone();
-            aib._boolParameters = (BoolParameter)_boolParameters.Clone();
-            aib._stringParameters = (StringParameter)_stringParameters.Clone();
+            aib._intParameters = new IntParameter(_intParameters);
+            aib._floatParameters = new FloatParameter(_floatParameters);
+            aib._boolParameters = new BoolParameter(_boolParameters);
+            aib._stringParameters = new StringParameter(_stringParameters);
             return aib;
         }
     }

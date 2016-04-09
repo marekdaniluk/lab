@@ -5,7 +5,8 @@ namespace lab {
     /// <summary>
     /// Component to control ai behaviour.
     /// <para>AiController inherits from MonoBehaviour, so  this one should be attached to your game object. It is also responsible for binding tasks scripts with the logic (trees' tasks).
-    /// Simply attach a AiBehaviour asset and tasks scripts. Use AiController to modificate AiBehaviour's parameters.</para>
+    /// Simply attach an AiBehaviour asset and tasks scripts. Use AiController to modificate AiBehaviour's parameters. Each AiController has its own copy of state for attached AiBehaviour,
+    /// that means you can use same behaviour trees for many controllers.</para>
     /// </summary>
     /// <example>
     /// This sample shows how to update parameters for current controller and run default behaviour tree.
@@ -38,11 +39,11 @@ namespace lab {
 
         private AiBlackboard Blackboard {
             get {
-                if (_behaviour == null) {
+                if (Behaviour == null) {
                     return null;
                 }
                 if (_blackboard == null) {
-                    _blackboard = _behaviour.Blackboard.Clone();
+                    _blackboard = Behaviour.Blackboard.Clone();
                 }
                 return _blackboard;
             }
@@ -50,11 +51,11 @@ namespace lab {
 
         private IList<AiTree> Trees {
             get {
-                if(_trees == null) {
-                    if(_behaviour == null) {
+                if (_trees == null) {
+                    if (Behaviour == null) {
                         return null;
                     }
-                    _trees = _behaviour.Trees;
+                    _trees = Behaviour.Trees;
                 }
                 return _trees;
             }

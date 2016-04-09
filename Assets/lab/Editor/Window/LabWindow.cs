@@ -180,7 +180,9 @@ public class LabWindow : EditorWindow {
         if (data != null) {
             var node = NodeFactory.CreateNode(data.nodeType, _target);
             node.Position = new Vector2(data.position.x - _currentViewWidth - NodeDrawer.gSize.x / 2, data.position.y - NodeDrawer.gSize.y);
-            _statusBar.CurrentTree.AddNode(node);
+            if (_statusBar.CurrentTree.AddNode(node) && _statusBar.CurrentTree.Root == null) {
+                _statusBar.CurrentTree.Root = node;
+            }
             _treeDrawer.RebuildTreeView(_statusBar.CurrentTree);
         }
     }

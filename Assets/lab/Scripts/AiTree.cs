@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace lab {
     /// <summary>
     /// Behaviour tree with ai logic.
-    /// <para></para>
+    /// <para>Single ai tree that can be run.</para>
     /// </summary>
     [System.Serializable]
     public class AiTree {
@@ -15,7 +15,7 @@ namespace lab {
         private List<ANode> _nodes = new List<ANode>();
 
         /// <summary>
-        /// 
+        /// Sets/Gets root node for current AiTree. Only flow nodes can be root nodes.
         /// </summary>
         public ANode Root {
             get { return _root; }
@@ -37,33 +37,30 @@ namespace lab {
         }
 
         /// <summary>
-        /// 
+        /// Gets readonly list of all nodes assigned to this AiTree.
         /// </summary>
         public IList<ANode> Nodes {
             get { return _nodes.AsReadOnly(); }
         }
 
         /// <summary>
-        /// 
+        /// Adds new node to this AiTree.
         /// </summary>
-        /// <param name="node"></param>
-        /// <returns></returns>
+        /// <param name="node">A node to add to this AiTree.</param>
+        /// <returns>True if adding node was succeed. Otherwise false.</returns>
         public bool AddNode(ANode node) {
             if (_nodes.Contains(node)) {
                 return false;
             }
             _nodes.Add(node);
-            if (Root == null) {
-                Root = node;
-            }
             return true;
         }
 
         /// <summary>
-        /// 
+        /// Removes node from this AiTree. Also removes all connections between other nodes, so it doesn't have to be done manually.
         /// </summary>
-        /// <param name="node"></param>
-        /// <returns></returns>
+        /// <param name="node">A node to remove from this AiTree.</param>
+        /// <returns>True if removing node was succeed. Otherwise false.</returns>
         public bool RemoveNode(ANode node) {
             if (_nodes.Remove(node)) {
                 if (Root == node) {
@@ -86,11 +83,11 @@ namespace lab {
         }
 
         /// <summary>
-        /// 
+        /// Creates connection between one node to another. The connection is one one-way and tries to prevent circular to prevent infinity loops.
         /// </summary>
-        /// <param name="from"></param>
-        /// <param name="to"></param>
-        /// <returns></returns>
+        /// <param name="from">A node that is higher in hierarchy.</param>
+        /// <param name="to">A node that is lower in hierarchy.</param>
+        /// <returns>True if connection succeed. Otherwise false.</returns>
         public bool ConnectNodes(AFlowNode from, ANode to) {
             if (_nodes.Contains(from) && _nodes.Contains(to) && to != Root) {
                 var n = to as AFlowNode;
@@ -106,21 +103,23 @@ namespace lab {
         }
 
         /// <summary>
-        /// 
+        /// Runs this tree behaviour.
         /// </summary>
-        /// <param name="tasks"></param>
-        /// <returns></returns>
+        /// <param name="parameters">AiBlackboard with global parameters.</param>
+        /// <param name="trees">Readonly list with all ai trees.</param>
+        /// <param name="tasks">List of task scripts to bind with task nodes.</param>
+        /// <returns>True if tree succeed. Otherwise false.</returns>
         public bool Run(AiBlackboard parameters, IList<AiTree> trees, List<ATaskScript> tasks) {
             return Root.Run(parameters, trees, tasks);
         }
 
         /// <summary>
-        /// 
+        /// Runs debug this tree behaviour.
         /// </summary>
-        /// <param name="parameters"></param>
-        /// <param name="trees"></param>
-        /// <param name="level"></param>
-        /// <returns></returns>
+        /// <param name="parameters">AiBlackboard with global parameters.</param>
+        /// <param name="trees">Readonly list with all ai trees.</param>
+        /// <param name="level">Level of how deep we are in this AiTree.</param>
+        /// <returns>True if debug run succeed. Otherwise false.</returns>
         public bool DebugRun(AiBlackboard parameters, IList<AiTree> trees, int level) {
             var result = Root.DebugRun(parameters, trees, (level + 1), 0);
             level = Mathf.Clamp(level, 0, level);

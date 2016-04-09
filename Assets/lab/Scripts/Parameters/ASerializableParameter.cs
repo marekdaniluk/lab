@@ -12,12 +12,27 @@ namespace lab {
     [System.Serializable]
     public abstract class ASerializableParameter<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver {
 
-        [SerializeField]
-        [HideInInspector]
-        private List<TKey> _keys = new List<TKey>();
-        [SerializeField]
-        [HideInInspector]
-        private List<TValue> _values = new List<TValue>();
+        [SerializeField, HideInInspector]
+        protected List<TKey> _keys = new List<TKey>();
+        [SerializeField, HideInInspector]
+        protected List<TValue> _values = new List<TValue>();
+
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        public ASerializableParameter() : base() {
+            _keys = new List<TKey>();
+            _values = new List<TValue>();
+        }
+
+        /// <summary>
+        /// Copy constructor.
+        /// </summary>
+        /// <param name="asp">Serializable parameter to copy</param>
+        public ASerializableParameter(ASerializableParameter<TKey, TValue> asp) : base(asp) {
+            _keys = new List<TKey>(asp._keys);
+            _values = new List<TValue>(asp._values);
+        }
 
         /// <summary>
         /// Method to receive a callback before Unity serializes your object.
@@ -42,17 +57,6 @@ namespace lab {
             for (int i = 0; i < _keys.Count; i++) {
                 this.Add(_keys[i], _values[i]);
             }
-        }
-
-        /// <summary>
-        /// Creates a copy of this object.
-        /// </summary>
-        /// <returns>Deep copy of serialized parameter.</returns>
-        public ASerializableParameter<TKey, TValue> Clone() {
-            var asp = (ASerializableParameter<TKey, TValue>)MemberwiseClone();
-            asp._keys = new List<TKey>(_keys);
-            asp._values = new List<TValue>(_values);
-            return asp;
         }
     }
 }
