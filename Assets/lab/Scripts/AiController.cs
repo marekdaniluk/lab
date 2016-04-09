@@ -54,7 +54,7 @@ namespace lab {
                     return null;
                 }
                 if (_blackboard == null) {
-                    _blackboard = Behaviour.Blackboard.Clone();
+                    _blackboard = new AiBlackboard(Behaviour.Blackboard);
                 }
                 return _blackboard;
             }

@@ -14,7 +14,7 @@
         /// <summary>
         /// Copy constructor.
         /// </summary>
-        /// <param name="floatParameter">Serializable parameter to copy</param>
+        /// <param name="floatParameter">Serializable parameter to copy.</param>
         public FloatParameter(FloatParameter floatParameter) : base(floatParameter) { }
     }
 }

@@ -14,7 +14,7 @@
         /// <summary>
         /// Copy constructor.
         /// </summary>
-        /// <param name="boolParameter">Serializable parameter to copy</param>
+        /// <param name="boolParameter">Serializable parameter to copy.</param>
         public BoolParameter(BoolParameter boolParameter) : base(boolParameter) { }
     }
 }

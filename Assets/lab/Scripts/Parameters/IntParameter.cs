@@ -14,7 +14,7 @@
         /// <summary>
         /// Copy constructor.
         /// </summary>
-        /// <param name="intParameter">Serializable parameter to copy</param>
+        /// <param name="intParameter">Serializable parameter to copy.</param>
         public IntParameter(IntParameter intParameter) : base(intParameter) { }
     }
 }
