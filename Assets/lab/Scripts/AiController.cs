@@ -1,6 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+///\mainpage lab documentation's main page
+///\section intro_sec What is lab?
+///Lab stands for lightweight ai behaviour. It is a small Unity 3D plugin that provides tools for creating and using behavioral trees to your projects.
+///What is unique for lab, is that it separates logic from implementation.
+///
+/// That means, lab is not out-of-the-box-ready-to-use framework. If you need a tool for rapid prototype there are other tools that give you predefined tasks or integrate with other popular Unity’s plugins.
+/// Lab tries to act like one of Unity’s internal modules, when you see lab’s editor, you will see it is inspired by Unity’s new animation system.
+
+/// <summary>
+/// Namespace for lab framework
+/// </summary>
 namespace lab {
     /// <summary>
     /// Component to control ai behaviour.

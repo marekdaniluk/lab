@@ -13,9 +13,9 @@ namespace lab {
     public abstract class ASerializableParameter<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver {
 
         [SerializeField, HideInInspector]
-        protected List<TKey> _keys = new List<TKey>();
+        private List<TKey> _keys = new List<TKey>();
         [SerializeField, HideInInspector]
-        protected List<TValue> _values = new List<TValue>();
+        private List<TValue> _values = new List<TValue>();
 
         /// <summary>
         /// Default constructor.
