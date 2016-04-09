@@ -19,7 +19,7 @@ Still working on it :(
 
 ## ![roadmap](https://github.com/marekdaniluk/lab/blob/master/Assets/lab/Icons/32x32/center.png) Roadmap
 * Examples in package
-* Documentation and wiki
+* [Documentation](https://marekdaniluk.github.io/lab/index.html) and wiki
 * Covering API with unit tests
 * Support for common editor features like undo, shortcuts, etc.
 * Better tasks binding architecture
