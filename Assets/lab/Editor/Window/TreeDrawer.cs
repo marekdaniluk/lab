@@ -29,14 +29,6 @@ public class TreeDrawer {
 		}
 	}
 
-	public void RunDebug() {
-		ResetDebug();
-		if(_tree != null && _tree.Root != null) {
-            //TODO: fix the null param
-			_tree.DebugRun(null, null, -1);
-		}
-	}
-
     public void DrawTree() {
         DrawTransition();
         if(_startConnection != null) {

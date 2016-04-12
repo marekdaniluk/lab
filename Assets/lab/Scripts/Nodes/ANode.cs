@@ -32,9 +32,7 @@ namespace lab {
         /// </summary>
         /// <param name="parameters">AiBlackboard with global parameters.</param>
         /// <param name="trees">Readonly list with all ai trees.</param>
-        /// <param name="level">Level of how deep we are in this AiTree.</param>
-        /// <param name="nodeIndex">Index of current node in parent's node. If this is root, nodeIndex is 0.</param>
         /// <returns>True if debug run succeed. Otherwise false.</returns>
-        public abstract bool DebugRun(AiBlackboard parameters, IList<AiTree> trees, int level, int nodeIndex);
+        public abstract bool DebugRun(AiBlackboard parameters, IList<AiTree> trees);
     }
 }

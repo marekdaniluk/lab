@@ -38,7 +38,8 @@ public class LabWindow : EditorWindow {
         //a bit dirty hack of drawing buttons in param panel without making dependencies. Well, editor gui...
         EditorGUILayout.BeginHorizontal();
         if (_target != null && GUILayout.Button(new GUIContent((Texture2D)EditorGUIUtility.Load("Assets/lab/Icons/32x32/debug.png"), "run debug info"), "CommandLeft")) {
-            _treeDrawer.RunDebug();
+            _treeDrawer.ResetDebug();
+            _statusBar.CurrentTree.DebugRun(_target.Blackboard, _target.Trees);
         }
         if (_target != null && GUILayout.Button(new GUIContent((Texture2D)EditorGUIUtility.Load("Assets/lab/Icons/32x32/reset.png"), "reset debug info"), "CommandMid")) {
             _treeDrawer.ResetDebug();

@@ -70,12 +70,9 @@ namespace lab {
         /// </summary>
         /// <param name="parameters">AiBlackboard with global parameters.</param>
         /// <param name="trees">Readonly list with all ai trees.</param>
-        /// <param name="level">Level of how deep we are in this AiTree.</param>
-        /// <param name="nodeIndex">Index of current node in parent's node. If this is root, nodeIndex is 0.</param>
         /// <returns>True if child node debug run failed. Otherwise false.</returns>
-        public override bool DebugRun(AiBlackboard parameters, IList<AiTree> trees, int level, int nodeIndex) {
-            var result = _node.DebugRun(parameters, trees, (level + 1), 0);
-            Debug.Log(string.Format("{0}{1}. Inverter Node. Result: <b><color={2}>{3}</color></b>", new string('\t', level), nodeIndex, result == false ? "green" : "red", !result));
+        public override bool DebugRun(AiBlackboard parameters, IList<AiTree> trees) {
+            var result = _node.DebugRun(parameters, trees);
             OnDebugResult(this, !result);
             return !result;
         }

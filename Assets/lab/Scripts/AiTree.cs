@@ -118,12 +118,9 @@ namespace lab {
         /// </summary>
         /// <param name="parameters">AiBlackboard with global parameters.</param>
         /// <param name="trees">Readonly list with all ai trees.</param>
-        /// <param name="level">Level of how deep we are in this AiTree.</param>
         /// <returns>True if debug run succeed. Otherwise false.</returns>
-        public bool DebugRun(AiBlackboard parameters, IList<AiTree> trees, int level) {
-            var result = Root.DebugRun(parameters, trees, (level + 1), 0);
-            level = Mathf.Clamp(level, 0, level);
-            Debug.Log(string.Format("{0}<b>Tree debug run. Result: <color={1}>{2}</color></b>", new string('\t', level), result ? "green" : "red", result));
+        public bool DebugRun(AiBlackboard parameters, IList<AiTree> trees) {
+            var result = Root.DebugRun(parameters, trees);
             return result;
         }
 

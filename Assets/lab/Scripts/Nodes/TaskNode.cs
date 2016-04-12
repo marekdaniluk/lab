@@ -46,11 +46,8 @@ namespace lab {
         /// </summary>
         /// <param name="parameters">AiBlackboard with global parameters.</param>
         /// <param name="trees">Readonly list with all ai trees.</param>
-        /// <param name="level">Level of how deep we are in this AiTree.</param>
-        /// <param name="nodeIndex">Index of current node in parent's node. If this is root, nodeIndex is 0.</param>
         /// <returns>Debug run always returns true for TaskNode.</returns>
-        public override bool DebugRun(AiBlackboard parameters, IList<AiTree> trees, int level, int nodeIndex) {
-            Debug.Log(string.Format("{0}{1}. Task Node. Result in debug mode for tasks is always <b><color=orange>true</color></b>", new string('\t', level), nodeIndex));
+        public override bool DebugRun(AiBlackboard parameters, IList<AiTree> trees) {
             OnDebugResult(this, true);
             return true;
         }
