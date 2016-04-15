@@ -14,7 +14,7 @@
         /// <summary>
         /// Copy constructor.
         /// </summary>
-        /// <param name="stringParameter">Serializable parameter to copy</param>
+        /// <param name="stringParameter">Serializable parameter to copy.</param>
         public StringParameter(StringParameter stringParameter) : base(stringParameter) { }
     }
 }

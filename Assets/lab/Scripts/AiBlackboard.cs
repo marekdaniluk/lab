@@ -11,13 +11,34 @@ namespace lab {
     public class AiBlackboard {
 
         [SerializeField]
-        private IntParameter _intParameters;
+        private IntParameter _intParameters = new IntParameter();
         [SerializeField]
-        private FloatParameter _floatParameters;
+        private FloatParameter _floatParameters = new FloatParameter();
         [SerializeField]
-        private BoolParameter _boolParameters;
+        private BoolParameter _boolParameters = new BoolParameter();
         [SerializeField]
-        private StringParameter _stringParameters;
+        private StringParameter _stringParameters = new StringParameter();
+
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        public AiBlackboard() {
+            _intParameters = new IntParameter();
+            _floatParameters = new FloatParameter();
+            _boolParameters = new BoolParameter();
+            _stringParameters = new StringParameter();
+        }
+
+        /// <summary>
+        /// Copy constructor.
+        /// </summary>
+        /// <param name="blackboard">Blackboard to copy.</param>
+        public AiBlackboard(AiBlackboard blackboard) {
+            _intParameters = new IntParameter(blackboard._intParameters);
+            _floatParameters = new FloatParameter(blackboard._floatParameters);
+            _boolParameters = new BoolParameter(blackboard._boolParameters);
+            _stringParameters = new StringParameter(blackboard._stringParameters);
+        }
 
         /// <summary>
         /// Gets int parameters.
@@ -45,19 +66,6 @@ namespace lab {
         /// </summary>
         public StringParameter StringParameters {
             get { return _stringParameters; }
-        }
-
-        /// <summary>
-        /// Creates a copy of this object.
-        /// </summary>
-        /// <returns>Deep copy of AiBlackboard.</returns>
-        public AiBlackboard Clone() {
-            var aib = new AiBlackboard();
-            aib._intParameters = new IntParameter(_intParameters);
-            aib._floatParameters = new FloatParameter(_floatParameters);
-            aib._boolParameters = new BoolParameter(_boolParameters);
-            aib._stringParameters = new StringParameter(_stringParameters);
-            return aib;
         }
     }
 }
