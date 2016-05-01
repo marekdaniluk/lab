@@ -37,7 +37,7 @@ namespace lab {
         /// <param name="trees">Readonly list with all ai trees.</param>
         /// <param name="tasks">List of task scripts to bind with.</param>
         /// <returns>True if current conditions of comparition succeed. Otherwise false.</returns>
-        public override bool Run(AiBlackboard parameters, IList<AiTree> trees, List<ATaskScript> tasks) {
+        public override bool Run(AiBlackboard parameters, IList<AiTree> trees, List<TaskBinder> tasks) {
             switch (_condition) {
                 case FloatCondition.Greater:
                     if (parameters.FloatParameters[Key] > (DynamicValue ? parameters.FloatParameters[DynamicValueKey] : Value)) {

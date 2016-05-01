@@ -144,8 +144,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _behaviour: {fileID: 11400000, guid: 0cf9496ce93d98345b6ff1accbbceac9, type: 2}
   _tasks:
-  - {fileID: 169794167}
-  - {fileID: 169794166}
+  - taskKeyName: follow
+    task: {fileID: 169794167}
+  - taskKeyName: random move
+    task: {fileID: 169794166}
 --- !u!114 &169794169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -439,8 +441,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _behaviour: {fileID: 11400000, guid: 0cf9496ce93d98345b6ff1accbbceac9, type: 2}
   _tasks:
-  - {fileID: 1498359381}
-  - {fileID: 1498359380}
+  - taskKeyName: random move
+    task: {fileID: 1498359380}
+  - taskKeyName: follow
+    task: {fileID: 1498359381}
 --- !u!114 &1498359383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -634,8 +638,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _behaviour: {fileID: 11400000, guid: 0cf9496ce93d98345b6ff1accbbceac9, type: 2}
   _tasks:
-  - {fileID: 1888547474}
-  - {fileID: 1888547473}
+  - taskKeyName: random move
+    task: {fileID: 1888547473}
+  - taskKeyName: follow
+    task: {fileID: 1888547474}
 --- !u!114 &1888547476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -768,8 +774,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _behaviour: {fileID: 11400000, guid: 0cf9496ce93d98345b6ff1accbbceac9, type: 2}
   _tasks:
-  - {fileID: 1925467304}
-  - {fileID: 1925467303}
+  - taskKeyName: follow
+    task: {fileID: 1925467304}
+  - taskKeyName: random move
+    task: {fileID: 1925467303}
 --- !u!114 &1925467306
 MonoBehaviour:
   m_ObjectHideFlags: 0

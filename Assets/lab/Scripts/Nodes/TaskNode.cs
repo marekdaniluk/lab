@@ -10,24 +10,14 @@ namespace lab {
     public class TaskNode : ANode {
 
         [SerializeField]
-        private int _taskIndex = 0;
-        [SerializeField]
-        private string _description;
+        private string _taskKey;
 
         /// <summary>
-        /// Sets/Gets index of task from AiController's tasks list to be executed. This is how tasks are binded currently.
+        /// Sets/Gets key of task from AiController's tasks list to be executed. This is how tasks are binded currently.
         /// </summary>
-        public int TaskIndex {
-            get { return _taskIndex; }
-            set { _taskIndex = value; }
-        }
-
-        /// <summary>
-        /// Sets/Gets description of current task.
-        /// </summary>
-        public string Description {
-            get { return _description; }
-            set { _description = value; }
+        public string TaskKey {
+            get { return _taskKey; }
+            set { _taskKey = value; }
         }
 
         /// <summary>
@@ -37,8 +27,13 @@ namespace lab {
         /// <param name="trees">Readonly list with all ai trees.</param>
         /// <param name="tasks">List of task scripts to bind with.</param>
         /// <returns>True if node succeed. Otherwise false.</returns>
-        public override bool Run(AiBlackboard parameters, IList<AiTree> trees, List<ATaskScript> tasks) {
-            return tasks[_taskIndex].Execute();
+        public override bool Run(AiBlackboard parameters, IList<AiTree> trees, List<TaskBinder> tasks) {
+            for(int i = 0; i < tasks.Count; ++i) {
+                if(tasks[i].taskKeyName == TaskKey) {
+                    return tasks[i].task.Execute();
+                }
+            }
+            return false;
         }
 
         /// <summary>

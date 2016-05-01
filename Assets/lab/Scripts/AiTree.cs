@@ -109,7 +109,7 @@ namespace lab {
         /// <param name="trees">Readonly list with all ai trees.</param>
         /// <param name="tasks">List of task scripts to bind with task nodes.</param>
         /// <returns>True if tree succeed. Otherwise false.</returns>
-        public bool Run(AiBlackboard parameters, IList<AiTree> trees, List<ATaskScript> tasks) {
+        public bool Run(AiBlackboard parameters, IList<AiTree> trees, List<TaskBinder> tasks) {
             return Root.Run(parameters, trees, tasks);
         }
 
@@ -122,6 +122,17 @@ namespace lab {
         public bool DebugRun(AiBlackboard parameters, IList<AiTree> trees) {
             var result = Root.DebugRun(parameters, trees);
             return result;
+        }
+
+        public List<string> GetTaskNodeKeys() {
+            var keys = new List<string>();
+            for (int i = 0; i < _nodes.Count; ++i) {
+                var n = _nodes[i] as TaskNode;
+                if (n != null) {
+                    keys.Add(n.TaskKey);
+                }
+            }
+            return keys;
         }
 
         private bool IsConnected(AFlowNode from, AFlowNode to) {

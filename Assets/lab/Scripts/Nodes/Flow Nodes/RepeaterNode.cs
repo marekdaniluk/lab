@@ -71,7 +71,7 @@ namespace lab {
         /// <param name="trees">Readonly list with all ai trees.</param>
         /// <param name="tasks">List of task scripts to bind with task nodes.</param>
         /// <returns>Always returns true.</returns>
-        public override bool Run(AiBlackboard parameters, IList<AiTree> trees, List<ATaskScript> tasks) {
+        public override bool Run(AiBlackboard parameters, IList<AiTree> trees, List<TaskBinder> tasks) {
             for (int i = 0; i < Repeat; ++i) {
                 _node.Run(parameters, trees, tasks);
             }

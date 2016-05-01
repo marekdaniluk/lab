@@ -42,8 +42,8 @@ namespace lab {
 
         [SerializeField]
         private AiBehaviour _behaviour;
-        [SerializeField]
-        private List<ATaskScript> _tasks;
+        [SerializeField, HideInInspector]
+        private List<TaskBinder> _tasks;
 
         private AiBlackboard _blackboard;
         private IList<AiTree> _trees;
@@ -83,7 +83,7 @@ namespace lab {
         /// <summary>
         /// Sets/Gets task list.
         /// </summary>
-        public List<ATaskScript> Tasks {
+        public List<TaskBinder> Tasks {
             get { return _tasks; }
             set { _tasks = value; }
         }

@@ -45,9 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f57c244dd3480924a888b3b03b101418, type: 3}
   m_Name: TaskNode
   m_EditorClassIdentifier: 
-  Position: {x: 532, y: 283}
-  _taskIndex: 1
-  _description: 
+  Position: {x: 542, y: 441}
+  _taskKey: random move
 --- !u!114 &11441382
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -59,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4049d6a73af16724ebf61d547555a4c5, type: 3}
   m_Name: SequenceNode
   m_EditorClassIdentifier: 
-  Position: {x: 305, y: 281}
+  Position: {x: 315, y: 439}
   _nodes:
   - {fileID: 11471582}
   - {fileID: 11449794}
@@ -74,7 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77192985dbf2d4c4bbd32c7520893136, type: 3}
   m_Name: SelectorNode
   m_EditorClassIdentifier: 
-  Position: {x: 419, y: 172}
+  Position: {x: 429, y: 330}
   _nodes:
   - {fileID: 11441382}
   - {fileID: 11431412}
@@ -89,9 +88,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f57c244dd3480924a888b3b03b101418, type: 3}
   m_Name: TaskNode
   m_EditorClassIdentifier: 
-  Position: {x: 405, y: 393}
-  _taskIndex: 0
-  _description: 
+  Position: {x: 414, y: 552}
+  _taskKey: follow
 --- !u!114 &11471582
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -103,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f575d0542cdd6c40b92c2dfffedfc1d, type: 3}
   m_Name: FloatParameterNode
   m_EditorClassIdentifier: 
-  Position: {x: 184, y: 393}
+  Position: {x: 194, y: 551}
   _dynamicValue: 0
   _key: distance
   _dynamicValueKey: 
