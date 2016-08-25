@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEditor.ProjectWindowCallback;
 using lab;
 
-internal class EndNameEdit : EndNameEditAction {
+internal class LabEndNameEdit : EndNameEditAction {
 
     #region implemented abstract members of EndNameEditAction
     public override void Action(int instanceId, string pathName, string resourceFile) {
@@ -22,7 +22,7 @@ public class AiBehaviourEditor : Editor {
         asset.AddTree(new AiTree());
         ProjectWindowUtil.StartNameEditingIfProjectWindowExists(
             asset.GetInstanceID(),
-            ScriptableObject.CreateInstance<EndNameEdit>(),
+            ScriptableObject.CreateInstance<LabEndNameEdit>(),
             string.Format("{0}.asset", asset.GetType().Name),
             AssetPreview.GetMiniThumbnail(asset),
             null);
