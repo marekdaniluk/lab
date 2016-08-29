@@ -4,8 +4,6 @@ using lab;
 
 public class LabWindow : EditorWindow {
 
-    public static LabWindow gWindow = null;
-
     [SerializeField]
     private float _currentViewWidth = 200f;
     private Vector2 _scrollPosition = Vector2.zero;
@@ -20,14 +18,25 @@ public class LabWindow : EditorWindow {
 
 	[MenuItem("Window/Lab Window")]
     public static void ShowEditor() {
-        gWindow = EditorWindow.GetWindow<LabWindow>();
+        var window = EditorWindow.GetWindow<LabWindow>();
+        window.titleContent = new GUIContent("lab");
+        window.titleContent.image = (Texture2D)EditorGUIUtility.Load("Assets/lab/Icons/32x32/lab.png");
+        window.Show();
     }
 
     private void OnEnable() {
-        titleContent = new GUIContent("lab");
-		titleContent.image = (Texture2D)EditorGUIUtility.Load("Assets/lab/Icons/32x32/lab.png");
 		Init();
-		gWindow = this;
+        SequenceNodeEditor.OnSequenceNodeChanged += Repaint;
+        SelectorNodeEditor.OnSelectorNodeChanged += Repaint;
+        RepeaterNodeEditor.OnRepeaterNodeChanged += Repaint;
+        InverterNodeEditor.OnInverterNodeChanged += Repaint;
+    }
+
+    private void OnDisable() {
+        SequenceNodeEditor.OnSequenceNodeChanged -= Repaint;
+        SelectorNodeEditor.OnSelectorNodeChanged -= Repaint;
+        RepeaterNodeEditor.OnRepeaterNodeChanged -= Repaint;
+        InverterNodeEditor.OnInverterNodeChanged -= Repaint;
     }
 
 	private void OnGUI() {

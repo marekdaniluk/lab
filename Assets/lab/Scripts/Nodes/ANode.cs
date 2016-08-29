@@ -10,10 +10,10 @@ namespace lab {
     [System.Serializable]
     public abstract class ANode : ScriptableObject {
 
-#if UNITY_EDITOR
         public delegate void DebugNodeHandler(ANode node, bool result);
         public DebugNodeHandler OnDebugResult = delegate { };
 
+#if UNITY_EDITOR
         [SerializeField, HideInInspector]
         public Vector2 Position;
 #endif

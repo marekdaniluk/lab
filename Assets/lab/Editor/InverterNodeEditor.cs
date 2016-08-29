@@ -1,9 +1,12 @@
 using UnityEngine;
 using UnityEditor;
 using lab;
+using System;
 
 [CustomEditor(typeof(InverterNode))]
 public class InverterNodeEditor : Editor {
+
+    public static Action OnInverterNodeChanged = delegate { };
 
     public override void OnInspectorGUI() {
         var parameter = (InverterNode)target;
@@ -14,9 +17,7 @@ public class InverterNodeEditor : Editor {
             GUILayout.Label(string.Format("0. {0}", node.GetType().Name));
             if (GUILayout.Button("-", GUILayout.Width(35))) {
                 parameter.RemoveNode(node);
-                if (LabWindow.gWindow != null) {
-                    LabWindow.gWindow.Repaint();
-                }
+                OnInverterNodeChanged();
             }
         }
         EditorGUILayout.EndHorizontal();

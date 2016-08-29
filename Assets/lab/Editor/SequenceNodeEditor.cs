@@ -2,9 +2,12 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditorInternal;
 using lab;
+using System;
 
 [CustomEditor(typeof(SequenceNode))]
 public class SequenceNodeEditor : Editor {
+
+    public static Action OnSequenceNodeChanged = delegate { };
 
     private ReorderableList _list;
 
@@ -22,18 +25,14 @@ public class SequenceNodeEditor : Editor {
     private void DrawElement(Rect rect, int index, bool isActive, bool isFocused) {
         var element = (ANode)_list.serializedProperty.GetArrayElementAtIndex(index).objectReferenceValue;
         GUI.Label(new Rect(rect.x, rect.y, rect.width - 35, rect.height), string.Format("{0}. {1}", index, element.GetType().Name));
-        if (GUI.Button(new Rect(rect.x + rect.width - 35, rect.y, 35, rect.height), "-")) {
+        if (GUI.Button(new Rect(rect.x + rect.width - 24f, rect.y, 24f, rect.height), "", "OL Minus")) {
             ((SequenceNode)target).RemoveNode(element);
-            if (LabWindow.gWindow != null) {
-                LabWindow.gWindow.Repaint();
-            }
+            OnSequenceNodeChanged();
         }
     }
 
     private void Reorder(ReorderableList list) {
-        if (LabWindow.gWindow != null) {
-            LabWindow.gWindow.Repaint();
-        }
+        OnSequenceNodeChanged();
     }
 
     public override void OnInspectorGUI() {
