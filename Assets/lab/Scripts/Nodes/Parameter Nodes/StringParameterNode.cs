@@ -74,5 +74,9 @@ namespace lab {
             OnDebugResult(this, result);
             return result;
         }
+
+        public override string ToString() {
+            return string.IsNullOrEmpty(Key) ? GetType().Name : Key;
+        }
     }
 }

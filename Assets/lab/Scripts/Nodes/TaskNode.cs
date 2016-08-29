@@ -46,5 +46,9 @@ namespace lab {
             OnDebugResult(this, true);
             return true;
         }
+
+        public override string ToString() {
+            return string.IsNullOrEmpty(_taskKey) ? GetType().Name : _taskKey;
+        }
     }
 }
