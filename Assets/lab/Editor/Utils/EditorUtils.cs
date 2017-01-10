@@ -31,21 +31,21 @@ namespace UnityEditor {
             float num = 0f;
             float num2 = 0f;
             float num3 = num + position.width;
-            float num4 = num2 + position.height;
-			DrawGridLines(12f, new Color(0.5f, 0.5f, 0.5f, 0.35f), new Vector2(num, num2), new Vector2(num3, num4));
-            DrawGridLines(120f, Color.gray, new Vector2(num, num2), new Vector2(num3, num4));
+			float num4 = num2 + position.height;
+			DrawGridLines(12f, new Color(0f, 0f, 0f, 0.35f), new Vector2(num, num2), new Vector2(num3, num4));
+			DrawGridLines(120f, Color.black, new Vector2(num, num2), new Vector2(num3, num4));
         }
 
         public static void DrawGridLines(float gridSize, Color color, Vector2 min, Vector2 max) {
             for (float num = min.x - min.x % gridSize; num < max.x; num += gridSize) {
 				var start = new Vector2(num, min.y);
 				var end = new Vector2(num, max.y);
-				DrawLine(start, end, color);
+				DrawLine(start, end, color, 1f, false);
             }
 			for (float num2 = min.y - min.y % gridSize; num2 < max.y; num2 += gridSize) {
 				var start = new Vector2(min.x, num2);
 				var end = new Vector2(max.x, num2);
-				DrawLine(start, end, color);
+				DrawLine(start, end, color, 1f, false);
             }
         }
 
@@ -56,13 +56,15 @@ namespace UnityEditor {
 			DrawArrow(startPos, endPos, Color.white);
         }
 
-        public static void DrawLine(Vector3 start, Vector3 end, Color color) {
-            Color shadowCol = color;
-			shadowCol.a = 0.35f;
-			Handles.color = shadowCol;
-			Handles.DrawAAPolyLine(4, new Vector3[] {start, end});
+		public static void DrawLine(Vector3 start, Vector3 end, Color color, float width = 2f, bool drawShadow = true) {
+			if(drawShadow) {
+				Color shadowCol = color;
+				shadowCol.a = 0.35f;
+				Handles.color = shadowCol;
+				Handles.DrawAAPolyLine(width + 2f, new Vector3[] {start, end});
+			}
 			Handles.color = color;
-			Handles.DrawAAPolyLine(2, new Vector3[] {start, end});
+			Handles.DrawAAPolyLine(width, new Vector3[] {start, end});
         }
 
 		public static void DrawArrow(Vector3 start, Vector3 end, Color color) {
