@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using lab;
+using System;
 
 public class StatusBarDrawer {
 
-    public delegate void StatusBarDrawerHandler(AiTree aiTree);
-    public StatusBarDrawerHandler OnSelectedAiTree = delegate { };
+    public Action<AiTree> OnSelectedAiTree = delegate { };
 
     private AiBehaviour _blackboard;
     private GUIContent _statusBarContent;

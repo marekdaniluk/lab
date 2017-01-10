@@ -1,46 +1,44 @@
 ﻿using UnityEngine;
 using UnityEditor;
-using lab;
 using System;
-using System.Linq;
-using System.Reflection;
 
-public class NodeFactory {
+namespace lab {
+    public class NodeFactory {
 
-    public class NodeCallbackData {
-        public Vector2 position;
-        public Type nodeType;
+        public class NodeCallbackData {
+            public Vector2 position;
+            public Type nodeType;
 
-		public NodeCallbackData(Vector2 p, Type n) {
-            position = p;
-            nodeType = n;
+            public NodeCallbackData(Vector2 p, Type n) {
+                position = p;
+                nodeType = n;
+            }
+        };
+
+        public static ANode CreateNode(Type nodeType, AiBehaviour blackboard) {
+            ANode n = ScriptableObject.CreateInstance(nodeType) as ANode;
+            n.name = n.GetType().Name;
+            n.hideFlags = HideFlags.HideInHierarchy;
+            AssetDatabase.AddObjectToAsset(n, blackboard);
+            EditorUtility.SetDirty(n);
+            AssetDatabase.SaveAssets();
+            return n;
         }
-    };
 
-	public static ANode CreateNode(Type nodeType, AiBehaviour blackboard) {
-		ANode n = ScriptableObject.CreateInstance(nodeType) as ANode;
-        n.name = n.GetType().Name;
-        n.hideFlags = HideFlags.HideInHierarchy;
-        AssetDatabase.AddObjectToAsset(n, blackboard);
-        EditorUtility.SetDirty(n);
-        AssetDatabase.SaveAssets();
-        return n;
-    }
-
-    public static void CreateNodeMenu(Vector2 position, GenericMenu.MenuFunction2 MenuCallback) {
-        GenericMenu menu = new GenericMenu();
-		
-		var assembly = Assembly.Load(new AssemblyName("Assembly-CSharp"));
-		var paramTypes = (from t in assembly.GetTypes() where t.IsSubclassOfRawGeneric(typeof(AParameterNode<>)) && !t.IsAbstract select t).ToArray();
-		var flowTypes = (from t in assembly.GetTypes() where t.IsSubclassOfRawGeneric(typeof(AFlowNode)) && !t.IsAbstract select t).ToArray();
-		foreach(System.Type t in paramTypes) {
-			menu.AddItem(new GUIContent(string.Format("Parameter Nodes/{0}", t.Name)), false, MenuCallback, new NodeCallbackData(position, t));
-		}
-		foreach(System.Type t in flowTypes) {
-			menu.AddItem(new GUIContent(string.Format("Flow Nodes/{0}", t.Name)), false, MenuCallback, new NodeCallbackData(position, t));
+        public static void CreateNodeMenu(Vector2 position, GenericMenu.MenuFunction2 MenuCallback) {
+            GenericMenu menu = new GenericMenu();
+            menu.AddItem(new GUIContent("Flow Nodes/Sequencer"), false, MenuCallback, new NodeCallbackData(position, typeof(SequenceNode)));
+            menu.AddItem(new GUIContent("Flow Nodes/Selector"), false, MenuCallback, new NodeCallbackData(position, typeof(SelectorNode)));
+            menu.AddItem(new GUIContent("Flow Nodes/Inventer"), false, MenuCallback, new NodeCallbackData(position, typeof(InverterNode)));
+            menu.AddItem(new GUIContent("Flow Nodes/Repeater"), false, MenuCallback, new NodeCallbackData(position, typeof(RepeaterNode)));
+            menu.AddItem(new GUIContent("Flow Nodes/Succeeder"), false, MenuCallback, new NodeCallbackData(position, typeof(SucceederNode)));
+            menu.AddItem(new GUIContent("Parameter Nodes/Bool Parameter"), false, MenuCallback, new NodeCallbackData(position, typeof(BoolParameterNode)));
+            menu.AddItem(new GUIContent("Parameter Nodes/Float Parameter"), false, MenuCallback, new NodeCallbackData(position, typeof(FloatParameterNode)));
+            menu.AddItem(new GUIContent("Parameter Nodes/Int Parameter"), false, MenuCallback, new NodeCallbackData(position, typeof(IntParameterNode)));
+            menu.AddItem(new GUIContent("Parameter Nodes/String Parameter"), false, MenuCallback, new NodeCallbackData(position, typeof(StringParameterNode)));
+            menu.AddItem(new GUIContent("TaskNode"), false, MenuCallback, new NodeCallbackData(position, typeof(TaskNode)));
+            menu.AddItem(new GUIContent("TreeNode"), false, MenuCallback, new NodeCallbackData(position, typeof(TreeNode)));
+            menu.ShowAsContext();
         }
-        menu.AddItem(new GUIContent("TaskNode"), false, MenuCallback, new NodeCallbackData(position, typeof(TaskNode)));
-        menu.AddItem(new GUIContent("TreeNode"), false, MenuCallback, new NodeCallbackData(position, typeof(TreeNode)));
-        menu.ShowAsContext();
     }
 }

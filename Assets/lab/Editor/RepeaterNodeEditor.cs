@@ -1,9 +1,12 @@
 using UnityEngine;
 using UnityEditor;
 using lab;
+using System;
 
 [CustomEditor(typeof(RepeaterNode))]
 public class RepeaterNodeEditor : Editor {
+
+    public static Action OnRepeaterNodeChanged = delegate { };
 
     public override void OnInspectorGUI() {
         var parameter = (RepeaterNode)target;
@@ -18,9 +21,7 @@ public class RepeaterNodeEditor : Editor {
             GUILayout.Label(string.Format("0. {0}", node.GetType().Name));
             if (GUILayout.Button("-", GUILayout.Width(35))) {
                 parameter.RemoveNode(node);
-                if (LabWindow.gWindow != null) {
-                    LabWindow.gWindow.Repaint();
-                }
+                OnRepeaterNodeChanged();
             }
         }
         EditorGUILayout.EndHorizontal();

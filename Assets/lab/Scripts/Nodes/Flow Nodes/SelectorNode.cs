@@ -83,5 +83,9 @@ namespace lab {
             OnDebugResult(this, false);
             return false;
         }
+
+        public override string ToString() {
+            return GetType().Name;
+        }
     }
 }

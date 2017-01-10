@@ -76,5 +76,9 @@ namespace lab {
             OnDebugResult(this, !result);
             return !result;
         }
+
+        public override string ToString() {
+            return GetType().Name;
+        }
     }
 }
