@@ -39,29 +39,24 @@ namespace UnityEditor {
         }
 
         public static void DrawGrid(Rect position) {
-            Profiler.BeginSample("DrawGrid");
-            GL.PushMatrix();
-            GL.Begin(GL.LINES);
             float num = 0f;
             float num2 = 0f;
             float num3 = num + position.width;
             float num4 = num2 + position.height;
-            DrawGridLines(12f, new Color(1f, 1f, 1f, 0.35f), new Vector2(num, num2), new Vector2(num3, num4));
-            DrawGridLines(120f, Color.white, new Vector2(num, num2), new Vector2(num3, num4));
-            GL.End();
-            GL.PopMatrix();
-            Profiler.EndSample();
+			DrawGridLines(12f, new Color(0.5f, 0.5f, 0.5f, 0.35f), new Vector2(num, num2), new Vector2(num3, num4));
+            DrawGridLines(120f, Color.gray, new Vector2(num, num2), new Vector2(num3, num4));
         }
 
         public static void DrawGridLines(float gridSize, Color color, Vector2 min, Vector2 max) {
-            GL.Color(color);
             for (float num = min.x - min.x % gridSize; num < max.x; num += gridSize) {
-                GL.Vertex(new Vector2(num, min.y));
-                GL.Vertex(new Vector2(num, max.y));
+				var start = new Vector2(num, min.y);
+				var end = new Vector2(num, max.y);
+				DrawLine(start, end, color);
             }
-            for (float num2 = min.y - min.y % gridSize; num2 < max.y; num2 += gridSize) {
-                GL.Vertex(new Vector2(min.x, num2));
-                GL.Vertex(new Vector2(max.x, num2));
+			for (float num2 = min.y - min.y % gridSize; num2 < max.y; num2 += gridSize) {
+				var start = new Vector2(min.x, num2);
+				var end = new Vector2(max.x, num2);
+				DrawLine(start, end, color);
             }
         }
 
