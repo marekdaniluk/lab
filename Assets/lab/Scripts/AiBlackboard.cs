@@ -29,6 +29,7 @@ namespace lab {
             _floatParameters = new FloatParameter();
             _boolParameters = new BoolParameter();
             _stringParameters = new StringParameter();
+            _taskParameters = new StringParameter();
         }
 
         /// <summary>
