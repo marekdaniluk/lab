@@ -8,6 +8,7 @@ public class ParamPanelDrawer {
     private FloatParamDrawer _floatParamList;
     private BoolParamDrawer _boolParamList;
     private StringParamDrawer _stringParamList;
+	private TaskParamDrawer _taskParamList;
 
     public AiBehaviour Blackboard {
         set {
@@ -17,6 +18,7 @@ public class ParamPanelDrawer {
                 _floatParamList = new FloatParamDrawer(_blackboard);
                 _boolParamList = new BoolParamDrawer(_blackboard);
                 _stringParamList = new StringParamDrawer(_blackboard);
+				_taskParamList = new TaskParamDrawer(_blackboard);
             }
         }
     }
@@ -27,6 +29,7 @@ public class ParamPanelDrawer {
             _floatParamList.DrawParamList();
             _boolParamList.DrawParamList();
             _stringParamList.DrawParamList();
+			_taskParamList.DrawParamList();
             EditorGUILayout.Space();
             EditorGUILayout.Space();
             EditorGUILayout.Space();

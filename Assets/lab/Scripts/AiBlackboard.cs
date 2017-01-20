@@ -18,6 +18,8 @@ namespace lab {
         private BoolParameter _boolParameters = new BoolParameter();
         [SerializeField]
         private StringParameter _stringParameters = new StringParameter();
+		[SerializeField]
+		private StringParameter _taskParameters = new StringParameter();
 
         /// <summary>
         /// Default constructor.
@@ -38,6 +40,7 @@ namespace lab {
             _floatParameters = new FloatParameter(blackboard._floatParameters);
             _boolParameters = new BoolParameter(blackboard._boolParameters);
             _stringParameters = new StringParameter(blackboard._stringParameters);
+			_taskParameters = new StringParameter(blackboard._stringParameters);
         }
 
         /// <summary>
@@ -59,13 +62,20 @@ namespace lab {
         /// </summary>
         public BoolParameter BoolParameters {
             get { return _boolParameters; }
-        }
+		}
 
-        /// <summary>
-        /// Gets string parameters.
-        /// </summary>
-        public StringParameter StringParameters {
-            get { return _stringParameters; }
-        }
+		/// <summary>
+		/// Gets string parameters.
+		/// </summary>
+		public StringParameter StringParameters {
+			get { return _stringParameters; }
+		}
+
+		/// <summary>
+		/// Gets task parameters.
+		/// </summary>
+		public StringParameter TaskParameters {
+			get { return _taskParameters; }
+		}
     }
 }

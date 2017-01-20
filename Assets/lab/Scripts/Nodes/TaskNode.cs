@@ -29,7 +29,7 @@ namespace lab {
         /// <returns>True if node succeed. Otherwise false.</returns>
         public override bool Run(AiBlackboard parameters, IList<AiTree> trees, List<TaskBinder> tasks) {
             for(int i = 0; i < tasks.Count; ++i) {
-                if(tasks[i].taskKeyName == TaskKey) {
+				if(tasks[i].taskKeyName == parameters.TaskParameters[TaskKey]) {
                     return tasks[i].task.Execute();
                 }
             }
