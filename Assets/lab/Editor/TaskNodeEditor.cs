@@ -15,7 +15,7 @@ public class TaskNodeEditor : Editor {
 		}
 		EditorGUILayout.BeginVertical();
 		EditorGUILayout.BeginHorizontal();
-		string[] keys = LabWindow._target.Blackboard.TaskParameters.Keys.ToArray<string>();
+		string[] keys = LabWindow._target.Blackboard.TaskParameters.Keys;
 		for (int i = 0; i < keys.Length; ++i) {
 			if (keys[i].Equals(parameter.TaskKey)) {
 				_index = i;
