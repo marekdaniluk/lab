@@ -5,7 +5,7 @@ namespace lab {
     /// <summary>
     /// AiBlackboard with global information for current behaviour.
     /// <para>AiBlackboard keeps global information values to help making decisions to bevahiour trees. AiBlackboard supports four types (int, float, bool and string) of parameters.
-    /// Values can be written or read to cache some more complicated calculation.</para>
+    /// Values can be written or read to cache some more complicated calculation. There is also task parameter that is responsible for pairing tasks with implementation.</para>
     /// </summary>
     [System.Serializable]
     public class AiBlackboard {

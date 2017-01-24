@@ -135,6 +135,12 @@ namespace lab {
             return keys;
         }
 
+        /// <summary>
+        /// Check recursive connections between nodes.
+        /// </summary>
+        /// <param name="from">node that should be higher in node tree</param>
+        /// <param name="to">node that should be lower in node tree</param>
+        /// <returns>True if there is connection. Otherwise false.</returns>
         private bool IsConnected(AFlowNode from, AFlowNode to) {
             for (int i = 0; i < to.NodeCount; ++i) {
                 var n = to.GetNode(i) as AFlowNode;

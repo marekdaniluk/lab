@@ -46,8 +46,10 @@ namespace lab {
         private List<TaskBinder> _tasks;
 
         private AiBlackboard _blackboard;
-        private IList<AiTree> _trees;
 
+        /// <summary>
+        /// Copy of Blackboard from attached Behaviour for current AiController instance.
+        /// </summary>
         private AiBlackboard Blackboard {
             get {
                 if (Behaviour == null) {
@@ -57,18 +59,6 @@ namespace lab {
                     _blackboard = new AiBlackboard(Behaviour.Blackboard);
                 }
                 return _blackboard;
-            }
-        }
-
-        private IList<AiTree> Trees {
-            get {
-                if (_trees == null) {
-                    if (Behaviour == null) {
-                        return null;
-                    }
-                    _trees = Behaviour.Trees;
-                }
-                return _trees;
             }
         }
 
@@ -194,7 +184,7 @@ namespace lab {
         /// <param name="i">Index of tree to run. Default value is 0.</param>
         /// <returns>True if tree succeed. Otherwise false.</returns>
         public bool Run(int i = 0) {
-            return Trees[i].Run(Blackboard, Trees, Tasks);
+            return Behaviour.Trees[i].Run(Blackboard, Behaviour.Trees, Tasks);
         }
     }
 }
