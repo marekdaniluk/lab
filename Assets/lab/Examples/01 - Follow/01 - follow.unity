@@ -149,7 +149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _behaviour: {fileID: 11400000, guid: 0cf9496ce93d98345b6ff1accbbceac9, type: 2}
   _tasks:
-  - taskKeyName: random
+  - taskKeyName: follow
     task: {fileID: 169794167}
   - taskKeyName: random
     task: {fileID: 169794166}
@@ -457,7 +457,7 @@ MonoBehaviour:
   _tasks:
   - taskKeyName: random
     task: {fileID: 1498359380}
-  - taskKeyName: random
+  - taskKeyName: follow
     task: {fileID: 1498359381}
 --- !u!114 &1498359383
 MonoBehaviour:

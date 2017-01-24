@@ -5,7 +5,7 @@ namespace lab {
     /// <summary>
     /// Generic abstract class for dictionary serialization.
     /// <para>Unity cannot serialize dictionaries, so ASerializableParameter implements ISerializationCallbackReceiver. This gives possibility of custom serialization.
-    /// However, this solition does not work with generic types, so we need to inherit from ASerializableParameter.</para>
+    /// However, this solution does not work with generic types, so we need to inherit from ASerializableParameter.</para>
     /// </summary>
     /// <typeparam name="TKey">Key type</typeparam>
     /// <typeparam name="TValue">Value type</typeparam>
