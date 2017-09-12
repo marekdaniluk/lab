@@ -27,8 +27,9 @@ public class IntParamDrawer : AParamDrawer {
     }
 
     public override void ApplyModifications() {
-        _serializedObject.ApplyModifiedProperties();
-        ((AiBehaviour)_serializedObject.targetObject).Blackboard.IntParameters.OnBeforeSerialize();
+        if(_serializedObject.ApplyModifiedProperties()) {
+            ((AiBehaviour)_serializedObject.targetObject).Blackboard.IntParameters.OnBeforeSerialize();   
+        }
     }
     #endregion
 }

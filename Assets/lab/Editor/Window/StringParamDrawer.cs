@@ -27,8 +27,9 @@ public class StringParamDrawer : AParamDrawer {
     }
 
     public override void ApplyModifications() {
-        _serializedObject.ApplyModifiedProperties();
-        ((AiBehaviour)_serializedObject.targetObject).Blackboard.StringParameters.OnBeforeSerialize();
+        if(_serializedObject.ApplyModifiedProperties()) {
+            ((AiBehaviour)_serializedObject.targetObject).Blackboard.StringParameters.OnBeforeSerialize();   
+        }
     }
     #endregion
 }

@@ -27,8 +27,9 @@ public class FloatParamDrawer : AParamDrawer {
     }
 
     public override void ApplyModifications() {
-        _serializedObject.ApplyModifiedProperties();
-        ((AiBehaviour)_serializedObject.targetObject).Blackboard.FloatParameters.OnBeforeSerialize();
+        if(_serializedObject.ApplyModifiedProperties()) {
+            ((AiBehaviour)_serializedObject.targetObject).Blackboard.FloatParameters.OnBeforeSerialize();   
+        }
     }
     #endregion
 }

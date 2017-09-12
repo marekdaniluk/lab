@@ -27,8 +27,9 @@ public class BoolParamDrawer : AParamDrawer {
     }
 
     public override void ApplyModifications() {
-        _serializedObject.ApplyModifiedProperties();
-        ((AiBehaviour)_serializedObject.targetObject).Blackboard.BoolParameters.OnBeforeSerialize();
+        if(_serializedObject.ApplyModifiedProperties()) {
+            ((AiBehaviour)_serializedObject.targetObject).Blackboard.BoolParameters.OnBeforeSerialize();   
+        }
     }
     #endregion
 }

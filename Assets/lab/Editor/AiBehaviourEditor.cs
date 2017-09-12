@@ -15,6 +15,21 @@ internal class LabEndNameEdit : EndNameEditAction {
 
 [CustomEditor(typeof(AiBehaviour))]
 public class AiBehaviourEditor : Editor {
+    
+    private IntParamDrawer _intParamList;
+    private FloatParamDrawer _floatParamList;
+    private BoolParamDrawer _boolParamList;
+    private StringParamDrawer _stringParamList;
+    private TaskParamDrawer _taskParamList;
+
+    private void OnEnable() {
+        var behaviour = target as AiBehaviour;
+        _intParamList = new IntParamDrawer(behaviour);
+        _floatParamList = new FloatParamDrawer(behaviour);
+        _boolParamList = new BoolParamDrawer(behaviour);
+        _stringParamList = new StringParamDrawer(behaviour);
+        _taskParamList = new TaskParamDrawer(behaviour);
+    }
 
     [MenuItem("Assets/Create/AiBehaviour")]
     private static void CreateAiBehaviourMenu() {
@@ -41,9 +56,14 @@ public class AiBehaviourEditor : Editor {
     }
 
     public override void OnInspectorGUI() {
-        var behaviour = (AiBehaviour)target;
+        var behaviour = target as AiBehaviour;
         if (behaviour.Trees == null || behaviour.Trees.Count == 0) {
             EditorGUILayout.HelpBox(string.Format("Behaviour \"{0}\" has no ai trees. Add at least one ai tree.", behaviour.name), MessageType.Info);
         }
+        _intParamList.DrawParamList();
+        _floatParamList.DrawParamList();
+        _boolParamList.DrawParamList();
+        _stringParamList.DrawParamList();
+        _taskParamList.DrawParamList();
     }
 }
