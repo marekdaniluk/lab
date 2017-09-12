@@ -2,6 +2,7 @@
 using UnityEditor;
 using UnityEditor.ProjectWindowCallback;
 using lab;
+using lab.EditorView;
 
 internal class LabEndNameEdit : EndNameEditAction {
 

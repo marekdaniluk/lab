@@ -26,6 +26,9 @@ MonoBehaviour:
     _stringParameters:
       _keys: []
       _values: []
+    _taskParameters:
+      _keys:
+      - Task Parameter
   _trees:
   - _root: {fileID: 11447518}
     _nodes:
@@ -46,7 +49,7 @@ MonoBehaviour:
   m_Name: TaskNode
   m_EditorClassIdentifier: 
   Position: {x: 542, y: 441}
-  _taskKey: random move
+  _taskKey: random
 --- !u!114 &11441382
 MonoBehaviour:
   m_ObjectHideFlags: 1

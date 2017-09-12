@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using lab;
+using lab.EditorView;
 
 public class LabWindow : EditorWindow {
 

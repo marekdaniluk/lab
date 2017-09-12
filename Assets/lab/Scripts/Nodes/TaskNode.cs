@@ -29,7 +29,7 @@ namespace lab {
         /// <returns>True if node succeed. Otherwise false.</returns>
         public override bool Run(AiBlackboard parameters, IList<AiTree> trees, List<TaskBinder> tasks) {
             for(int i = 0; i < tasks.Count; ++i) {
-				if(tasks[i].taskKeyName == parameters.TaskParameters[TaskKey]) {
+				if(tasks[i].taskKeyName == TaskKey) {
                     return tasks[i].task.Execute();
                 }
             }
@@ -47,6 +47,10 @@ namespace lab {
             return true;
         }
 
+        /// <summary>
+        /// Returns a string that represents the current object.
+        /// </summary>
+        /// <returns>A string that represents the current object.</returns>
         public override string ToString() {
             return string.IsNullOrEmpty(_taskKey) ? GetType().Name : _taskKey;
         }

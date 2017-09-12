@@ -1,5 +1,6 @@
 ﻿using UnityEditorInternal;
 using lab;
+using lab.EditorView;
 using UnityEditor;
 
 public class BoolParamDrawer : AParamDrawer {

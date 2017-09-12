@@ -5,7 +5,7 @@ namespace lab {
     /// <summary>
     /// AiBlackboard with global information for current behaviour.
     /// <para>AiBlackboard keeps global information values to help making decisions to bevahiour trees. AiBlackboard supports four types (int, float, bool and string) of parameters.
-    /// Values can be written or read to cache some more complicated calculation.</para>
+    /// Values can be written or read to cache some more complicated calculation. There is also task parameter that is responsible for pairing tasks with implementation.</para>
     /// </summary>
     [System.Serializable]
     public class AiBlackboard {
@@ -19,7 +19,7 @@ namespace lab {
         [SerializeField]
         private StringParameter _stringParameters = new StringParameter();
 		[SerializeField]
-		private StringParameter _taskParameters = new StringParameter();
+		private TaskParameter _taskParameters = new TaskParameter();
 
         /// <summary>
         /// Default constructor.
@@ -29,6 +29,7 @@ namespace lab {
             _floatParameters = new FloatParameter();
             _boolParameters = new BoolParameter();
             _stringParameters = new StringParameter();
+            _taskParameters = new TaskParameter();
         }
 
         /// <summary>
@@ -40,7 +41,7 @@ namespace lab {
             _floatParameters = new FloatParameter(blackboard._floatParameters);
             _boolParameters = new BoolParameter(blackboard._boolParameters);
             _stringParameters = new StringParameter(blackboard._stringParameters);
-			_taskParameters = new StringParameter(blackboard._stringParameters);
+			_taskParameters = new TaskParameter(blackboard._taskParameters);
         }
 
         /// <summary>
@@ -74,7 +75,7 @@ namespace lab {
 		/// <summary>
 		/// Gets task parameters.
 		/// </summary>
-		public StringParameter TaskParameters {
+		public TaskParameter TaskParameters {
 			get { return _taskParameters; }
 		}
     }
