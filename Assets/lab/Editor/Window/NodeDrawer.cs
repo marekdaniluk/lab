@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
+using System;
 
 namespace lab.EditorView {
     public class NodeDrawer {
@@ -7,6 +8,7 @@ namespace lab.EditorView {
         public delegate void NodeDrawerHandler(ANode node);
         public static NodeDrawerHandler OnRightClicked = delegate { };
         public static NodeDrawerHandler OnLeftClicked = delegate { };
+        public static Action<ANode> OnDuplicate = delegate { };
 
         public static readonly Vector2 gSize = new Vector2(144f, 32f);
 
@@ -68,6 +70,7 @@ namespace lab.EditorView {
             if (_node == null) {
                 return;
             }
+            Shortcuts(e);
             GUI.Label(new Rect(0, gSize.y / 2f - 12, _rect.width, 24), new GUIContent(_node.ToString(), EditorGUIUtility.ObjectContent(_node, _node.GetType()).image));
             GUI.Label(new Rect(gSize.x - 14f, -1f, 16f, 16f), new GUIContent((Texture2D)EditorGUIUtility.Load(_currentIcon)));
             if (e.type == EventType.MouseUp && e.button == 1) {
@@ -79,6 +82,12 @@ namespace lab.EditorView {
             }
             EditorUtility.SetDirty(_node);
             GUI.DragWindow();
+        }
+
+        private void Shortcuts(Event e) {
+            if(e.rawType == EventType.keyUp && e.control && e.keyCode == KeyCode.D) {
+                OnDuplicate(_node);
+            }
         }
     }
 }

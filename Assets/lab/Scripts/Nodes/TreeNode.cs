@@ -51,5 +51,13 @@ namespace lab {
         public override string ToString() {
             return string.Format("{0} {1}", GetType().Name, _treeIndex);
         }
+
+        public override ANode Clone() {
+            var clone = Instantiate(this);
+            clone.Position -= Vector2.one * 20f;
+            clone.name = this.name;
+            clone.hideFlags = HideFlags.HideInHierarchy;
+            return clone;
+        }
     }
 }

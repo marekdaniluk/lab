@@ -34,5 +34,7 @@ namespace lab {
         /// <param name="trees">Readonly list with all ai trees.</param>
         /// <returns>True if debug run succeed. Otherwise false.</returns>
         public abstract bool DebugRun(AiBlackboard parameters, IList<AiTree> trees);
+
+        public abstract ANode Clone();
     }
 }

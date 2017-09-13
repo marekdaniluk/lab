@@ -100,5 +100,14 @@ namespace lab {
         public override string ToString() {
             return GetType().Name;
         }
+
+        public override ANode Clone() {
+            var clone = Instantiate(this);
+            clone._node = null;
+            clone.Position -= Vector2.one * 20f;
+            clone.name = this.name;
+            clone.hideFlags = HideFlags.HideInHierarchy;
+            return clone;
+        }
     }
 }

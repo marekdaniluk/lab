@@ -49,5 +49,13 @@ namespace lab {
             get { return _dynamicValueKey; }
             set { _dynamicValueKey = value; }
         }
+
+        public override ANode Clone() {
+            var clone = Instantiate(this);
+            clone.Position -= Vector2.one * 20f;
+            clone.name = this.name;
+            clone.hideFlags = HideFlags.HideInHierarchy;
+            return clone;
+        }
     }
 }

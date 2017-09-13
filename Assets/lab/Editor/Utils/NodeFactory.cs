@@ -15,14 +15,17 @@ namespace lab {
             }
         };
 
-        public static ANode CreateNode(Type nodeType, AiBehaviour blackboard) {
+        public static ANode CreateNode(Type nodeType) {
             ANode n = ScriptableObject.CreateInstance(nodeType) as ANode;
             n.name = n.GetType().Name;
             n.hideFlags = HideFlags.HideInHierarchy;
+            return n;
+        }
+
+        public static void AddNodeToTarget(ANode n, AiBehaviour blackboard) {
             AssetDatabase.AddObjectToAsset(n, blackboard);
             EditorUtility.SetDirty(n);
             AssetDatabase.SaveAssets();
-            return n;
         }
 
         public static void CreateNodeMenu(Vector2 position, GenericMenu.MenuFunction2 MenuCallback) {

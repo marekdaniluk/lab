@@ -2,6 +2,7 @@
 using UnityEditor;
 using lab;
 using lab.EditorView;
+using System;
 
 public class LabWindow : EditorWindow {
 
@@ -28,6 +29,7 @@ public class LabWindow : EditorWindow {
         SelectorNodeEditor.OnSelectorNodeChanged += Repaint;
         RepeaterNodeEditor.OnRepeaterNodeChanged += Repaint;
         InverterNodeEditor.OnInverterNodeChanged += Repaint;
+        NodeDrawer.OnDuplicate += DuplicateNode;
     }
 
     private void OnDisable() {
@@ -35,9 +37,20 @@ public class LabWindow : EditorWindow {
         SelectorNodeEditor.OnSelectorNodeChanged -= Repaint;
         RepeaterNodeEditor.OnRepeaterNodeChanged -= Repaint;
         InverterNodeEditor.OnInverterNodeChanged -= Repaint;
+        NodeDrawer.OnDuplicate -= DuplicateNode;
     }
 
-	private void OnGUI() {
+    private void DuplicateNode(ANode obj) {
+        var node = obj.Clone();
+        NodeFactory.AddNodeToTarget(node, _target);
+        if(_statusBar.CurrentTree.AddNode(node) && _statusBar.CurrentTree.Root == null) {
+            _statusBar.CurrentTree.Root = node;
+        }
+        _treeDrawer.RebuildTreeView(_statusBar.CurrentTree);
+        Repaint();
+    }
+
+    private void OnGUI() {
 		if(_statusBar == null) {
             return;
 		}
@@ -51,19 +64,24 @@ public class LabWindow : EditorWindow {
         EndWindows();
         GUI.EndGroup();
         EditorGUILayout.BeginHorizontal();
+        GUI.enabled = _statusBar.CurrentTree != null && _statusBar.CurrentTree.Root != null;
         if(_target != null && GUILayout.Button(new GUIContent((Texture2D)EditorGUIUtility.Load("Assets/lab/Icons/32x32/debug.png"),"run debug info"),"CommandLeft")) {
             _treeDrawer.ResetDebug();
             _statusBar.CurrentTree.DebugRun(_target.Blackboard,_target.Trees);
         }
+        GUI.enabled = true;
         if(_target != null && GUILayout.Button(new GUIContent((Texture2D)EditorGUIUtility.Load("Assets/lab/Icons/32x32/reset.png"),"reset debug info"),"CommandMid")) {
             _treeDrawer.ResetDebug();
         }
-        if(_target != null && GUILayout.Button(new GUIContent((Texture2D)EditorGUIUtility.Load("Assets/lab/Icons/32x32/center.png"),"center view on root"),"CommandRight")) {
-            var pos = -_statusBar.CurrentTree.Root.Position + (new Vector2(position.width,position.height - EditorStyles.toolbar.fixedHeight) - NodeDrawer.gSize) / 2;
+        GUI.enabled = _statusBar.CurrentTree != null && _statusBar.CurrentTree.Nodes.Count > 0;
+        if(_target != null && GUILayout.Button(new GUIContent((Texture2D)EditorGUIUtility.Load("Assets/lab/Icons/32x32/center.png"),"center view on root"), "CommandRight")) {
+            var nodePos = _statusBar.CurrentTree.Root != null ? _statusBar.CurrentTree.Root.Position : _statusBar.CurrentTree.Nodes[0].Position;
+            var pos = -nodePos + (new Vector2(position.width,position.height - EditorStyles.toolbar.fixedHeight) - NodeDrawer.gSize) / 2;
             pos.x = Mathf.Floor(pos.x);
             pos.y = Mathf.Floor(pos.y);
             _treeDrawer.OffsetNodes(pos);
         }
+        GUI.enabled = true;
         EditorGUILayout.EndHorizontal();
         InputHandler();
     }
@@ -151,8 +169,9 @@ public class LabWindow : EditorWindow {
     private void MenuCallback(object obj) {
         var data = obj as NodeFactory.NodeCallbackData;
         if (data != null) {
-            var node = NodeFactory.CreateNode(data.nodeType, _target);
-            node.Position = new Vector2(data.position.x - NodeDrawer.gSize.x / 2, data.position.y - NodeDrawer.gSize.y);
+            var node = NodeFactory.CreateNode(data.nodeType);
+            node.Position = new Vector2(data.position.x - NodeDrawer.gSize.x / 2,data.position.y - NodeDrawer.gSize.y);
+            NodeFactory.AddNodeToTarget(node,_target);
             if (_statusBar.CurrentTree.AddNode(node) && _statusBar.CurrentTree.Root == null) {
                 _statusBar.CurrentTree.Root = node;
             }

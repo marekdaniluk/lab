@@ -54,5 +54,13 @@ namespace lab {
         public override string ToString() {
             return string.IsNullOrEmpty(_taskKey) ? GetType().Name : _taskKey;
         }
+
+        public override ANode Clone() {
+            var clone = Instantiate(this);
+            clone.Position -= Vector2.one * 20f;
+            clone.name = this.name;
+            clone.hideFlags = HideFlags.HideInHierarchy;
+            return clone;
+        }
     }
 }
