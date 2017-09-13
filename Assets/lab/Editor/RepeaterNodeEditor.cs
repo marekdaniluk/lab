@@ -6,8 +6,6 @@ namespace lab.EditorView {
     [CustomEditor(typeof(RepeaterNode))]
     public class RepeaterNodeEditor : Editor {
 
-        public static Action OnRepeaterNodeChanged = delegate { };
-
         public override void OnInspectorGUI() {
             var parameter = (RepeaterNode)target;
             EditorGUILayout.BeginHorizontal();
@@ -21,7 +19,6 @@ namespace lab.EditorView {
                 GUILayout.Label(string.Format("0. {0}", node.GetType().Name));
                 if (GUILayout.Button("-", GUILayout.Width(35))) {
                     parameter.RemoveNode(node);
-                    OnRepeaterNodeChanged();
                 }
             }
             EditorGUILayout.EndHorizontal();

@@ -25,29 +25,6 @@ public class LabWindow : EditorWindow {
 
     private void OnEnable() {
 		Init();
-        SequenceNodeEditor.OnSequenceNodeChanged += Repaint;
-        SelectorNodeEditor.OnSelectorNodeChanged += Repaint;
-        RepeaterNodeEditor.OnRepeaterNodeChanged += Repaint;
-        InverterNodeEditor.OnInverterNodeChanged += Repaint;
-        NodeDrawer.OnDuplicate += DuplicateNode;
-    }
-
-    private void OnDisable() {
-        SequenceNodeEditor.OnSequenceNodeChanged -= Repaint;
-        SelectorNodeEditor.OnSelectorNodeChanged -= Repaint;
-        RepeaterNodeEditor.OnRepeaterNodeChanged -= Repaint;
-        InverterNodeEditor.OnInverterNodeChanged -= Repaint;
-        NodeDrawer.OnDuplicate -= DuplicateNode;
-    }
-
-    private void DuplicateNode(ANode obj) {
-        var node = obj.Clone();
-        NodeFactory.AddNodeToTarget(node, _target);
-        if(_statusBar.CurrentTree.AddNode(node) && _statusBar.CurrentTree.Root == null) {
-            _statusBar.CurrentTree.Root = node;
-        }
-        _treeDrawer.RebuildTreeView(_statusBar.CurrentTree);
-        Repaint();
     }
 
     private void OnGUI() {
@@ -84,6 +61,7 @@ public class LabWindow : EditorWindow {
         GUI.enabled = true;
         EditorGUILayout.EndHorizontal();
         InputHandler();
+        Repaint();
     }
 
     private void OnSelectionChange() {
@@ -112,7 +90,6 @@ public class LabWindow : EditorWindow {
         Event current = Event.current;
         if ((current.type == EventType.MouseDown || current.type == EventType.MouseUp)) {
             Selection.activeObject = _target;
-            Repaint();
         }
         if (current.button == 1 && current.type == EventType.MouseDown && _target != null) {
             NodeFactory.CreateNodeMenu(current.mousePosition, MenuCallback);

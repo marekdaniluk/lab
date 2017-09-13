@@ -6,8 +6,6 @@ namespace lab.EditorView {
     [CustomEditor(typeof(InverterNode))]
     public class InverterNodeEditor : Editor {
 
-        public static Action OnInverterNodeChanged = delegate { };
-
         public override void OnInspectorGUI() {
             var parameter = (InverterNode)target;
             EditorGUILayout.BeginHorizontal();
@@ -17,7 +15,6 @@ namespace lab.EditorView {
                 GUILayout.Label(string.Format("0. {0}", node.GetType().Name));
                 if (GUILayout.Button("-", GUILayout.Width(35))) {
                     parameter.RemoveNode(node);
-                    OnInverterNodeChanged();
                 }
             }
             EditorGUILayout.EndHorizontal();

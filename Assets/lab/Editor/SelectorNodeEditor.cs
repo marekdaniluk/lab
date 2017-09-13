@@ -7,15 +7,12 @@ namespace lab.EditorView {
     [CustomEditor(typeof(SelectorNode))]
     public class SelectorNodeEditor : Editor {
 
-        public static Action OnSelectorNodeChanged = delegate { };
-
         private ReorderableList _list;
 
         private void OnEnable() {
             _list = new ReorderableList(serializedObject, serializedObject.FindProperty("_nodes"), true, true, false, false);
             _list.drawHeaderCallback += DrawHeader;
             _list.drawElementCallback += DrawElement;
-            _list.onReorderCallback += Reorder;
         }
 
         private void DrawHeader(Rect rect) {
@@ -27,12 +24,7 @@ namespace lab.EditorView {
             GUI.Label(new Rect(rect.x, rect.y, rect.width - 35, rect.height), string.Format("{0}. {1}", index, element.GetType().Name));
             if (GUI.Button(new Rect(rect.x + rect.width - 24f, rect.y, 24f, rect.height), "", "OL Minus")) {
                 ((SelectorNode)target).RemoveNode(element);
-                OnSelectorNodeChanged();
             }
-        }
-
-        private void Reorder(ReorderableList list) {
-            OnSelectorNodeChanged();
         }
 
         public override void OnInspectorGUI() {

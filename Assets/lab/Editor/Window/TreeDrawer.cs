@@ -12,6 +12,8 @@ namespace lab.EditorView {
         public TreeDrawer(AiTree tree) {
             NodeDrawer.OnLeftClicked += NodeLeftClicked;
             NodeDrawer.OnRightClicked += ShowContextMenu;
+            NodeDrawer.OnDuplicate += DuplicateNode;
+            NodeDrawer.OnDelete += DeleteNode;
             RebuildTreeView(tree);
         }
 
@@ -107,7 +109,8 @@ namespace lab.EditorView {
                 menu.AddDisabledItem(new GUIContent("Connect"));
             }
             menu.AddSeparator("");
-            menu.AddItem(new GUIContent("Delete"), false, DeleteCallback, node);
+            menu.AddItem(new GUIContent("Duplicate [Ctrl+D]"), false, DuplicateCallback, node);
+            menu.AddItem(new GUIContent("Delete [Del]"), false, DeleteCallback, node);
             menu.ShowAsContext();
         }
 
@@ -127,12 +130,34 @@ namespace lab.EditorView {
             }
         }
 
+        private void DuplicateCallback(object obj) {
+            var n = obj as ANode;
+            if(n != null) {
+                DuplicateNode(n);
+            }
+        }
+
         private void DeleteCallback(object obj) {
             var n = obj as ANode;
-            if (n != null && _tree.RemoveNode(n)) {
-                n.OnDebugResult -= DebugResult;
+            if (n != null) {
+                DeleteNode(n);
+            }
+        }
+
+        private void DuplicateNode(ANode obj) {
+            var node = obj.Clone();
+            NodeFactory.AddNodeToTarget(node,LabWindow._target);
+            if(_tree.AddNode(node) && _tree.Root == null) {
+                _tree.Root = node;
+            }
+            RebuildTreeView(_tree);
+        }
+
+        private void DeleteNode(ANode obj) {
+            if(_tree.RemoveNode(obj)) {
+                obj.OnDebugResult -= DebugResult;
                 Selection.activeObject = _tree.Root;
-                Object.DestroyImmediate(n, true);
+                Object.DestroyImmediate(obj, true);
                 AssetDatabase.SaveAssets();
                 RebuildTreeView(_tree);
             }
